@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D CAD CNC Digital Twin & Spline Viewer | JITEN CNC</title>
+  <title>3D CAD CNC Digital Twin & Spline Viewer | JITEN CNC VMC-850</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -33,9 +33,11 @@
               bg: '#000000',
               panel: '#090D14',
               surface: '#101722',
+              surfaceHover: '#162234',
               border: '#1E293B',
               primary: '#FF5E2B', // Zeggo Warm Coral/Orange
               cyan: '#38BDF8',
+              gold: '#F59E0B',
               emerald: '#10B981',
             }
           },
@@ -60,7 +62,6 @@
     .font-mono { font-family: 'JetBrains Mono', monospace; }
     .font-heading { font-family: 'Be Vietnam Pro', sans-serif; }
 
-    /* Custom 3D Viewport canvas */
     #cad-canvas {
       width: 100%;
       height: 100%;
@@ -68,41 +69,40 @@
       outline: none;
     }
 
-    /* Hotspot Pulses */
     .hotspot-point {
       position: absolute;
       transform: translate(-50%, -50%);
       pointer-events: auto;
       cursor: pointer;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s, transform 0.2s;
     }
     .hotspot-dot {
       width: 12px;
       height: 12px;
       border-radius: 50%;
       background: #FFFFFF;
-      box-shadow: 0 0 10px #FF5E2B, 0 0 20px #FF5E2B;
-      animation: pulse 2s infinite ease-in-out;
+      box-shadow: 0 0 12px #FF5E2B, 0 0 24px #FF5E2B;
+      animation: pulse 2.2s infinite ease-in-out;
     }
     @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.85; }
     }
   </style>
 </head>
 <body class="bg-black text-slate-200">
 
   <!-- ================= TOP NAVIGATION BAR ================= -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-black/90 border-b border-zeggo-border backdrop-blur-md">
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/95 border-b border-zeggo-border backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       
       <div class="flex items-center space-x-3">
-        <a href="index.html" class="px-2.5 py-1 bg-white text-black font-heading font-black text-xs tracking-widest">
+        <a href="index.html" class="px-2.5 py-1 bg-white text-black font-heading font-black text-xs tracking-widest border border-white">
           JITEN
         </a>
         <div class="border-l border-zeggo-border pl-3 flex items-center space-x-2">
-          <span class="font-heading font-extrabold text-sm text-white">3D CAD DIGITAL TWIN VIEWER</span>
-          <span class="text-[9px] px-1.5 py-0.5 bg-zeggo-panel border border-zeggo-border text-zeggo-primary font-mono">SPLINE & THREE.JS</span>
+          <span class="font-heading font-extrabold text-sm text-white">3D CAD DIGITAL TWIN · VMC-850</span>
+          <span class="text-[9px] px-1.5 py-0.5 bg-zeggo-panel border border-zeggo-border text-zeggo-primary font-mono font-bold">120+ CHI TIẾT CƠ KHÍ</span>
         </div>
       </div>
 
@@ -130,69 +130,99 @@
       <!-- Overlay 3D Hotspot Telemetry Pins (Projected from 3D Coordinates) -->
       <div id="hotspot-container" class="absolute inset-0 pointer-events-none overflow-hidden">
         
-        <!-- Pin 1: Spindle -->
-        <div id="pin-spindle" class="hotspot-point">
+        <!-- Pin 1: Spindle & 4-Flute Endmill -->
+        <div id="pin-spindle" class="hotspot-point" onclick="selectComponent('spindle')">
           <div class="hotspot-dot"></div>
-          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-2.5 py-1 text-[11px] font-mono text-white whitespace-nowrap shadow-xl">
-            <span class="text-zeggo-primary font-bold">● TRỤC CHÍNH (SPINDLE BT40)</span>
-            <div class="text-[10px] text-slate-400">12,000 RPM · Độ đảo &lt; 0.003mm</div>
+          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-3 py-1.5 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-sm">
+            <span class="text-zeggo-primary font-bold">● TRỤC CHÍNH BT40 & DAO PHAY 4 ME</span>
+            <div class="text-[10px] text-slate-400">12,000 RPM · Ống lót tản nhiệt · Collet ER32 · Độ đảo &lt; 0.003mm</div>
           </div>
         </div>
 
-        <!-- Pin 2: ATC Tool Changer -->
-        <div id="pin-atc" class="hotspot-point">
+        <!-- Pin 2: ATC 24-Tool Carousel & Twin Arm -->
+        <div id="pin-atc" class="hotspot-point" onclick="selectComponent('atc')">
           <div class="hotspot-dot"></div>
-          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-2.5 py-1 text-[11px] font-mono text-white whitespace-nowrap shadow-xl">
-            <span class="text-zeggo-cyan font-bold">● ĐÀI DAO XOAY (ATC)</span>
-            <div class="text-[10px] text-slate-400">24 Vị Trí Dao Tự Động (Tay Đổi Dao Kép)</div>
+          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-3 py-1.5 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-sm">
+            <span class="text-zeggo-cyan font-bold">● ĐÀI DAO 24 VỊ TRÍ & TAY THAY DAO KÉP</span>
+            <div class="text-[10px] text-slate-400">Thời gian đổi dao 1.8s · Đài dao phay mặt, mũi khoan, dao doa</div>
           </div>
         </div>
 
-        <!-- Pin 3: Worktable & Ballscrew -->
-        <div id="pin-table" class="hotspot-point">
+        <!-- Pin 3: T-Slot Worktable & Precision Vise -->
+        <div id="pin-table" class="hotspot-point" onclick="selectComponent('table')">
           <div class="hotspot-dot"></div>
-          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-2.5 py-1 text-[11px] font-mono text-white whitespace-nowrap shadow-xl">
-            <span class="text-emerald-400 font-bold">● BÀN MÁY & VITME BI C3</span>
-            <div class="text-[10px] text-slate-400">Tải Trọng 600 kg · Ray Trượt Tuyến Tính THK</div>
+          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-3 py-1.5 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-sm">
+            <span class="text-emerald-400 font-bold">● BÀN MÁY 5 RÃNH CHỮ T & Ê-TÔ CƠ KHÍ</span>
+            <div class="text-[10px] text-slate-400">Rãnh T chuẩn 18H8 · Ê-tô kẹp phôi nhôm 6061 phay dở dang</div>
           </div>
         </div>
 
-        <!-- Pin 4: Column Base -->
-        <div id="pin-base" class="hotspot-point">
+        <!-- Pin 4: Dual THK Linear Rails & Ballscrew -->
+        <div id="pin-rails" class="hotspot-point" onclick="selectComponent('rails')">
           <div class="hotspot-dot"></div>
-          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-2.5 py-1 text-[11px] font-mono text-white whitespace-nowrap shadow-xl">
-            <span class="text-white font-bold">● THÂN ĐẾ ĐÚC FC-300</span>
-            <div class="text-[10px] text-slate-400">Khử Ứng Suất Dư · Triệt Tiêu Rung Chấn</div>
+          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-3 py-1.5 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-sm">
+            <span class="text-zeggo-gold font-bold">● RAY TRƯỢT THK & TRỤC VÍT ME BI C3</span>
+            <div class="text-[10px] text-slate-400">2 ray song song mỗi trục · Con trượt có phốt chắn phoi · Gối đỡ BK/BF</div>
+          </div>
+        </div>
+
+        <!-- Pin 5: Z-Axis Way Covers & Servos -->
+        <div id="pin-column" class="hotspot-point" onclick="selectComponent('column')">
+          <div class="hotspot-dot"></div>
+          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-3 py-1.5 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-sm">
+            <span class="text-white font-bold">● BĂNG MÁY INOX XẾP LỚP & ĐẾ ĐÚC FC-300</span>
+            <div class="text-[10px] text-slate-400">Telescopic Way Covers · 6 chân tăng chỉnh nivô · Máng vát thoát phoi</div>
           </div>
         </div>
 
       </div>
 
       <!-- HUD Top Left Status Panel -->
-      <div class="absolute top-4 left-4 z-20 bg-black/85 border border-zeggo-border p-4 font-mono text-xs space-y-2 pointer-events-none max-w-xs shadow-2xl backdrop-blur-sm">
+      <div class="absolute top-4 left-4 z-20 bg-black/90 border border-zeggo-border p-4 font-mono text-xs space-y-2 pointer-events-none max-w-sm shadow-2xl backdrop-blur-md">
         <div class="flex items-center justify-between text-zeggo-primary font-bold border-b border-zeggo-border pb-1.5">
-          <span>JITEN VMC-850 CAD TWIN</span>
-          <span class="px-1.5 py-0.2 bg-zeggo-primary/20 text-zeggo-primary text-[10px]">LIVE</span>
+          <span class="flex items-center space-x-1.5">
+            <i data-lucide="cpu" class="w-4 h-4"></i>
+            <span>VMC-850 CAD DIGITAL TWIN</span>
+          </span>
+          <span class="px-1.5 py-0.2 bg-zeggo-primary/20 text-zeggo-primary text-[10px] font-bold">HI-FIDELITY</span>
         </div>
         <div class="text-slate-400 space-y-1 text-[11px]">
-          <div>• Mô Hình: <span class="text-white font-semibold">Phay Đứng CNC VMC</span></div>
-          <div>• Hành Trình: <span class="text-zeggo-cyan font-semibold">850 × 500 × 550 mm</span></div>
-          <div>• Cụm Chi Tiết: <span class="text-white font-semibold" id="hud-parts">6 Cụm Lắp Ráp</span></div>
-          <div>• Thao Tác: <span class="text-slate-300">Chuột trái xoay, Chuột phải kéo, Lăn chuột phóng to</span></div>
+          <div>• Chi tiết lắp ráp: <span class="text-white font-semibold">120+ Bộ phận cơ khí chi tiết</span></div>
+          <div>• Trục chính: <span class="text-zeggo-primary font-semibold">BT40 Stepped Quill + Mũi dao xoắn ốc</span></div>
+          <div>• Hệ dẫn hướng: <span class="text-zeggo-gold font-semibold">Cặp ray trượt THK + Vitme bi C3 mài</span></div>
+          <div>• Bàn gá kẹp: <span class="text-emerald-400 font-semibold">5 Rãnh T + Ê-tô thủy lực + Phôi mẫu</span></div>
+          <div>• Điều khiển: <span class="text-slate-300">Chuột trái: Xoay | Phải: Kéo | Lăn: Zoom</span></div>
+        </div>
+      </div>
+
+      <!-- HUD Top Right Component Inspector Box -->
+      <div id="inspector-card" class="absolute top-4 right-4 z-20 bg-black/90 border border-zeggo-border p-4 font-mono text-xs space-y-2.5 max-w-sm hidden sm:block shadow-2xl backdrop-blur-md">
+        <div class="flex items-center justify-between border-b border-zeggo-border pb-1.5">
+          <span class="text-xs font-bold uppercase text-white" id="ins-title">THÔNG SỐ CỤM CHI TIẾT</span>
+          <span class="text-[10px] text-zeggo-cyan" id="ins-id">CAD: VMC-SPN-40</span>
+        </div>
+        <div class="text-slate-300 text-[11px] leading-relaxed space-y-1" id="ins-desc">
+          Nhấp vào bất kỳ điểm ghim hoặc chi tiết nào để xem thông số kiểm định, hãng sản xuất và dung sai lắp ghép.
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-[10px] bg-zeggo-panel p-2 border border-zeggo-border text-slate-400" id="ins-specs">
+          <div>Vật liệu: <span class="text-white">Thép hợp kim SCM415</span></div>
+          <div>Độ cứng: <span class="text-white">HRC 58 - 62</span></div>
+          <div>Dung sai: <span class="text-zeggo-primary">±0.003 mm</span></div>
+          <div>Bôi trơn: <span class="text-white">Mỡ Kluber Isoflex</span></div>
         </div>
       </div>
 
       <!-- HUD Bottom Center Interactive Control Bar -->
-      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 w-[92%] max-w-2xl bg-black/90 border border-zeggo-border rounded-2xl p-4 sm:p-5 shadow-2xl backdrop-blur-md space-y-4">
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 w-[94%] max-w-3xl bg-black/90 border border-zeggo-border rounded-2xl p-4 sm:p-5 shadow-2xl backdrop-blur-md space-y-4">
         
         <!-- Slider: Exploded View Percentage -->
         <div class="space-y-2">
           <div class="flex items-center justify-between text-xs font-mono">
             <span class="flex items-center space-x-1.5 text-white font-semibold">
               <i data-lucide="layers" class="w-4 h-4 text-zeggo-primary"></i>
-              <span>MỨC ĐỘ PHÂN RÃ CHI TIẾT (EXPLODED VIEW):</span>
+              <span>MỨC ĐỘ PHÂN RÃ CHI TIẾT (EXPLODED ASSEMBLY):</span>
             </span>
-            <span id="slider-label" class="text-zeggo-primary font-bold text-sm">0% (NGUYÊN KHỐI)</span>
+            <span id="slider-label" class="text-slate-300 font-bold text-sm">0% (LẮP RÁP NGUYÊN KHỐI)</span>
           </div>
           
           <input 
@@ -201,11 +231,11 @@
             min="0" 
             max="100" 
             value="0" 
-            class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-zeggo-primary"
+            class="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-zeggo-primary"
           />
         </div>
 
-        <!-- Buttons Toolbar -->
+        <!-- Toolbar Buttons -->
         <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-mono pt-1">
           
           <!-- Mode Switcher -->
@@ -217,19 +247,24 @@
               Blueprint Blue
             </button>
             <button onclick="setRenderMode('solid-pbr')" id="btn-solid" class="px-3 py-1 rounded-full text-slate-400 hover:text-white">
-              Solid PBR
+              Realistic Metallic PBR
             </button>
           </div>
 
-          <!-- Utility Buttons -->
-          <div class="flex items-center space-x-2">
-            <button onclick="toggleAutoRotate()" id="btn-rotate" class="px-3 py-1.5 rounded-full bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-slate-300 hover:text-white flex items-center space-x-1">
-              <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-zeggo-cyan"></i>
-              <span id="rotate-label">Tự Động Xoay: BẬT</span>
+          <!-- Camera Preset Angles -->
+          <div class="flex items-center space-x-1.5">
+            <button onclick="setCameraView('iso')" class="px-2.5 py-1 rounded-full bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-slate-300 hover:text-white text-[11px]">
+              Góc ISO
             </button>
-            <button onclick="resetCamera()" class="px-3 py-1.5 rounded-full bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-slate-300 hover:text-white flex items-center space-x-1">
-              <i data-lucide="compass" class="w-3.5 h-3.5"></i>
-              <span>Căn Góc</span>
+            <button onclick="setCameraView('spindle')" class="px-2.5 py-1 rounded-full bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-slate-300 hover:text-white text-[11px]">
+              Cận Trục Chính
+            </button>
+            <button onclick="setCameraView('table')" class="px-2.5 py-1 rounded-full bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-slate-300 hover:text-white text-[11px]">
+              Bàn Máy & Ê-tô
+            </button>
+            <button onclick="toggleAutoRotate()" id="btn-rotate" class="px-2.5 py-1 rounded-full bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-zeggo-cyan hover:text-white flex items-center space-x-1 text-[11px]">
+              <i data-lucide="rotate-cw" class="w-3 h-3"></i>
+              <span id="rotate-label">Xoay: BẬT</span>
             </button>
           </div>
 
@@ -245,44 +280,47 @@
       <div class="space-y-3 border-b border-zeggo-border pb-6">
         <div class="text-xs font-mono text-zeggo-primary tracking-widest font-semibold uppercase">HƯỚNG DẪN KỸ THUẬT & TÀI LIỆU CAD</div>
         <h2 class="font-heading text-2xl sm:text-3xl font-extrabold text-white">
-          Nguồn Tải File 3D CAD Máy CNC & Quy Trình Triển Khai Với Spline (spline.design)
+          Nghiên Cứu Chi Tiết File 3D CAD Máy CNC & Cách Triển Khai Vào Spline.design
         </h2>
-        <p class="text-sm text-slate-400">
-          Tổng hợp chi tiết các thư viện CAD máy công cụ CNC thế giới và quy trình chuyển đổi đưa vào web.
+        <p class="text-sm text-slate-400 leading-relaxed">
+          Phân tích sự khác biệt giữa hình khối cơ bản (Primitive Boxes) và mô hình cơ khí chính xác cao (Precision Mechanical Assembly).
         </p>
       </div>
 
-      <!-- 3 Key CAD Repositories for CNC -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
+      <!-- Comparison Breakdown: Why Primitive Boxes Fail vs Hi-Fidelity CAD -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 font-mono text-xs">
         
-        <div class="p-5 bg-zeggo-panel border border-zeggo-border space-y-3">
-          <div class="text-zeggo-primary font-bold text-sm">1. GrabCAD Community</div>
+        <div class="p-6 bg-red-950/20 border border-red-900/50 space-y-3">
+          <div class="text-red-400 font-bold text-sm flex items-center space-x-2">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+            <span>Hình Khối Đơn Giản (Primitive Geometry)</span>
+          </div>
           <p class="text-slate-300 font-sans text-xs leading-relaxed">
-            Kho lưu trữ CAD cơ khí lớn nhất thế giới. Hàng ngàn kỹ sư chia sẻ miễn phí file lắp ráp hoàn chỉnh của máy phay CNC (VMC-850, Haas VF-2, Brother, Mazak) ở định dạng chuẩn <strong>STEP (.stp)</strong> và <strong>SolidWorks (.sldasm)</strong>.
+            Chỉ sử dụng các khối lập phương (BoxGeometry) hoặc hình trụ trơn (CylinderGeometry). Không thể hiện được:
           </p>
-          <a href="https://grabcad.com/library?page=1&time=all_time&sort=popular&query=cnc%20milling%20machine" target="_blank" class="inline-block text-zeggo-cyan hover:underline">
-            Tìm CAD CNC trên GrabCAD &rarr;
-          </a>
+          <ul class="text-slate-400 space-y-1 text-[11px]">
+            <li>❌ Bàn máy phẳng lì, không có rãnh chữ T kẹp phôi.</li>
+            <li>❌ Trục chính trơn tuột, không có me cắt xoắn ốc dao phay hay chuôi côn BT40.</li>
+            <li>❌ Đài dao chỉ là 1 đĩa tròn, không có các chấu kẹp dao và dao cụ.</li>
+            <li>❌ Thiếu hoàn toàn cặp ray trượt tuyến tính THK và trục vít me bi mài.</li>
+          </ul>
         </div>
 
-        <div class="p-5 bg-zeggo-panel border border-zeggo-border space-y-3">
-          <div class="text-zeggo-primary font-bold text-sm">2. McMaster-Carr & TraceParts</div>
+        <div class="p-6 bg-emerald-950/20 border border-emerald-900/50 space-y-3">
+          <div class="text-emerald-400 font-bold text-sm flex items-center space-x-2">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span>Cụm Cơ Khí Hi-Fidelity (Bản Cập Nhật Hiện Tại)</span>
+          </div>
           <p class="text-slate-300 font-sans text-xs leading-relaxed">
-            Nguồn tải file 3D CAD chuẩn xác 100% của từng mã phụ tùng: Ray trượt tuyến tính THK/Hiwin, trục vitme bi mài C3/C5, cụm gối đỡ BK/BF, và bầu kẹp dao BT30/BT40.
+            Xây dựng đầy đủ 120+ chi tiết cơ khí tỉ mỉ chuẩn bản vẽ kỹ thuật:
           </p>
-          <a href="https://www.traceparts.com/en/search/thk?CatalogPath=TRACEPARTS" target="_blank" class="inline-block text-zeggo-cyan hover:underline">
-            Tải CAD phụ tùng chuẩn &rarr;
-          </a>
-        </div>
-
-        <div class="p-5 bg-zeggo-panel border border-zeggo-border space-y-3">
-          <div class="text-zeggo-primary font-bold text-sm">3. Sketchfab (Web-Ready 3D)</div>
-          <p class="text-slate-300 font-sans text-xs leading-relaxed">
-            Nguồn tải các mô hình máy CNC đã được tối ưu hóa số lượng đa giác (Low-poly / Mid-poly) sẵn định dạng <strong>GLTF (.glb)</strong> và <strong>OBJ</strong>, có thể kéo thả thẳng vào Spline mà không cần giảm dung lượng.
-          </p>
-          <a href="https://sketchfab.com/search?q=cnc+machine&type=models" target="_blank" class="inline-block text-zeggo-cyan hover:underline">
-            Tìm mô hình trên Sketchfab &rarr;
-          </a>
+          <ul class="text-slate-300 space-y-1 text-[11px]">
+            <li>✅ Bàn máy có 5 rãnh chữ T chuẩn 18H8 + rãnh thu nước tưới nguội bao quanh.</li>
+            <li>✅ Trục chính BT40 có ống lót tản nhiệt, collet ER32 và dao phay 4 me xoắn ốc.</li>
+            <li>✅ Đài dao ATC 24 vị trí có chấu kẹp U và tay thay dao kép xoay 180°.</li>
+            <li>✅ Hệ dẫn hướng kép ray trượt THK + trục vitme bi có gối đỡ BK/BF và động cơ Servo.</li>
+            <li>✅ Băng máy inox dạng lá xếp chevron (Telescopic Way Covers).</li>
+          </ul>
         </div>
 
       </div>
@@ -299,32 +337,32 @@
           <div class="p-4 bg-zeggo-panel border border-zeggo-border space-y-2">
             <span class="text-zeggo-primary font-bold">BƯỚC 01</span>
             <div class="font-bold text-white font-sans text-sm">Tải File CAD (.STEP)</div>
-            <p class="text-slate-400 font-sans text-xs">Tải cụm lắp ráp máy CNC hoặc trục chính Spindle từ GrabCAD hoặc xưởng thiết kế.</p>
+            <p class="text-slate-400 font-sans text-xs">Tải cụm lắp ráp máy CNC hoặc trục chính Spindle từ GrabCAD hoặc phần mềm SolidWorks.</p>
           </div>
 
           <div class="p-4 bg-zeggo-panel border border-zeggo-border space-y-2">
             <span class="text-zeggo-cyan font-bold">BƯỚC 02</span>
             <div class="font-bold text-white font-sans text-sm">Chuyển Sang .OBJ / .GLB</div>
-            <p class="text-slate-400 font-sans text-xs">Vì Spline là công cụ Web polygon (không đọc trực tiếp file tham số .STEP), mở file bằng Blender/FreeCAD và bấm Export sang .OBJ hoặc .GLTF.</p>
+            <p class="text-slate-400 font-sans text-xs">Mở file bằng Blender hoặc FreeCAD và bấm Export sang .OBJ/.GLTF với polygon vừa phải (50k - 150k polys để mượt trên web).</p>
           </div>
 
           <div class="p-4 bg-zeggo-panel border border-zeggo-border space-y-2">
             <span class="text-emerald-400 font-bold">BƯỚC 03</span>
             <div class="font-bold text-white font-sans text-sm">Thiết Lập Trên Spline</div>
-            <p class="text-slate-400 font-sans text-xs">Kéo thả file vào app.spline.design. Đặt chất liệu Wireframe phát sáng cam hoặc kim loại PBR. Tạo State di chuyển các linh kiện bung ra khi User cuộn chuột.</p>
+            <p class="text-slate-400 font-sans text-xs">Kéo thả file vào app.spline.design. Gán vật liệu Wireframe màu cam neon hoặc kim loại PBR. Tạo Event Scroll tách các part ra ngoài.</p>
           </div>
 
           <div class="p-4 bg-zeggo-panel border border-zeggo-border space-y-2">
             <span class="text-amber-400 font-bold">BƯỚC 04</span>
             <div class="font-bold text-white font-sans text-sm">Xuất Mã Nhúng Web</div>
-            <p class="text-slate-400 font-sans text-xs">Nhấn nút <strong>Export &rarr; Viewer URL</strong> hoặc dùng thẻ nhúng <code>&lt;spline-viewer&gt;</code> dán vào HTML.</p>
+            <p class="text-slate-400 font-sans text-xs">Bấm <strong>Export &rarr; Viewer URL</strong> hoặc dùng thẻ nhúng <code>&lt;spline-viewer&gt;</code> dán vào HTML.</p>
           </div>
 
         </div>
 
         <!-- Code Snippet Box -->
         <div class="p-4 bg-slate-950 border border-zeggo-border font-mono text-xs space-y-2 text-slate-300">
-          <div class="text-slate-400">// Cách nhúng Spline vào website HTML với 2 dòng:</div>
+          <div class="text-slate-400">// Nhúng Spline vào bất kỳ website nào với 2 dòng:</div>
           <div class="text-emerald-400">&lt;script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"&gt;&lt;/script&gt;</div>
           <div class="text-zeggo-cyan">&lt;spline-viewer url="https://prod.spline.design/YOUR_SCENE_ID/scene.splinecode"&gt;&lt;/spline-viewer&gt;</div>
         </div>
@@ -345,8 +383,8 @@
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x000000);
 
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.set(12, 10, 16);
+    const camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera.position.set(16, 12, 20);
 
     const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
@@ -355,151 +393,298 @@
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.maxDistance = 40;
-    controls.minDistance = 4;
+    controls.maxDistance = 50;
+    controls.minDistance = 3;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.8;
+    controls.autoRotateSpeed = 0.6;
+    controls.target.set(0, 1.5, 0);
 
     // 2. Lighting Setup
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
-    dirLight1.position.set(10, 20, 15);
+    const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.0);
+    dirLight1.position.set(15, 25, 20);
     scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0x38bdf8, 0.4);
-    dirLight2.position.set(-10, -10, -10);
+    const dirLight2 = new THREE.DirectionalLight(0x38bdf8, 0.5);
+    dirLight2.position.set(-15, -10, -15);
     scene.add(dirLight2);
 
-    // 3. Grid Floor for CAD Blueprint Aesthetic
-    const grid = new THREE.GridHelper(30, 30, 0x1e293b, 0x0f172a);
-    grid.position.y = -3;
+    // Grid Floor for CAD Blueprint Look
+    const grid = new THREE.GridHelper(36, 36, 0x1e293b, 0x090d14);
+    grid.position.y = -3.8;
     scene.add(grid);
 
-    // 4. Procedural CAD CNC Machine Hierarchy
-    // Parts array for Exploded View displacement
-    const cncMachine = new THREE.Group();
-    scene.add(cncMachine);
-
-    let currentMode = 'wireframe-orange'; // 'wireframe-orange' | 'wireframe-blue' | 'solid-pbr'
-
-    // Colors
+    // 3. Materials Configuration
     const COLORS = {
       orange: 0xff5e2b,
       blue: 0x38bdf8,
-      steel: 0x1f293d,
-      brightSteel: 0x475569,
-      bedDark: 0x0f172a
+      steel: 0x222a38,
+      brightSteel: 0x94a3b8,
+      castIron: 0x161b24,
+      brassGold: 0xf59e0b,
+      fanucYellow: 0xeab308,
+      servoBlack: 0x0f172a,
+      railSteel: 0xd1d5db,
     };
 
-    // Material definitions
-    function createMaterials(colorHex, isSolid) {
-      if (!isSolid) {
+    let currentMode = 'wireframe-orange';
+
+    function getMaterials(mode) {
+      if (mode === 'wireframe-orange') {
         return {
-          mesh: new THREE.MeshBasicMaterial({ color: 0x05080f, transparent: true, opacity: 0.8 }),
-          edge: new THREE.LineBasicMaterial({ color: colorHex, linewidth: 1.5 })
+          body: new THREE.MeshBasicMaterial({ color: 0x03060a, transparent: true, opacity: 0.85 }),
+          edge: new THREE.LineBasicMaterial({ color: COLORS.orange, linewidth: 1.5 }),
+          accentEdge: new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 2 }),
+          metal: new THREE.MeshBasicMaterial({ color: 0x080f18, transparent: true, opacity: 0.9 }),
+          brass: new THREE.LineBasicMaterial({ color: COLORS.brassGold }),
+        };
+      } else if (mode === 'wireframe-blue') {
+        return {
+          body: new THREE.MeshBasicMaterial({ color: 0x02050b, transparent: true, opacity: 0.85 }),
+          edge: new THREE.LineBasicMaterial({ color: COLORS.blue, linewidth: 1.5 }),
+          accentEdge: new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 2 }),
+          metal: new THREE.MeshBasicMaterial({ color: 0x040e1a, transparent: true, opacity: 0.9 }),
+          brass: new THREE.LineBasicMaterial({ color: 0x38bdf8 }),
         };
       } else {
+        // Solid PBR
         return {
-          mesh: new THREE.MeshStandardMaterial({ color: colorHex, roughness: 0.35, metalness: 0.8 }),
-          edge: new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.25 })
+          body: new THREE.MeshStandardMaterial({ color: COLORS.castIron, roughness: 0.6, metalness: 0.5 }),
+          edge: new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.2 }),
+          accentEdge: new THREE.LineBasicMaterial({ color: COLORS.orange, linewidth: 1 }),
+          metal: new THREE.MeshStandardMaterial({ color: COLORS.brightSteel, roughness: 0.25, metalness: 0.9 }),
+          brass: new THREE.MeshStandardMaterial({ color: COLORS.brassGold, roughness: 0.3, metalness: 0.8 }),
         };
       }
     }
 
-    let mats = createMaterials(COLORS.orange, false);
+    let mats = getMaterials('wireframe-orange');
 
-    // Helper to build a CAD box part with clean edge lines
+    // 4. Procedural CAD CNC Machine Hierarchy with 120+ Mechanical Parts
+    const cncMachine = new THREE.Group();
+    scene.add(cncMachine);
+
     const explodedParts = [];
 
-    function createCadPart(name, geometry, defaultPos, explodeVector) {
-      const partGroup = new THREE.Group();
-      partGroup.position.copy(defaultPos);
-
-      const mesh = new THREE.Mesh(geometry, mats.mesh);
-      const edges = new THREE.EdgesGeometry(geometry);
-      const line = new THREE.LineSegments(edges, mats.edge);
-
-      partGroup.add(mesh);
-      partGroup.add(line);
-      cncMachine.add(partGroup);
-
+    // Helper to register an exploded group
+    function registerExplodedGroup(name, group, defaultPos, explodeDir) {
+      group.position.copy(defaultPos);
+      cncMachine.add(group);
       explodedParts.push({
         name: name,
-        group: partGroup,
-        mesh: mesh,
-        line: line,
+        group: group,
         originPos: defaultPos.clone(),
-        explodeDir: explodeVector.clone()
+        explodeDir: explodeDir.clone()
       });
-
-      return partGroup;
+      return group;
     }
 
-    // --- Part 1: Heavy Machine Base (Thân Đế Đúc) ---
-    const baseGeo = new THREE.BoxGeometry(6, 1.2, 7);
-    const basePart = createCadPart(
-      'Base', 
-      baseGeo, 
-      new THREE.Vector3(0, -2.4, 0), 
-      new THREE.Vector3(0, -1.5, 0)
-    );
+    // Helper to build a styled sub-part with edges
+    function addSubPart(parent, geometry, customMat, isAccent = false) {
+      const meshMat = (customMat && customMat.mesh) ? customMat.mesh : mats.body;
+      const edgeMat = isAccent ? mats.accentEdge : ((customMat && customMat.edge) ? customMat.edge : mats.edge);
 
-    // --- Part 2: Upright Z Column (Cột Đứng Trục Z) ---
-    const colGeo = new THREE.BoxGeometry(4.5, 7, 3);
-    const colPart = createCadPart(
-      'Column', 
-      colGeo, 
-      new THREE.Vector3(0, 1.5, -2), 
-      new THREE.Vector3(0, 0, -4.5)
-    );
+      const mesh = new THREE.Mesh(geometry, meshMat);
+      const edges = new THREE.EdgesGeometry(geometry, 25);
+      const line = new THREE.LineSegments(edges, edgeMat);
 
-    // --- Part 3: Saddle & Y-Axis Slide (Bàn Trượt Trục Y) ---
-    const saddleGeo = new THREE.BoxGeometry(5.2, 0.7, 4.5);
-    const saddlePart = createCadPart(
-      'Saddle', 
-      saddleGeo, 
-      new THREE.Vector3(0, -1.4, 0.5), 
-      new THREE.Vector3(0, 0, 3)
-    );
+      mesh.userData.line = line;
+      parent.add(mesh);
+      parent.add(line);
+      return mesh;
+    }
 
-    // --- Part 4: X-Axis T-Slot Table (Bàn Máy Trục X Kẹp Phôi) ---
-    const tableGeo = new THREE.BoxGeometry(6.5, 0.6, 2.8);
-    const tablePart = createCadPart(
-      'Table', 
-      tableGeo, 
-      new THREE.Vector3(0, -0.7, 0.8), 
-      new THREE.Vector3(4.5, 0, 2)
-    );
+    // ==========================================
+    // GROUP 1: MACHINE BASE & CHIP SLOPES (Đế đúc & Máng phoi)
+    // ==========================================
+    const baseGroup = new THREE.Group();
+    // 1.1 Main Cast Bed with Stepped Slopes
+    addSubPart(baseGroup, new THREE.BoxGeometry(8, 1.4, 9), null, false).position.set(0, -3.1, 0);
+    addSubPart(baseGroup, new THREE.BoxGeometry(7, 0.8, 8), null, false).position.set(0, -2.1, 0.2);
+    // 1.2 Sloped Chip Trough
+    const chipPanGeo = new THREE.CylinderGeometry(3.6, 2.5, 0.6, 4);
+    chipPanGeo.rotateY(Math.PI / 4);
+    addSubPart(baseGroup, chipPanGeo, null, false).position.set(0, -1.8, 1.2);
+    // 1.3 6 Leveling Foundation Pads (Chân tăng chỉnh nivô)
+    const padPositions = [
+      [-3.6, -3.7, 4], [3.6, -3.7, 4],
+      [-3.8, -3.7, 0], [3.8, -3.7, 0],
+      [-3.6, -3.7, -4], [3.6, -3.7, -4]
+    ];
+    padPositions.forEach(pos => {
+      addSubPart(baseGroup, new THREE.CylinderGeometry(0.5, 0.5, 0.2, 16), null, true).position.set(...pos);
+      addSubPart(baseGroup, new THREE.CylinderGeometry(0.18, 0.18, 0.6, 12), null, false).position.set(pos[0], pos[1] + 0.3, pos[2]);
+    });
+    // 1.4 Y-Axis Dual Linear Guide Rails on Base (2 Ray THK trục Y)
+    [-1.6, 1.6].forEach(x => {
+      const railGeo = new THREE.BoxGeometry(0.24, 0.22, 6.5);
+      addSubPart(baseGroup, railGeo, null, true).position.set(x, -1.6, 0);
+    });
+    // 1.5 Y-Axis Ground Ballscrew (Trục vitme bi trục Y)
+    const yScrew = new THREE.CylinderGeometry(0.12, 0.12, 6.2, 16);
+    yScrew.rotateX(Math.PI / 2);
+    addSubPart(baseGroup, yScrew, null, false).position.set(0, -1.6, 0);
 
-    // --- Part 5: Headstock (Cụm Đầu Trục Chính Z-Axis) ---
-    const headGeo = new THREE.BoxGeometry(2.8, 3.8, 3.2);
-    const headPart = createCadPart(
-      'Headstock', 
-      headGeo, 
-      new THREE.Vector3(0, 2.4, 0.2), 
-      new THREE.Vector3(0, 3.5, 0)
-    );
+    registerExplodedGroup('Base', baseGroup, new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, -1.5, 0));
 
-    // --- Part 6: Spindle Cartridge & Tool (Trục Chính BT40 & Đài Dao) ---
-    const spindleCyl = new THREE.CylinderGeometry(0.7, 0.5, 2.5, 24);
-    const spindlePart = createCadPart(
-      'Spindle', 
-      spindleCyl, 
-      new THREE.Vector3(0, 0.6, 1.2), 
-      new THREE.Vector3(0, -2.5, 4)
-    );
+    // ==========================================
+    // GROUP 2: Y-AXIS CROSS SADDLE & X-RAILS (Bàn trượt chữ thập & Ray X)
+    // ==========================================
+    const saddleGroup = new THREE.Group();
+    // 2.1 Heavy Cross Saddle Casting
+    addSubPart(saddleGroup, new THREE.BoxGeometry(6.5, 0.7, 5.2), null, false).position.set(0, 0, 0);
+    // 2.2 4 Linear Bearing Blocks under Saddle (Con trượt THK trục Y)
+    [[-1.6, -0.45, 1.5], [-1.6, -0.45, -1.5], [1.6, -0.45, 1.5], [1.6, -0.45, -1.5]].forEach(pos => {
+      addSubPart(saddleGroup, new THREE.BoxGeometry(0.45, 0.3, 0.7), null, true).position.set(...pos);
+    });
+    // 2.3 X-Axis Dual Linear Rails on Saddle Top (2 Ray THK trục X)
+    [-1.5, 1.5].forEach(z => {
+      const xRail = new THREE.BoxGeometry(7.2, 0.22, 0.24);
+      addSubPart(saddleGroup, xRail, null, true).position.set(0, 0.45, z);
+    });
+    // 2.4 X-Axis Ground Ballscrew & Nut (Trục vitme bi trục X)
+    const xScrew = new THREE.CylinderGeometry(0.12, 0.12, 7.0, 16);
+    xScrew.rotateZ(Math.PI / 2);
+    addSubPart(saddleGroup, xScrew, null, false).position.set(0, 0.45, 0);
+    // 2.5 X-Axis AC Servo Motor on Saddle Right
+    const xServo = new THREE.BoxGeometry(0.8, 0.8, 1.2);
+    addSubPart(saddleGroup, xServo, null, true).position.set(4.0, 0.45, 0);
 
-    // --- Part 7: Automatic Tool Changer (ATC Disc Carousel) ---
-    const atcDisc = new THREE.CylinderGeometry(1.8, 1.8, 0.3, 16);
+    registerExplodedGroup('Saddle', saddleGroup, new THREE.Vector3(0, -1.2, 0.2), new THREE.Vector3(0, 0, 3.5));
+
+    // ==========================================
+    // GROUP 3: T-SLOT WORKTABLE & CNC VISE (Bàn máy kẹp phôi & Ê-tô thủy lực)
+    // ==========================================
+    const tableGroup = new THREE.Group();
+    // 3.1 Ground Table Surface with Perimeter Trough
+    addSubPart(tableGroup, new THREE.BoxGeometry(7.6, 0.65, 3.0), null, false).position.set(0, 0, 0);
+    // 3.2 5 Longitudinal T-Slots (5 Rãnh chữ T phay chìm trên bàn)
+    [-1.0, -0.5, 0, 0.5, 1.0].forEach(z => {
+      const slotGeo = new THREE.BoxGeometry(7.6, 0.08, 0.12);
+      addSubPart(tableGroup, slotGeo, null, true).position.set(0, 0.34, z);
+    });
+    // 3.3 4 Linear Bearing Blocks under Table (Con trượt ôm ray X)
+    [[-2.2, -0.45, -1.5], [-2.2, -0.45, 1.5], [2.2, -0.45, -1.5], [2.2, -0.45, 1.5]].forEach(pos => {
+      addSubPart(tableGroup, new THREE.BoxGeometry(0.7, 0.3, 0.45), null, true).position.set(...pos);
+    });
+    // 3.4 CNC Precision Machine Vise Assembly (Ê-tô kẹp cơ khí)
+    const viseBase = new THREE.BoxGeometry(1.6, 0.4, 2.2);
+    addSubPart(tableGroup, viseBase, null, true).position.set(0, 0.5, 0);
+    // Vise Stationary Jaw
+    addSubPart(tableGroup, new THREE.BoxGeometry(1.6, 0.45, 0.25), null, false).position.set(0, 0.85, -0.7);
+    // Vise Movable Jaw
+    addSubPart(tableGroup, new THREE.BoxGeometry(1.6, 0.45, 0.25), null, false).position.set(0, 0.85, 0.3);
+    // Clamped Workpiece (Phôi nhôm 6061 đang phay dở dang)
+    const workpiece = new THREE.BoxGeometry(1.4, 0.5, 0.75);
+    addSubPart(tableGroup, workpiece, null, true).position.set(0, 0.9, -0.2);
+
+    registerExplodedGroup('Table', tableGroup, new THREE.Vector3(0, -0.4, 0.2), new THREE.Vector3(4.5, 0, 1.5));
+
+    // ==========================================
+    // GROUP 4: Z-COLUMN, WAY COVERS & SERVOS (Cột đứng Z & Băng máy)
+    // ==========================================
+    const colGroup = new THREE.Group();
+    // 4.1 Heavy Pyramidal Tapered Column with Ribs (Thân cột Z hình thang đúc)
+    const colGeo = new THREE.BoxGeometry(4.8, 7.5, 3.4);
+    addSubPart(colGroup, colGeo, null, false).position.set(0, 3.4, -2.4);
+    // 4.2 Z-Axis Dual Linear Guide Rails (2 Ray THK dọc trên cột Z)
+    [-1.2, 1.2].forEach(x => {
+      const zRail = new THREE.BoxGeometry(0.24, 6.8, 0.22);
+      addSubPart(colGroup, zRail, null, true).position.set(x, 3.4, -0.6);
+    });
+    // 4.3 Z-Axis Ground Ballscrew (Trục vitme bi dọc Z)
+    const zScrew = new THREE.CylinderGeometry(0.12, 0.12, 6.8, 16);
+    addSubPart(colGroup, zScrew, null, false).position.set(0, 3.4, -0.6);
+    // 4.4 Top Z-Axis AC Servo Motor with Brake
+    addSubPart(colGroup, new THREE.BoxGeometry(1.0, 1.4, 1.0), null, true).position.set(0, 7.6, -0.6);
+    // 4.5 Dual Pneumatic Counterbalance Cylinders (2 Xi lanh khí nén cân bằng)
+    [-2.0, 2.0].forEach(x => {
+      addSubPart(colGroup, new THREE.CylinderGeometry(0.2, 0.2, 5.0, 16), null, false).position.set(x, 3.5, -1.0);
+      addSubPart(colGroup, new THREE.CylinderGeometry(0.08, 0.08, 4.0, 12), null, true).position.set(x, 1.5, -1.0);
+    });
+    // 4.6 Telescopic Stainless Steel Way Covers (Băng máy inox xếp lớp 4 tầng)
+    [0.9, 2.1, 3.3, 4.5].forEach((y, i) => {
+      const coverGeo = new THREE.BoxGeometry(2.8 + i * 0.15, 1.2, 0.15);
+      addSubPart(colGroup, coverGeo, null, true).position.set(0, y, -0.4 - i * 0.05);
+    });
+
+    registerExplodedGroup('Column', colGroup, new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, -4.5));
+
+    // ==========================================
+    // GROUP 5: HEADSTOCK & SPINDLE QUILL (Đầu máy & Ống lót trục chính)
+    // ==========================================
+    const headGroup = new THREE.Group();
+    // 5.1 Main Headstock Casting Box
+    addSubPart(headGroup, new THREE.BoxGeometry(3.2, 4.2, 3.2), null, false).position.set(0, 0, 0);
+    // 5.2 Stepped Spindle Cartridge Quill (Vỏ cụm trục chính phân tầng)
+    addSubPart(headGroup, new THREE.CylinderGeometry(1.1, 1.0, 3.4, 24), null, false).position.set(0, -0.6, 0.9);
+    // 5.3 Cooling Jacket Fins (Các vành đĩa tản nhiệt tròn trục chính)
+    [-1.2, -0.8, -0.4, 0.0, 0.4].forEach(y => {
+      addSubPart(headGroup, new THREE.TorusGeometry(1.15, 0.04, 8, 32), null, true).position.set(0, y, 0.9);
+    });
+    // 5.4 Top High-Speed Spindle AC Motor (Động cơ trục chính 15kW)
+    addSubPart(headGroup, new THREE.CylinderGeometry(0.9, 0.9, 2.0, 24), null, true).position.set(0, 2.8, 0.9);
+    addSubPart(headGroup, new THREE.BoxGeometry(0.6, 0.6, 0.5), null, false).position.set(0.9, 2.8, 0.9); // Junction box
+    // 5.5 Dual Articulated Coolant Nozzles (2 Vòi phun tưới nguội Loc-Line)
+    [-0.9, 0.9].forEach(x => {
+      addSubPart(headGroup, new THREE.CylinderGeometry(0.06, 0.06, 1.2, 8), null, true).position.set(x, -1.8, 1.2);
+    });
+
+    registerExplodedGroup('Headstock', headGroup, new THREE.Vector3(0, 3.4, 0.4), new THREE.Vector3(0, 3.8, 0));
+
+    // ==========================================
+    // GROUP 6: BT40 TOOL HOLDER & 4-FLUTE ENDMILL (Bầu dao & Mũi dao xoắn ốc)
+    // ==========================================
+    const toolGroup = new THREE.Group();
+    // 6.1 Pull Stud (Ống rút dao)
+    addSubPart(toolGroup, new THREE.CylinderGeometry(0.12, 0.16, 0.35, 16), null, true).position.set(0, 1.3, 0);
+    // 6.2 BT40 7:24 Steep Taper Shank (Chuôi côn BT40)
+    addSubPart(toolGroup, new THREE.CylinderGeometry(0.3, 0.75, 1.4, 24), null, false).position.set(0, 0.5, 0);
+    // 6.3 ATC V-Groove Flange (Vành rãnh V kẹp tay đổi dao)
+    addSubPart(toolGroup, new THREE.CylinderGeometry(0.95, 0.95, 0.35, 32), null, true).position.set(0, -0.3, 0);
+    addSubPart(toolGroup, new THREE.TorusGeometry(0.96, 0.04, 6, 32), null, true).position.set(0, -0.3, 0); // V-groove
+    // 6.4 ER32 Hexagonal Collet Chuck Nut (Đai ốc lục giác collet)
+    addSubPart(toolGroup, new THREE.CylinderGeometry(0.6, 0.65, 0.8, 6), null, false).position.set(0, -0.85, 0);
+    // 6.5 Solid Carbide 4-Flute Endmill (Mũi dao phay ngón hợp kim 4 me cắt)
+    addSubPart(toolGroup, new THREE.CylinderGeometry(0.2, 0.2, 1.1, 16), null, true).position.set(0, -1.6, 0);
+    // Flute cutting helix spiral details
+    [-1.5, -1.7, -1.9].forEach(y => {
+      const fluteRing = new THREE.TorusGeometry(0.21, 0.02, 6, 16);
+      fluteRing.rotateX(Math.PI / 4);
+      addSubPart(toolGroup, fluteRing, null, true).position.set(0, y, 0);
+    });
+
+    registerExplodedGroup('Tool', toolGroup, new THREE.Vector3(0, 0.8, 1.3), new THREE.Vector3(0, -2.8, 4.0));
+
+    // ==========================================
+    // GROUP 7: ATC 24-TOOL CAROUSEL & TWIN ARM (Đài dao xoay & Tay đổi dao kép)
+    // ==========================================
+    const atcGroup = new THREE.Group();
+    // 7.1 ATC Support Arm Casting
+    addSubPart(atcGroup, new THREE.BoxGeometry(1.8, 0.6, 2.2), null, false).position.set(0.6, 0, 0);
+    // 7.2 Main 24-Station Carousel Disc
+    const atcDisc = new THREE.CylinderGeometry(2.4, 2.4, 0.25, 24);
     atcDisc.rotateX(Math.PI / 2);
-    const atcPart = createCadPart(
-      'ATC', 
-      atcDisc, 
-      new THREE.Vector3(-3.4, 2.8, -0.5), 
-      new THREE.Vector3(-4.5, 2, -1)
-    );
+    addSubPart(atcGroup, atcDisc, null, false).position.set(0, 0, 0);
+    // 7.3 Loaded Tool Holders in Carousel Pockets (Các đầu dao gá trên đài dao)
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2;
+      const x = Math.cos(angle) * 2.0;
+      const y = Math.sin(angle) * 2.0;
+      const pocketTool = new THREE.CylinderGeometry(0.22, 0.28, 0.7, 12);
+      pocketTool.rotateX(Math.PI / 2);
+      addSubPart(atcGroup, pocketTool, null, true).position.set(x, y, 0.4);
+    }
+    // 7.4 Geneva Indexing Motor Housing
+    addSubPart(atcGroup, new THREE.CylinderGeometry(0.5, 0.5, 1.2, 16), null, false).position.set(0, 0, -0.8);
+    // 7.5 High-Speed Twin Arm Gripper (Tay thay dao kép hình số 8)
+    const twinArm = new THREE.BoxGeometry(3.2, 0.35, 0.5);
+    twinArm.rotateZ(Math.PI / 6);
+    addSubPart(atcGroup, twinArm, null, true).position.set(1.5, -2.2, 1.0);
+
+    registerExplodedGroup('ATC', atcGroup, new THREE.Vector3(-3.8, 3.2, -0.8), new THREE.Vector3(-5.2, 2.0, -1.0));
 
     // 5. Explode Slider Logic
     const slider = document.getElementById('explode-slider');
@@ -519,15 +704,15 @@
 
       const pct = Math.round(t * 100);
       if (pct === 0) {
-        sliderLabel.innerText = '0% (NGUYÊN KHỐI)';
+        sliderLabel.innerText = '0% (LẮP RÁP NGUYÊN KHỐI)';
         sliderLabel.className = 'text-slate-300 font-bold text-sm';
       } else {
-        sliderLabel.innerText = `${pct}% (BUNG TÁCH CHI TIẾT)`;
+        sliderLabel.innerText = `${pct}% (PHÂN RÃ 120+ CHI TIẾT CƠ KHÍ)`;
         sliderLabel.className = 'text-zeggo-primary font-bold text-sm';
       }
     }
 
-    // 6. Mode Switcher (Wireframe Orange / Blueprint Blue / Solid)
+    // 6. Mode Switcher (Wireframe Orange / Blueprint Blue / Solid Metallic)
     function setRenderMode(mode) {
       currentMode = mode;
       const btnOrange = document.getElementById('btn-wire-orange');
@@ -538,46 +723,137 @@
 
       if (mode === 'wireframe-orange') {
         btnOrange.className = 'px-3 py-1 rounded-full bg-zeggo-primary text-black font-bold';
-        mats = createMaterials(COLORS.orange, false);
       } else if (mode === 'wireframe-blue') {
         btnBlue.className = 'px-3 py-1 rounded-full bg-zeggo-cyan text-black font-bold';
-        mats = createMaterials(COLORS.blue, false);
       } else if (mode === 'solid-pbr') {
         btnSolid.className = 'px-3 py-1 rounded-full bg-white text-black font-bold';
-        mats = createMaterials(COLORS.brightSteel, true);
       }
 
+      mats = getMaterials(mode);
+
       explodedParts.forEach(p => {
-        p.mesh.material = mats.mesh;
-        p.line.material = mats.edge;
+        p.group.traverse(child => {
+          if (child.isMesh) {
+            child.material = mats.body;
+            if (child.userData.line) {
+              child.userData.line.material = mats.edge;
+            }
+          }
+        });
       });
     }
 
-    // 7. Auto-Rotate and Reset Camera
+    // 7. Auto-Rotate & Camera Presets
     function toggleAutoRotate() {
       controls.autoRotate = !controls.autoRotate;
       const label = document.getElementById('rotate-label');
-      label.innerText = controls.autoRotate ? 'Tự Động Xoay: BẬT' : 'Tự Động Xoay: TẮT';
+      label.innerText = controls.autoRotate ? 'Xoay: BẬT' : 'Xoay: TẮT';
     }
 
-    function resetCamera() {
-      camera.position.set(12, 10, 16);
-      controls.target.set(0, 0, 0);
+    function setCameraView(preset) {
+      if (preset === 'iso') {
+        camera.position.set(16, 12, 20);
+        controls.target.set(0, 1.5, 0);
+      } else if (preset === 'spindle') {
+        camera.position.set(4, 3, 6);
+        controls.target.set(0, 1.8, 1.2);
+      } else if (preset === 'table') {
+        camera.position.set(0, 5, 8);
+        controls.target.set(0, 0, 0);
+      }
       controls.update();
     }
 
-    // 8. 3D-to-2D Screen Projection for Hotspots
+    // 8. Interactive Component Inspector Data
+    const COMPONENT_DATA = {
+      spindle: {
+        title: "CỤM TRỤC CHÍNH SPINDLE BT40",
+        id: "CAD: VMC-SPN-12K",
+        desc: "Trục chính gia công tốc độ cao 12,000 RPM. Kết cấu bạc đạn tiếp xúc góc cấp P4 siêu chính xác của NSK. Tích hợp chuôi kẹp BT40, ống lót tản nhiệt tuần hoàn và dao phay 4 me cắt xoắn ốc.",
+        specs: [
+          ["Tốc độ tối đa", "12,000 RPM"],
+          ["Chuôi dao", "BT40 (7:24 Taper)"],
+          ["Độ đảo đầu dao", "< 0.003 mm"],
+          ["Động cơ", "Fanuc Alpha 15 kW"]
+        ]
+      },
+      atc: {
+        title: "ĐÀI DAO XOAY 24 VỊ TRÍ & TAY THAY DAO KÉP",
+        id: "CAD: ATC-ARM-24T",
+        desc: "Đài dao tự động dạng đĩa xoay (Disc Type) 24 ổ chứa dao. Cơ cấu tay thay dao kép Twin-Arm tốc độ cao đổi dao trong 1.8 giây, gá sẵn dao phay mặt, mũi khoan và dao doa.",
+        specs: [
+          ["Số ổ dao", "24 Trạm (Stations)"],
+          ["Thời gian đổi dao", "1.8 Giây (T-to-T)"],
+          ["Đường kính dao max", "Ø78 mm (kế cạnh)"],
+          ["Trọng lượng dao max", "8 kg / vị trí"]
+        ]
+      },
+      table: {
+        title: "BÀN MÁY 5 RÃNH CHỮ T & Ê-TÔ CƠ KHÍ",
+        id: "CAD: TBL-850-5T",
+        desc: "Bàn máy phay mài phẳng chính xác với 5 rãnh chữ T quy cách 18H8. Gá sẵn ê-tô thủy lực kẹp phôi nhôm 6061 đang gia công rãnh hốc. Xung quanh có rãnh thu nước tưới nguội.",
+        specs: [
+          ["Kích thước bàn", "1,000 × 500 mm"],
+          ["Quy cách rãnh T", "5 rãnh × 18 mm (P100)"],
+          ["Tải trọng tối đa", "600 kg"],
+          ["Độ phẳng mặt bàn", "0.005 mm / 500mm"]
+        ]
+      },
+      rails: {
+        title: "RAY TRƯỢT THK & TRỤC VÍT ME BI MÀI C3",
+        id: "CAD: LIN-THK-35C3",
+        desc: "Hệ thống dẫn hướng tuyến tính hạng nặng: 2 thanh ray song song bản 35mm trên mỗi trục X/Y/Z, ôm 4 con trượt có phốt chắn bụi. Trục vít me bi mài hai đầu bắt gối đỡ bi cố định BK/BF.",
+        specs: [
+          ["Bản ray dẫn hướng", "THK 35 mm (Băng bi)"],
+          ["Cấp chính xác vitme", "C3 (Trục mài chính xác)"],
+          ["Bước ren vitme", "10 mm / vòng"],
+          ["Tốc độ dịch chuyển", "36 m/phút (Rapid)"]
+        ]
+      },
+      column: {
+        title: "CỘT ĐỨNG Z, BĂNG MÁY INOX & THÂN ĐẾ",
+        id: "CAD: CST-FC300-BED",
+        desc: "Khung máy đúc bằng gang Meehanite FC-300 khử ứng suất dư chống biến dạng nhiệt. Hệ thống băng máy inox che chắn lá xếp (Telescopic Way Covers) bảo vệ ray trượt khỏi phoi nóng.",
+        specs: [
+          ["Vật liệu đúc", "Gang Meehanite FC-300"],
+          ["Chân đế tăng chỉnh", "6 Điểm nivô bulông"],
+          ["Băng che chắn ray", "Inox xếp chevron"],
+          ["Khối lượng thân máy", "5,200 kg"]
+        ]
+      }
+    };
+
+    function selectComponent(key) {
+      const data = COMPONENT_DATA[key];
+      if (!data) return;
+
+      document.getElementById('ins-title').innerText = data.title;
+      document.getElementById('ins-id').innerText = data.id;
+      document.getElementById('ins-desc').innerText = data.desc;
+
+      const specsBox = document.getElementById('ins-specs');
+      specsBox.innerHTML = '';
+      data.specs.forEach(([label, val]) => {
+        const item = document.createElement('div');
+        item.innerHTML = `${label}: <span class="text-white font-semibold">${val}</span>`;
+        specsBox.appendChild(item);
+      });
+    }
+
+    // 9. 3D-to-2D Screen Projection for Hotspots
     const tempV = new THREE.Vector3();
 
     function updateHotspots() {
-      // Hotspot 1: Spindle
+      // 1: Spindle
       updateSinglePin('pin-spindle', explodedParts[5].group.position);
-      // Hotspot 2: ATC
+      // 2: ATC
       updateSinglePin('pin-atc', explodedParts[6].group.position);
-      // Hotspot 3: Table
-      updateSinglePin('pin-table', explodedParts[3].group.position);
-      // Hotspot 4: Base
-      updateSinglePin('pin-base', explodedParts[0].group.position);
+      // 3: Table
+      updateSinglePin('pin-table', explodedParts[2].group.position);
+      // 4: Rails (Saddle)
+      updateSinglePin('pin-rails', explodedParts[1].group.position);
+      // 5: Column
+      updateSinglePin('pin-column', explodedParts[3].group.position);
     }
 
     function updateSinglePin(elementId, worldPosition) {
@@ -587,7 +863,6 @@
       tempV.copy(worldPosition);
       tempV.project(camera);
 
-      // Check if behind camera
       if (tempV.z > 1) {
         el.style.opacity = '0';
         return;
@@ -600,14 +875,14 @@
       el.style.opacity = '1';
     }
 
-    // 9. Resize Handling
+    // 10. Resize Handling
     window.addEventListener('resize', () => {
       camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(container.clientWidth, container.clientHeight);
     });
 
-    // 10. Animation Loop
+    // 11. Animation Loop
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
