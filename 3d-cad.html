@@ -32,7 +32,7 @@
               surface: '#0F1624',
               surfaceHover: '#172236',
               border: '#1E293B',
-              primary: '#FF5E2B', // Zeggo Warm Coral/Orange
+              primary: '#38BDF8', // Precision Laser Cyan
               cyan: '#38BDF8',
               gold: '#F59E0B',
               emerald: '#10B981',
@@ -79,7 +79,7 @@
       height: 13px;
       border-radius: 50%;
       background: #FFFFFF;
-      box-shadow: 0 0 12px #FF5E2B, 0 0 24px #FF5E2B;
+      box-shadow: 0 0 12px #38BDF8, 0 0 24px #38BDF8;
       animation: pulse 2.2s infinite ease-in-out;
     }
     @keyframes pulse {
@@ -108,9 +108,6 @@
         <a href="index.html" class="rounded-full px-4 py-1.5 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-xs font-mono text-slate-300 hover:text-white transition-all flex items-center space-x-1.5">
           <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
           <span>Về Landing Page</span>
-        </a>
-        <a href="https://github.com/dodonghd12/jiten-cnc" target="_blank" class="rounded-full px-4 py-1.5 bg-white text-black hover:bg-zeggo-primary hover:text-white text-xs font-mono font-bold transition-all">
-          GitHub Repo
         </a>
       </div>
 
@@ -238,8 +235,8 @@
           
           <!-- Mode Switcher -->
           <div class="flex items-center space-x-1 bg-zeggo-panel p-1 border border-zeggo-border rounded-full">
-            <button onclick="setRenderMode('wireframe-orange')" id="btn-wire-orange" class="px-3 py-1 rounded-full bg-zeggo-primary text-black font-bold">
-              Zeggo Wireframe
+            <button onclick="setRenderMode('wireframe-cyan')" id="btn-wire-cyan" class="px-3 py-1 rounded-full bg-zeggo-primary text-black font-bold">
+              Laser Cyan Wireframe
             </button>
             <button onclick="setRenderMode('wireframe-blue')" id="btn-wire-blue" class="px-3 py-1 rounded-full text-slate-400 hover:text-white">
               Blueprint Blue
@@ -447,8 +444,8 @@
 
     // 3. Materials Configuration
     const COLORS = {
-      orange: 0xff5e2b,
-      blue: 0x38bdf8,
+      cyan: 0x38bdf8,
+      blue: 0x0284c7,
       steel: 0x222a38,
       brightSteel: 0xc8d1dc,
       castIron: 0x141820,
@@ -458,13 +455,13 @@
       carriageRed: 0xd97706,
     };
 
-    let currentMode = 'wireframe-orange';
+    let currentMode = 'wireframe-cyan';
 
     function getMaterials(mode) {
-      if (mode === 'wireframe-orange') {
+      if (mode === 'wireframe-cyan') {
         return {
           body: new THREE.MeshBasicMaterial({ color: 0x03060a, transparent: true, opacity: 0.85 }),
-          edge: new THREE.LineBasicMaterial({ color: COLORS.orange, linewidth: 1.5 }),
+          edge: new THREE.LineBasicMaterial({ color: COLORS.cyan, linewidth: 1.5 }),
           accentEdge: new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 2 }),
           gold: new THREE.MeshBasicMaterial({ color: 0x140e04 }),
           goldEdge: new THREE.LineBasicMaterial({ color: COLORS.brassGold, linewidth: 2 }),
@@ -488,7 +485,7 @@
         return {
           body: new THREE.MeshStandardMaterial({ color: COLORS.castIron, roughness: 0.5, metalness: 0.6 }),
           edge: new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.25 }),
-          accentEdge: new THREE.LineBasicMaterial({ color: COLORS.orange, linewidth: 1 }),
+          accentEdge: new THREE.LineBasicMaterial({ color: COLORS.cyan, linewidth: 1 }),
           gold: new THREE.MeshStandardMaterial({ color: COLORS.brassGold, roughness: 0.25, metalness: 0.9 }),
           goldEdge: new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.4 }),
           ruby: new THREE.MeshStandardMaterial({ color: COLORS.rubyRed, roughness: 0.1, metalness: 0.1 }),
@@ -498,7 +495,7 @@
       }
     }
 
-    let mats = getMaterials('wireframe-orange');
+    let mats = getMaterials('wireframe-cyan');
 
     // 4. Procedural CAD CNC Machine Hierarchy with 250+ Mechanical Parts
     const cncMachine = new THREE.Group();
@@ -866,21 +863,23 @@
       }
     }
 
-    // 6. Mode Switcher (Wireframe Orange / Blueprint Blue / Metallic CAD Colors)
+    // 6. Mode Switcher (Laser Cyan Wireframe / Blueprint Blue / Metallic CAD Colors)
     function setRenderMode(mode) {
       currentMode = mode;
-      const btnOrange = document.getElementById('btn-wire-orange');
+      const btnCyan = document.getElementById('btn-wire-cyan');
       const btnBlue = document.getElementById('btn-wire-blue');
       const btnSolid = document.getElementById('btn-solid');
 
-      [btnOrange, btnBlue, btnSolid].forEach(b => b.className = 'px-3 py-1 rounded-full text-slate-400 hover:text-white');
+      [btnCyan, btnBlue, btnSolid].forEach(b => {
+        if (b) b.className = 'px-3 py-1 rounded-full text-slate-400 hover:text-white';
+      });
 
-      if (mode === 'wireframe-orange') {
-        btnOrange.className = 'px-3 py-1 rounded-full bg-zeggo-primary text-black font-bold';
+      if (mode === 'wireframe-cyan') {
+        if (btnCyan) btnCyan.className = 'px-3 py-1 rounded-full bg-zeggo-primary text-black font-bold';
       } else if (mode === 'wireframe-blue') {
-        btnBlue.className = 'px-3 py-1 rounded-full bg-zeggo-cyan text-black font-bold';
+        if (btnBlue) btnBlue.className = 'px-3 py-1 rounded-full bg-zeggo-cyan text-black font-bold';
       } else if (mode === 'solid-pbr') {
-        btnSolid.className = 'px-3 py-1 rounded-full bg-white text-black font-bold';
+        if (btnSolid) btnSolid.className = 'px-3 py-1 rounded-full bg-white text-black font-bold';
       }
 
       mats = getMaterials(mode);
