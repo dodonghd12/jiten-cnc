@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JITEN CNC | Công Ty TNHH Cơ Điện Kim Phong - Giải Pháp Máy Công Cụ & Tự Động Hóa</title>
+  <title>JITEN CNC · Enterprise Machine Tools & Digital Twin Platform (SaaS 2026)</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Fonts: Be Vietnam Pro (100% Chuyên trị Tiếng Việt không bao giờ vỡ font) + Inter + JetBrains Mono -->
+  <!-- Fonts: Be Vietnam Pro (100% Chuẩn Tiếng Việt không vỡ glyph) + Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -29,19 +29,20 @@
       theme: {
         extend: {
           colors: {
-            // ZEGGO-Inspired High-Tech Industrial Palette (Pitch Black + Electric Coral + Precision Ice Blue)
-            zeggo: {
-              bg: '#000000',           // Pure Pitch Black (Zeggo signature oklch(0% 0 0))
-              panel: '#090D14',        // Deep Obsidian Base
-              surface: '#101722',      // Architectural Card Surface
-              surfaceHover: '#162030', // Interactive Hover Surface
-              border: '#1E293B',       // Crisp Hairline Line (1px)
+            // SaaS 2026 Dark Obsidian & Precision Electric Accents
+            saas: {
+              bg: '#000000',           // Pure Pitch Black canvas
+              panel: '#070B12',        // Deep Obsidian Base
+              surface: '#0E1524',      // Elevated Card Surface
+              surfaceHover: '#152036', // Interactive Hover Surface
+              border: 'rgba(255, 255, 255, 0.08)', // 1px Hairline structural border
               borderActive: '#FF5E2B', // Zeggo Warm Coral/Orange
-              primary: '#FF5E2B',      // Zeggo Signature Brand Accent
-              primaryHover: '#FF7347',
-              cyan: '#38BDF8',         // Precision Engineering Sky Blue
-              white: '#FFFFFF',
-              textPrimary: '#F8FAFC',
+              primary: '#FF5E2B',      // Precision Signal Orange
+              primaryHover: '#FF7547',
+              cyan: '#38BDF8',         // Precision Telemetry Ice Blue
+              emerald: '#10B981',      // Uptime / Live Signal Green
+              gold: '#F59E0B',
+              textPrimary: '#FFFFFF',
               textSecondary: '#CBD5E1',
               textMuted: '#94A3B8',
             }
@@ -57,7 +58,7 @@
   </script>
 
   <style>
-    /* ZEGGO Architectural System: Pitch black, crisp 1px borders, bold kinetic typography */
+    /* SaaS 2026 Industrial Design System */
     body {
       background-color: #000000;
       color: #CBD5E1;
@@ -73,12 +74,19 @@
     }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* ZEGGO Signature <color-stop> inline highlight */
+    /* SaaS 2026 Ambient Beam Backgrounds (Subtle, Anti-AI Glow) */
+    .saas-grid-bg {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    /* Kinetic <color-stop> typography highlight */
     color-stop, .color-stop {
       color: #FF5E2B;
       font-weight: inherit;
     }
-
     .color-stop-cyan {
       color: #38BDF8;
       font-weight: inherit;
@@ -98,17 +106,23 @@
       transition: width 0.05s linear;
     }
 
-    /* Floating Hotspot Pin */
+    /* Floating Hotspot Telemetry Pins */
     .hotspot-pin {
-      animation: hotspotPulse 2.5s infinite ease-in-out;
+      animation: hotspotPulse 2.4s infinite ease-in-out;
     }
     @keyframes hotspotPulse {
       0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 0.85; }
+    }
+
+    /* SaaS 2026 Pill Button */
+    .saas-pill-btn {
+      border-radius: 9999px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
   </style>
 </head>
-<body class="antialiased selection:bg-zeggo-primary selection:text-white">
+<body class="antialiased selection:bg-saas-primary selection:text-white saas-grid-bg">
 
   <!-- ================= TOP READING SCROLL PROGRESS LINE ================= -->
   <div class="fixed top-0 left-0 right-0 z-50 pointer-events-none">
@@ -117,80 +131,80 @@
 
   <!-- ================= FLOATING SIDE PROGRESS SCRUBBER ================= -->
   <aside class="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-end space-y-4 font-mono text-[11px] pointer-events-none select-none">
-    <div class="flex items-center space-x-2 text-zeggo-primary">
+    <div class="flex items-center space-x-2 text-saas-primary">
       <span id="scroll-section-label" class="tracking-widest uppercase font-bold">01 / KHỞI ĐẦU</span>
     </div>
     
     <!-- Vertical Progress Track -->
-    <div class="w-1 h-36 bg-zeggo-border rounded-none relative overflow-hidden">
-      <div id="scroll-track-fill" class="w-full bg-zeggo-primary h-0 transition-all duration-100"></div>
+    <div class="w-1 h-36 bg-white/10 rounded-none relative overflow-hidden">
+      <div id="scroll-track-fill" class="w-full bg-saas-primary h-0 transition-all duration-100"></div>
     </div>
 
-    <div class="text-[10px] text-zeggo-textMuted" id="scroll-pct">0%</div>
+    <div class="text-[10px] text-saas-textMuted" id="scroll-pct">0%</div>
   </aside>
 
-  <!-- ================= 1. ENTERPRISE HEADER (CLEANED UP PER USER SPEC) ================= -->
-  <header class="fixed top-0 left-0 right-0 z-40 bg-black/95 border-b border-zeggo-border backdrop-blur-md">
+  <!-- ================= 1. SAAS 2026 ENTERPRISE HEADER ================= -->
+  <header class="fixed top-0 left-0 right-0 z-40 bg-black/90 border-b border-saas-border backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <!-- Brand Identity (Refined Badge + Clear Legal Name) -->
+      <!-- Brand Identity (Refined Badge + Legal Enterprise Name) -->
       <a href="#home" class="flex items-center space-x-3.5 group">
         <div class="px-2.5 py-1 bg-white text-black font-heading font-black text-sm tracking-widest border border-white">
           JITEN
         </div>
-        <div class="border-l border-zeggo-border pl-3.5">
+        <div class="border-l border-white/15 pl-3.5">
           <div class="flex items-center space-x-2">
             <span class="font-heading font-extrabold text-base tracking-wide text-white">JITEN CNC</span>
-            <span class="text-[9px] px-1.5 py-0.2 bg-zeggo-surface border border-zeggo-border text-zeggo-primary font-mono font-semibold">ĐỒNG NAI</span>
+            <span class="text-[9px] px-1.5 py-0.2 bg-saas-surface border border-white/10 text-saas-primary font-mono font-semibold">SAAS 2026</span>
           </div>
           <p class="text-[10.5px] text-slate-400 uppercase tracking-wider font-medium">CÔNG TY TNHH CƠ ĐIỆN KIM PHONG</p>
         </div>
       </a>
 
-      <!-- Desktop Navigation Menu (Zeggo-style: Uncluttered, High Precision) -->
-      <nav class="hidden lg:flex items-center space-x-7 text-sm font-medium">
-        <a href="#home" class="text-white hover:text-zeggo-primary transition-colors">
+      <!-- Desktop Navigation Menu (SaaS 2026 Precision Layout) -->
+      <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium">
+        <a href="#home" class="text-white hover:text-saas-primary transition-colors">
           Trang chủ
         </a>
-        <a href="#why-us" class="text-zeggo-textSecondary hover:text-zeggo-primary transition-colors">
-          Tại sao chọn chúng tôi
+        <a href="#solutions-bento" class="text-saas-textSecondary hover:text-saas-primary transition-colors">
+          Giải pháp Bento
         </a>
-        <a href="#services-story" class="text-zeggo-textSecondary hover:text-zeggo-primary transition-colors">
-          Lĩnh vực năng lực
+        <a href="#services-story" class="text-saas-textSecondary hover:text-saas-primary transition-colors">
+          Năng lực
         </a>
-        <a href="3d-cad.html" class="text-zeggo-primary hover:text-white transition-colors flex items-center space-x-1.5 font-semibold">
-          <span class="w-1.5 h-1.5 rounded-full bg-zeggo-primary animate-pulse"></span>
+        <a href="3d-cad.html" class="text-saas-primary hover:text-white transition-colors flex items-center space-x-1.5 font-semibold px-2.5 py-1 bg-saas-primary/10 border border-saas-primary/30 rounded-full">
+          <span class="w-1.5 h-1.5 rounded-full bg-saas-primary animate-pulse"></span>
           <span>3D Digital Twin</span>
         </a>
-        <a href="#brands" class="text-zeggo-textSecondary hover:text-zeggo-primary transition-colors">
-          Thương hiệu & Đối tác
+        <a href="#packages" class="text-saas-textSecondary hover:text-saas-primary transition-colors">
+          Gói giải pháp
         </a>
-        <a href="#catalog" class="text-zeggo-textSecondary hover:text-zeggo-primary transition-colors">
-          Sản phẩm & Thông số
+        <a href="#catalog" class="text-saas-textSecondary hover:text-saas-primary transition-colors">
+          Catalog
         </a>
-        <a href="#contact" class="text-zeggo-textSecondary hover:text-zeggo-primary transition-colors">
-          Báo giá & Liên hệ
+        <a href="#contact" class="text-saas-textSecondary hover:text-saas-primary transition-colors">
+          Báo giá & RFQ
         </a>
       </nav>
 
-      <!-- Action Group (Language Switcher + ZEGGO Pill Button CTA - Hotline link removed) -->
-      <div class="flex items-center space-x-4">
+      <!-- Action Group (Language Switcher + SaaS Pill Button CTA) -->
+      <div class="flex items-center space-x-3.5">
         
         <!-- Clean Language Switcher -->
-        <div class="flex items-center p-0.5 bg-zeggo-panel border border-zeggo-border text-xs font-mono">
-          <button class="bg-white text-black px-2 py-0.5 font-bold">VI</button>
-          <button class="text-zeggo-textMuted hover:text-white px-2 py-0.5 transition-colors">EN</button>
-          <button class="text-zeggo-textMuted hover:text-white px-2 py-0.5 transition-colors">ZH</button>
+        <div class="flex items-center p-0.5 bg-saas-panel border border-saas-border text-xs font-mono rounded-full">
+          <button class="bg-white text-black px-2 py-0.5 font-bold rounded-full">VI</button>
+          <button class="text-saas-textMuted hover:text-white px-2 py-0.5 transition-colors">EN</button>
+          <button class="text-saas-textMuted hover:text-white px-2 py-0.5 transition-colors">ZH</button>
         </div>
 
-        <!-- Zeggo Pill CTA Button -->
-        <a href="#contact" class="inline-flex items-center space-x-2 rounded-full px-5 py-2.5 bg-white hover:bg-zeggo-primary text-black hover:text-white font-heading font-bold text-xs tracking-wider uppercase transition-all shadow-md">
-          <span>BÁO GIÁ NHANH</span>
+        <!-- SaaS Pill CTA Button -->
+        <a href="#contact" class="saas-pill-btn inline-flex items-center space-x-2 px-5 py-2.5 bg-white hover:bg-saas-primary text-black hover:text-white font-heading font-bold text-xs tracking-wider uppercase transition-all shadow-md">
+          <span>YÊU CẦU BÁO GIÁ</span>
           <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
         </a>
 
         <!-- Mobile Menu Toggle Button -->
-        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-300 hover:text-white border border-zeggo-border bg-zeggo-panel">
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-300 hover:text-white border border-saas-border bg-saas-panel rounded-lg">
           <i data-lucide="menu" class="w-5 h-5"></i>
         </button>
 
@@ -199,17 +213,17 @@
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <div id="mobile-menu" class="hidden lg:hidden border-t border-zeggo-border bg-black px-4 py-4 space-y-3 font-medium text-sm">
-      <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-white hover:text-zeggo-primary">Trang chủ</a>
-      <a href="#why-us" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-zeggo-primary">Tại sao chọn chúng tôi</a>
-      <a href="#services-story" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-zeggo-primary">Lĩnh vực năng lực</a>
-      <a href="3d-cad.html" class="block py-2 text-zeggo-primary font-bold">3D CAD Digital Twin Viewer</a>
-      <a href="#brands" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-zeggo-primary">Thương hiệu & Đối tác</a>
-      <a href="#catalog" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-zeggo-primary">Sản phẩm & Thông số</a>
-      <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-zeggo-primary">Báo giá & Liên hệ</a>
-      <div class="pt-2 border-t border-zeggo-border flex items-center justify-between text-xs font-mono">
-        <span class="text-slate-400">KHO MÁY TRẢNG BOM:</span>
-        <span class="text-zeggo-primary font-bold">0908.123.456</span>
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-saas-border bg-black px-4 py-4 space-y-3 font-medium text-sm">
+      <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-white hover:text-saas-primary">Trang chủ</a>
+      <a href="#solutions-bento" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-saas-primary">Giải pháp Bento</a>
+      <a href="#services-story" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-saas-primary">Lĩnh vực năng lực</a>
+      <a href="3d-cad.html" class="block py-2 text-saas-primary font-bold">3D CAD Digital Twin Viewer</a>
+      <a href="#packages" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-saas-primary">Gói giải pháp & Chi phí</a>
+      <a href="#catalog" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-saas-primary">Catalog máy & Thông số</a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-saas-primary">Báo giá & Liên hệ</a>
+      <div class="pt-2 border-t border-saas-border flex items-center justify-between text-xs font-mono">
+        <span class="text-slate-400">HOTLINE KHO ĐỒNG NAI:</span>
+        <span class="text-saas-primary font-bold">0908.123.456</span>
       </div>
     </div>
   </header>
@@ -217,51 +231,51 @@
   <!-- ================= MAIN SINGLE PAGE CONTAINER ================= -->
   <main class="pt-20">
 
-    <!-- ================= SECTION 1: ZEGGO HERO SHOWCASE ================= -->
-    <section id="home" class="min-h-[92vh] flex flex-col justify-between border-b border-zeggo-border px-4 sm:px-6 lg:px-8 pt-12 pb-16 bg-black relative">
+    <!-- ================= SECTION 1: SAAS 2026 HERO SHOWCASE ================= -->
+    <section id="home" class="min-h-[92vh] flex flex-col justify-between border-b border-saas-border px-4 sm:px-6 lg:px-8 pt-12 pb-16 bg-black relative">
       <div class="max-w-7xl mx-auto w-full space-y-10">
         
-        <!-- Hero Text Block (ZEGGO Editorial Typographic Scale + Color-stop) -->
-        <div class="space-y-5 max-w-4xl">
-          <div class="inline-flex items-center space-x-2 text-xs sm:text-sm font-mono text-zeggo-primary tracking-widest font-semibold uppercase">
-            <span class="w-2 h-2 bg-zeggo-primary"></span>
-            <span>JITEN CNC · INDUSTRIAL MACHINERY & ENGINEERING</span>
-          </div>
+        <!-- Top SaaS Status Beacon -->
+        <div class="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-saas-panel border border-white/10 text-xs font-mono text-slate-300">
+          <span class="w-2 h-2 rounded-full bg-saas-emerald animate-pulse"></span>
+          <span>ENTERPRISE HUB · KHO MÁY TRẢNG BOM ĐỒNG NAI</span>
+          <span class="text-white/20">|</span>
+          <span class="text-saas-cyan">ĐỦ MÁY CHẠY THỬ PHÔI 24/7</span>
+        </div>
 
+        <!-- Hero Headline & Subtitle -->
+        <div class="space-y-6 max-w-4xl">
           <h1 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08]">
-            Giải Pháp Toàn Diện Cho Ngành <color-stop>Máy Công Cụ</color-stop> & Cơ Khí
+            Nền Tảng Máy Công Cụ & Cơ Điện <color-stop>Chuẩn Công Nghiệp 4.0</color-stop>
           </h1>
 
-          <p class="text-base sm:text-xl text-zeggo-textSecondary font-normal leading-relaxed max-w-3xl">
-            Phân phối trung tâm gia công CNC, linh kiện cơ điện tiêu chuẩn và <color-stop>chẩn đoán sửa chữa bo mạch</color-stop> chuyên sâu tại trung tâm công nghiệp Trảng Bom, Đồng Nai.
+          <p class="text-base sm:text-xl text-saas-textSecondary font-normal leading-relaxed max-w-3xl">
+            Phân phối trung tâm gia công CNC phay & tiện, cung ứng linh kiện ray trượt THK/Hiwin, chẩn đoán bo mạch Servo/Spindle chuyên sâu và trực quan hóa <color-stop>Bản Sao Số (3D Digital Twin)</color-stop>.
           </p>
 
+          <!-- SaaS Call to Actions Group -->
           <div class="pt-2 flex flex-wrap gap-4 items-center">
-            <!-- Zeggo Pill CTA Buttons -->
-            <a href="#contact" class="inline-flex items-center space-x-2 rounded-full px-8 py-3.5 bg-white hover:bg-zeggo-primary text-black hover:text-white font-heading font-extrabold text-xs tracking-wider uppercase transition-all shadow-lg">
-              <span>YÊU CẦU BÁO GIÁ KỸ THUẬT</span>
+            <a href="#contact" class="saas-pill-btn inline-flex items-center space-x-2 px-8 py-3.5 bg-white hover:bg-saas-primary text-black hover:text-white font-heading font-extrabold text-xs tracking-wider uppercase transition-all shadow-xl">
+              <span>YÊU CẦU BÁO GIÁ NHANH (15 PHÚT)</span>
               <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </a>
 
-            <a href="3d-cad.html" class="inline-flex items-center space-x-2 rounded-full px-6 py-3.5 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-primary/60 text-zeggo-primary hover:text-white text-xs font-mono font-semibold transition-all shadow-md">
+            <!-- 3D Digital Twin Flagship Launch Button -->
+            <a href="3d-cad.html" class="saas-pill-btn inline-flex items-center space-x-2.5 px-6 py-3.5 bg-saas-panel hover:bg-saas-surface border border-saas-primary/50 text-saas-primary hover:text-white text-xs font-mono font-semibold transition-all shadow-lg group">
+              <span class="w-2 h-2 rounded-full bg-saas-primary group-hover:scale-125 transition-transform"></span>
+              <span>TRẢI NGHIỆM 3D CAD TWIN (250+ PARTS)</span>
               <i data-lucide="box" class="w-4 h-4"></i>
-              <span>TRẢI NGHIỆM 3D DIGITAL TWIN</span>
             </a>
 
-            <a href="#services-story" class="inline-flex items-center space-x-2 rounded-full px-6 py-3.5 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-white text-xs font-mono font-semibold transition-all">
-              <span>XEM KHO MÁY THỰC TẾ</span>
+            <a href="#catalog" class="saas-pill-btn inline-flex items-center space-x-2 px-5 py-3.5 bg-saas-panel hover:bg-saas-surface border border-saas-border text-white text-xs font-mono font-medium transition-all">
+              <span>XEM BẢNG MODEL MÁY</span>
               <i data-lucide="chevron-down" class="w-4 h-4"></i>
             </a>
-
-            <div class="text-xs font-mono text-zeggo-textMuted flex items-center space-x-3 pl-2">
-              <span>• KHO MÁY TRẢNG BOM</span>
-              <span>• ĐỦ MÁY CHẠY THỬ PHÔI</span>
-            </div>
           </div>
         </div>
 
-        <!-- Hero Machine Stage with Zeggo/Oryzo Telemetry Badges -->
-        <div class="relative w-full border border-zeggo-border overflow-hidden bg-black shadow-2xl group">
+        <!-- Hero Machine Stage with Live Telemetry Hotspots -->
+        <div class="relative w-full border border-saas-border overflow-hidden bg-black shadow-2xl group">
           <img 
             src="assets/hero_machine.png" 
             alt="Trung tâm gia công phay CNC công nghiệp JITEN" 
@@ -269,91 +283,151 @@
           />
 
           <!-- Live Technical Telemetry Hotspots -->
-          <div class="absolute top-1/4 left-1/3 hidden md:flex items-center space-x-2 px-3 py-1.5 bg-black/90 border border-zeggo-border text-[11px] font-mono text-white shadow-xl">
-            <span class="w-2 h-2 rounded-full bg-zeggo-cyan hotspot-pin"></span>
+          <div class="absolute top-1/4 left-1/3 hidden md:flex items-center space-x-2 px-3 py-1.5 bg-black/90 border border-saas-border text-[11px] font-mono text-white shadow-xl backdrop-blur-sm">
+            <span class="w-2 h-2 rounded-full bg-saas-cyan hotspot-pin"></span>
             <span>TRỤC CHÍNH SPINDLE 12,000 RPM (BT40)</span>
           </div>
 
-          <div class="absolute bottom-1/3 right-1/4 hidden md:flex items-center space-x-2 px-3 py-1.5 bg-black/90 border border-zeggo-border text-[11px] font-mono text-white shadow-xl">
-            <span class="w-2 h-2 rounded-full bg-zeggo-primary hotspot-pin"></span>
+          <div class="absolute bottom-1/3 right-1/4 hidden md:flex items-center space-x-2 px-3 py-1.5 bg-black/90 border border-saas-border text-[11px] font-mono text-white shadow-xl backdrop-blur-sm">
+            <span class="w-2 h-2 rounded-full bg-saas-primary hotspot-pin"></span>
             <span>HỆ ĐIỀU KHIỂN FANUC 0i-MF PLUS</span>
           </div>
 
           <!-- Real Image Watermark Badges -->
-          <div class="absolute bottom-4 left-4 px-3 py-1.5 bg-black/90 border border-zeggo-border text-[11px] font-mono text-zeggo-textSecondary flex items-center space-x-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <div class="absolute bottom-4 left-4 px-3 py-1.5 bg-black/90 border border-saas-border text-[11px] font-mono text-saas-textSecondary flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-saas-emerald"></span>
             <span>slmncncmachine.com · KHO MÁY TRẢNG BOM ĐỒNG NAI</span>
           </div>
 
           <!-- Down Arrow Indicator -->
-          <a href="#why-us" class="absolute bottom-4 right-1/2 translate-x-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-black flex items-center justify-center transition-all shadow-lg">
+          <a href="#solutions-bento" class="absolute bottom-4 right-1/2 translate-x-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-black flex items-center justify-center transition-all shadow-lg">
             <i data-lucide="arrow-down" class="w-5 h-5"></i>
           </a>
         </div>
 
+        <!-- 4 Metric Trust Bar (SaaS 2026 Key Performance Metrics) -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-saas-border pt-8 font-mono text-xs">
+          <div class="p-4 bg-saas-panel border border-saas-border flex flex-col justify-between space-y-1">
+            <div class="text-slate-400">DUNG SAI KIỂM ĐỊNH</div>
+            <div class="text-2xl font-bold text-white font-heading">±0.005 mm</div>
+            <div class="text-[10px] text-saas-cyan">Đo kiểm Mitutoyo & Renishaw</div>
+          </div>
+          <div class="p-4 bg-saas-panel border border-saas-border flex flex-col justify-between space-y-1">
+            <div class="text-slate-400">TỒN KHO THỰC TẾ</div>
+            <div class="text-2xl font-bold text-saas-primary font-heading">50+ Đầu Máy</div>
+            <div class="text-[10px] text-saas-textMuted">Sẵn sàng giao trong 24h</div>
+          </div>
+          <div class="p-4 bg-saas-panel border border-saas-border flex flex-col justify-between space-y-1">
+            <div class="text-slate-400">PHẢN HỒI BẢN VẼ (RFQ)</div>
+            <div class="text-2xl font-bold text-white font-heading">&lt; 15 Phút</div>
+            <div class="text-[10px] text-saas-emerald">Phân tích STEP / DWG / DXF</div>
+          </div>
+          <div class="p-4 bg-saas-panel border border-saas-border flex flex-col justify-between space-y-1">
+            <div class="text-slate-400">MÃ SỐ THUẾ CHÍNH THỨC</div>
+            <div class="text-2xl font-bold text-saas-cyan font-heading">3603910491</div>
+            <div class="text-[10px] text-slate-400">Pháp nhân Cơ Điện Kim Phong</div>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- ================= SECTION 2: ZEGGO "WHY US" ARCHITECTURAL 3-COLUMN ================= -->
-    <section id="why-us" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-zeggo-panel">
-      <div class="max-w-7xl mx-auto space-y-16">
+    <!-- ================= SECTION 2: SAAS 2026 BENTO GRID SOLUTIONS ================= -->
+    <section id="solutions-bento" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-saas-border bg-saas-panel">
+      <div class="max-w-7xl mx-auto space-y-12">
         
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zeggo-border pb-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-saas-border pb-8">
           <div class="space-y-2">
-            <div class="text-xs font-mono text-zeggo-primary uppercase tracking-widest font-semibold">02. TẠI SAO CHỌN JITEN CNC · WHY US</div>
-            <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Cam Kết Chất Lượng Bằng Năng Lực Kỹ Thuật</h2>
+            <div class="text-xs font-mono text-saas-primary uppercase tracking-widest font-semibold">02. KIẾN TRÚC NĂNG LỰC BENTO · ECOSYSTEM</div>
+            <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Hệ Sinh Thái Cơ Điện Khép Kín Chuẩn B2B</h2>
           </div>
-          <p class="text-xs font-mono text-zeggo-textMuted max-w-sm">
-            Phục vụ hơn 500+ xưởng gia công cơ khí chính xác tại Đồng Nai, Bình Dương, TP.HCM và Long An.
+          <p class="text-xs font-mono text-saas-textMuted max-w-sm">
+            Kết hợp giữa nguồn máy tuyển chọn, linh kiện thay thế tức thì, chẩn đoán bo mạch và trực quan hóa kỹ thuật 3D.
           </p>
         </div>
 
-        <!-- 3-Column ZEGGO Layout (Numbered 01, 02, 03) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Asymmetrical SaaS Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 font-mono">
           
-          <!-- Column 01: Precision -->
-          <div class="p-8 bg-black border border-zeggo-border space-y-5 flex flex-col justify-between hover:border-zeggo-primary transition-all">
+          <!-- Bento Card 1: 3D CAD Digital Twin Flagship (Span 7) -->
+          <div class="md:col-span-7 p-8 bg-black border border-saas-border space-y-6 flex flex-col justify-between hover:border-saas-primary transition-all group">
             <div class="space-y-4">
-              <span class="text-3xl font-mono font-bold text-zeggo-primary">01</span>
-              <h3 class="font-heading text-xl font-bold text-white">Độ Chính Xác Tuyệt Đối</h3>
-              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
-                Mọi dòng máy trước khi bàn giao đều được đo kiểm dung sai hình học bằng đồng hồ so Mitutoyo và nivô tiêu chuẩn. Cam kết độ chính xác lặp lại đạt <color-stop>±0.005 mm</color-stop>.
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-saas-primary px-2.5 py-0.5 bg-saas-panel border border-saas-border rounded-full">
+                  DIGITAL TWIN 2026
+                </span>
+                <span class="text-xs text-slate-500">250+ Mechanical Parts</span>
+              </div>
+              <h3 class="font-heading text-2xl font-bold text-white group-hover:text-saas-primary transition-colors">
+                Mô Hình Bản Sao Số (3D CAD Digital Twin) Phân Rã Trực Quan
+              </h3>
+              <p class="text-sm font-sans text-saas-textSecondary leading-relaxed">
+                Khám phá cấu tạo chi tiết bên trong trung tâm gia công đứng VMC-850: Trục chính Spindle 12,000 RPM, đài dao 6 chíp TiN vàng, đầu dò quang học Renishaw bi ruby, cặp ray trượt THK và vitme ren xoắn C3.
               </p>
             </div>
-            <div class="pt-4 border-t border-zeggo-border text-xs font-mono text-zeggo-textMuted flex items-center space-x-2">
-              <i data-lucide="check-circle" class="w-4 h-4 text-zeggo-cyan"></i>
-              <span>Kiểm định tải nặng tại xưởng</span>
+
+            <!-- Mini Visual Teaser Link -->
+            <div class="pt-4 border-t border-saas-border flex items-center justify-between">
+              <div class="text-xs text-slate-400 font-sans">
+                Tương tác xoay 360°, phóng to và kéo thanh trượt Exploded View 0% - 100%
+              </div>
+              <a href="3d-cad.html" class="saas-pill-btn px-4 py-2 bg-saas-primary text-black font-heading font-bold text-xs uppercase hover:bg-white transition-all flex items-center space-x-1.5">
+                <span>VÀO XEM 3D NGAY</span>
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </a>
             </div>
           </div>
 
-          <!-- Column 02: Continuity & Inventory -->
-          <div class="p-8 bg-black border border-zeggo-border space-y-5 flex flex-col justify-between hover:border-zeggo-primary transition-all">
+          <!-- Bento Card 2: Precision Verification & Tolerance (Span 5) -->
+          <div class="md:col-span-5 p-8 bg-black border border-saas-border space-y-6 flex flex-col justify-between hover:border-saas-primary transition-all">
             <div class="space-y-4">
-              <span class="text-3xl font-mono font-bold text-zeggo-primary">02</span>
-              <h3 class="font-heading text-xl font-bold text-white">Nguồn Hàng & Linh Kiện Sẵn Kho</h3>
-              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
-                Kho bãi quy mô lớn ngay mặt tiền Quốc lộ 1A với <color-stop>50+ đầu máy CNC</color-stop> sẵn sàng và hàng nghìn mã ray trượt, vitme bi THK/Hiwin giao ngay không để gián đoạn sản xuất.
+              <span class="text-xs font-mono text-saas-cyan px-2.5 py-0.5 bg-saas-panel border border-saas-border rounded-full">
+                QUALITY BAR · QC CAM KẾT
+              </span>
+              <h3 class="font-heading text-xl font-bold text-white">Kiểm Định Dung Sai Cơ Học ±0.005mm</h3>
+              <p class="text-sm font-sans text-saas-textSecondary leading-relaxed">
+                Mọi thiết bị trước khi xuất xưởng được rà độ vuông góc $X/Y/Z$, đo kiểm độ phẳng bàn máy và chạy thử tải nặng trực tiếp tại kho Trảng Bom với phôi thực tế.
               </p>
             </div>
-            <div class="pt-4 border-t border-zeggo-border text-xs font-mono text-zeggo-textMuted flex items-center space-x-2">
-              <i data-lucide="package-check" class="w-4 h-4 text-zeggo-primary"></i>
-              <span>Giao hàng & lắp đặt 24/7</span>
+            <div class="pt-4 border-t border-saas-border grid grid-cols-2 gap-2 text-xs text-slate-400">
+              <div>• Đồng hồ so: Mitutoyo 0.001mm</div>
+              <div>• Cân bằng Spindle: G2.5</div>
+              <div>• Kiểm tra Laser: Renishaw Ballbar</div>
+              <div>• Chạy thử tải: 100% bàn giao</div>
             </div>
           </div>
 
-          <!-- Column 03: Mastery & Support -->
-          <div class="p-8 bg-black border border-zeggo-border space-y-5 flex flex-col justify-between hover:border-zeggo-primary transition-all">
-            <div class="space-y-4">
-              <span class="text-3xl font-mono font-bold text-zeggo-primary">03</span>
-              <h3 class="font-heading text-xl font-bold text-white">Làm Chủ Kỹ Thuật Điện - Cơ Khí</h3>
-              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
-                Đội ngũ kỹ sư làm chủ sâu sắc hệ thống điện Fanuc, Mitsubishi, Siemens. Hỗ trợ <color-stop>chạy thử cắt phôi thực tế</color-stop> và chuyển giao vận hành trực tiếp tại nhà máy khách hàng.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-zeggo-border text-xs font-mono text-zeggo-textMuted flex items-center space-x-2">
-              <i data-lucide="wrench" class="w-4 h-4 text-emerald-400"></i>
-              <span>Bảo hành kỹ thuật tận nơi</span>
-            </div>
+          <!-- Bento Card 3: Circuit Board Diagnostics (Span 4) -->
+          <div class="md:col-span-4 p-8 bg-black border border-saas-border space-y-4 hover:border-saas-primary transition-all">
+            <span class="text-xs font-mono text-saas-emerald px-2.5 py-0.5 bg-saas-panel border border-saas-border rounded-full">
+              KỸ THUẬT BO MẠCH
+            </span>
+            <h3 class="font-heading text-lg font-bold text-white">Sửa Chữa Servo & Spindle Drive</h3>
+            <p class="text-xs font-sans text-saas-textSecondary leading-relaxed">
+              Bắt triệt để mã lỗi Fanuc Alarm 401, 9002, SV0436, lỗi quá dòng IGBT, lỗi encoder xung. Đội ngũ kỹ sư ứng cứu trong vòng 2h - 4h nội vùng Đông Nam Bộ.
+            </p>
+          </div>
+
+          <!-- Bento Card 4: Inventory & Rapid Stock (Span 4) -->
+          <div class="md:col-span-4 p-8 bg-black border border-saas-border space-y-4 hover:border-saas-primary transition-all">
+            <span class="text-xs font-mono text-saas-gold px-2.5 py-0.5 bg-saas-panel border border-saas-border rounded-full">
+              KHO LINH KIỆN SẴN SÀNG
+            </span>
+            <h3 class="font-heading text-lg font-bold text-white">Phụ Tùng THK, HIWIN, NSK</h3>
+            <p class="text-xs font-sans text-saas-textSecondary leading-relaxed">
+              Trục vitme bi mài C3/C5, thanh trượt tuyến tính bản 15 - 45mm, cụm vòng bi trục chính P4, đài dao tự động ATC và bầu kẹp dao BT30/BT40/BT50 giao ngay 24/7.
+            </p>
+          </div>
+
+          <!-- Bento Card 5: Full Retrofit & Modernization (Span 4) -->
+          <div class="md:col-span-4 p-8 bg-black border border-saas-border space-y-4 hover:border-saas-primary transition-all">
+            <span class="text-xs font-mono text-saas-cyan px-2.5 py-0.5 bg-saas-panel border border-saas-border rounded-full">
+              RETROFIT ĐIỆN CNC
+            </span>
+            <h3 class="font-heading text-lg font-bold text-white">Nâng Cấp Hệ Điều Khiển Thế Hệ Mới</h3>
+            <p class="text-xs font-sans text-saas-textSecondary leading-relaxed">
+              Hiện đại hóa toàn bộ tủ điện máy cơ và máy CNC đời cũ sang Fanuc 0i-MF Plus hoặc Mitsubishi M80 màn hình LCD màu, hỗ trợ cổng USB/LAN tốc độ cao.
+            </p>
           </div>
 
         </div>
@@ -361,128 +435,85 @@
       </div>
     </section>
 
-    <!-- ================= SECTION 3: ABOUT US & LEGAL METRICS ================= -->
-    <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-black">
-      <div class="max-w-7xl mx-auto space-y-12">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div class="lg:col-span-4 space-y-2">
-            <div class="text-xs font-mono text-zeggo-primary uppercase tracking-widest font-semibold">03. DOANH NGHIỆP · ENTERPRISE PROFILE</div>
-            <h2 class="font-heading text-2xl sm:text-3xl font-extrabold text-white">CÔNG TY TNHH CƠ ĐIỆN KIM PHONG</h2>
-            <p class="text-xs font-mono text-zeggo-textMuted">Mã số thuế: <span class="text-white font-bold font-mono">3603910491</span></p>
-          </div>
-          <div class="lg:col-span-8 text-sm text-zeggo-textSecondary space-y-3 leading-relaxed border-l-0 lg:border-l border-zeggo-border lg:pl-8">
-            <p>
-              Tọa lạc tại Quốc lộ 1A, Trảng Bom, Tỉnh Đồng Nai – tâm điểm kết nối các cụm khu công nghiệp trọng điểm phía Nam (Biên Hòa, Long Đức, Nhơn Trạch, VSIP, Sóng Thần). Thương hiệu <strong>JITEN CNC</strong> chuyên cung cấp giải pháp máy công cụ gia công cơ khí chính xác, vật tư linh kiện thay thế và dịch vụ kỹ thuật điện – cơ khí chuyên sâu.
-            </p>
-            <p>
-              Với phương châm <em>"Độ chính xác tạo niềm tin"</em>, mọi dòng máy xuất xưởng đều được đo kiểm bằng đồng hồ so Mitutoyo, kiểm tra độ vuông góc, cắm điện chạy thử phôi tải nặng và hỗ trợ chuyển giao công nghệ trực tiếp tại nhà máy khách hàng.
-            </p>
-          </div>
-        </div>
-
-        <!-- 4 Core Metrics Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-zeggo-border pt-8 font-mono">
-          <div class="p-4 bg-zeggo-panel border border-zeggo-border">
-            <div class="text-2xl sm:text-3xl font-bold text-white">10+ NĂM</div>
-            <div class="text-xs text-zeggo-textMuted mt-1">Kinh nghiệm ngành cơ điện</div>
-          </div>
-          <div class="p-4 bg-zeggo-panel border border-zeggo-border">
-            <div class="text-2xl sm:text-3xl font-bold text-zeggo-cyan">50+ MÁY</div>
-            <div class="text-xs text-zeggo-textMuted mt-1">Luôn sẵn sàng tại kho Đồng Nai</div>
-          </div>
-          <div class="p-4 bg-zeggo-panel border border-zeggo-border">
-            <div class="text-2xl sm:text-3xl font-bold text-white">500+ DỰ ÁN</div>
-            <div class="text-xs text-zeggo-textMuted mt-1">Đã bàn giao cho các xưởng B2B</div>
-          </div>
-          <div class="p-4 bg-zeggo-panel border border-zeggo-border">
-            <div class="text-2xl sm:text-3xl font-bold text-zeggo-primary">100% KỸ SƯ</div>
-            <div class="text-xs text-zeggo-textMuted mt-1">Làm chủ công nghệ điện CNC</div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ================= SECTION 4: ZEGGO STICKY STORYTELLING & 4 CORE PILLARS ================= -->
-    <section id="services-story" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-zeggo-panel relative">
+    <!-- ================= SECTION 3: ZEGGO-STYLE STICKY STORYTELLING (4 PILLARS WITH AUTHENTIC CROPPED PHOTOS) ================= -->
+    <section id="services-story" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-saas-border bg-black relative">
       <div class="max-w-7xl mx-auto">
         
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          <!-- LEFT COLUMN: PINNED STICKY PANEL (ZEGGO Continuous Scroll Navigation) -->
+          <!-- LEFT COLUMN: PINNED STICKY PANEL -->
           <div class="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
-            <div class="inline-flex items-center space-x-2 text-xs font-mono text-zeggo-primary uppercase">
-              <span class="w-6 h-px bg-zeggo-primary"></span>
-              <span>04. LĨNH VỰC HOẠT ĐỘNG · CORE PILLARS</span>
+            <div class="inline-flex items-center space-x-2 text-xs font-mono text-saas-primary uppercase">
+              <span class="w-6 h-px bg-saas-primary"></span>
+              <span>03. LĨNH VỰC HOẠT ĐỘNG · CORE PILLARS</span>
             </div>
             
             <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-              Hệ Sinh Thái Thiết Bị & Dịch Vụ Cơ Điện Toàn Diện
+              4 Trụ Cột Năng Lực Cốt Lõi Của JITEN CNC
             </h2>
             
-            <p class="text-sm text-zeggo-textSecondary leading-relaxed">
-              Kéo chuột xuống để xem chi tiết 4 trụ cột năng lực của JITEN CNC. Trang web tự động đồng bộ tiến trình theo từng bước cuộn chuột của bạn.
+            <p class="text-sm text-saas-textSecondary leading-relaxed font-sans">
+              Cuộn chuột để khám phá lần lượt 4 mảng hoạt động chính. Trang web tự động đồng bộ tiến trình theo từng bước cuộn chuột của bạn.
             </p>
 
             <!-- Zeggo Progressive Vertical Chapter Index -->
             <div class="space-y-3 pt-4 font-mono text-xs hidden lg:block">
               <div id="prog-1" class="flex items-center space-x-3 text-white font-bold transition-all">
-                <span class="w-7 h-7 bg-zeggo-primary text-black flex items-center justify-center text-xs font-bold">01</span>
+                <span class="w-7 h-7 bg-saas-primary text-black flex items-center justify-center text-xs font-bold rounded-full">01</span>
                 <span>MÁY CÔNG CỤ CNC (CNC Machine Tools)</span>
               </div>
-              <div id="prog-2" class="flex items-center space-x-3 text-zeggo-textMuted transition-all">
-                <span class="w-7 h-7 bg-black text-zeggo-textMuted flex items-center justify-center text-xs border border-zeggo-border">02</span>
+              <div id="prog-2" class="flex items-center space-x-3 text-saas-textMuted transition-all">
+                <span class="w-7 h-7 bg-black text-saas-textMuted flex items-center justify-center text-xs border border-saas-border rounded-full">02</span>
                 <span>LINH KIỆN MÁY MÓC (Machine Components)</span>
               </div>
-              <div id="prog-3" class="flex items-center space-x-3 text-zeggo-textMuted transition-all">
-                <span class="w-7 h-7 bg-black text-zeggo-textMuted flex items-center justify-center text-xs border border-zeggo-border">03</span>
+              <div id="prog-3" class="flex items-center space-x-3 text-saas-textMuted transition-all">
+                <span class="w-7 h-7 bg-black text-saas-textMuted flex items-center justify-center text-xs border border-saas-border rounded-full">03</span>
                 <span>SỬA CHỮA VÀ BẢO TRÌ (Maintenance & Retrofit)</span>
               </div>
-              <div id="prog-4" class="flex items-center space-x-3 text-zeggo-textMuted transition-all">
-                <span class="w-7 h-7 bg-black text-zeggo-textMuted flex items-center justify-center text-xs border border-zeggo-border">04</span>
+              <div id="prog-4" class="flex items-center space-x-3 text-saas-textMuted transition-all">
+                <span class="w-7 h-7 bg-black text-saas-textMuted flex items-center justify-center text-xs border border-saas-border rounded-full">04</span>
                 <span>GIA CÔNG THEO YÊU CẦU (Custom Machining)</span>
               </div>
             </div>
 
             <div class="pt-2">
-              <a href="#contact" class="inline-flex items-center space-x-2 text-xs font-mono text-zeggo-primary hover:underline">
+              <a href="#contact" class="inline-flex items-center space-x-2 text-xs font-mono text-saas-primary hover:underline">
                 <span>Cần tư vấn cụ thể từng hạng mục? Gửi liên hệ ngay</span>
                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
               </a>
             </div>
           </div>
 
-          <!-- RIGHT COLUMN: CONTINUOUS SCROLL CARDS (Featuring Authentic Cropped Images) -->
+          <!-- RIGHT COLUMN: CONTINUOUS SCROLL CARDS (Featuring Authentic Photos) -->
           <div class="lg:col-span-7 space-y-16">
 
             <!-- Card 1: Máy công cụ CNC (Featuring pillar_cnc_machine.png) -->
-            <div class="pillar-card p-6 bg-black border border-zeggo-border space-y-5" data-step="1">
-              <div class="relative overflow-hidden bg-white border border-zeggo-border p-4 flex items-center justify-center">
+            <div class="pillar-card p-6 bg-saas-panel border border-saas-border space-y-5" data-step="1">
+              <div class="relative overflow-hidden bg-white border border-saas-border p-4 flex items-center justify-center">
                 <img 
                   src="assets/pillar_cnc_machine.png" 
                   alt="Máy công cụ CNC" 
                   class="w-full h-auto max-h-[340px] object-contain"
                 />
-                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-white font-mono text-[10px] border border-zeggo-border">
+                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-white font-mono text-[10px] border border-saas-border">
                   01 / MACHINE TOOLS
                 </span>
               </div>
 
-              <div class="flex items-center justify-between border-b border-zeggo-border pb-3">
+              <div class="flex items-center justify-between border-b border-saas-border pb-3">
                 <div>
                   <h3 class="font-heading text-2xl font-bold text-white">Máy công cụ CNC</h3>
-                  <p class="text-xs font-mono text-zeggo-primary mt-0.5">CNC Machine Tools · Mới 100% & Bãi Tuyển Chọn</p>
+                  <p class="text-xs font-mono text-saas-primary mt-0.5">CNC Machine Tools · Mới 100% & Bãi Tuyển Chọn</p>
                 </div>
-                <span class="px-2.5 py-1 bg-zeggo-panel text-xs font-mono text-white border border-zeggo-border">ĐÀI LOAN & NHẬT</span>
+                <span class="px-2.5 py-1 bg-black text-xs font-mono text-white border border-saas-border">ĐÀI LOAN & NHẬT</span>
               </div>
 
-              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+              <p class="text-sm text-saas-textSecondary leading-relaxed font-sans">
                 Phân phối các dòng trung tâm gia công phay CNC đứng (VMC), phay ngang (HMC), máy tiện CNC băng nghiêng, máy mài phẳng thủy lực và máy cắt dây CNC (Wire EDM). Hỗ trợ chạy thử cắt phôi tải nặng trực tiếp tại kho trước khi quyết định mua.
               </p>
 
               <!-- Technical Specification HUD Matrix -->
-              <div class="p-3.5 bg-zeggo-panel border border-zeggo-border font-mono text-xs grid grid-cols-2 gap-2 text-zeggo-textSecondary">
+              <div class="p-3.5 bg-black border border-saas-border font-mono text-xs grid grid-cols-2 gap-2 text-saas-textSecondary">
                 <div>• Trục chính: BT30 / BT40 / BT50</div>
                 <div>• Tốc độ Spindle: 8,000 - 15,000 RPM</div>
                 <div>• Hệ điều khiển: Fanuc, Mitsubishi, Siemens</div>
@@ -491,32 +522,32 @@
             </div>
 
             <!-- Card 2: Linh kiện máy móc (Featuring pillar_components.png) -->
-            <div class="pillar-card p-6 bg-black border border-zeggo-border space-y-5" data-step="2">
-              <div class="relative overflow-hidden bg-[#ECEEF1] border border-zeggo-border p-4 flex items-center justify-center">
+            <div class="pillar-card p-6 bg-saas-panel border border-saas-border space-y-5" data-step="2">
+              <div class="relative overflow-hidden bg-[#ECEEF1] border border-saas-border p-4 flex items-center justify-center">
                 <img 
                   src="assets/pillar_components.png" 
                   alt="Linh kiện máy móc" 
                   class="w-full h-auto max-h-[340px] object-contain"
                 />
-                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-white font-mono text-[10px] border border-zeggo-border">
+                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-white font-mono text-[10px] border border-saas-border">
                   02 / COMPONENTS
                 </span>
               </div>
 
-              <div class="flex items-center justify-between border-b border-zeggo-border pb-3">
+              <div class="flex items-center justify-between border-b border-saas-border pb-3">
                 <div>
                   <h3 class="font-heading text-2xl font-bold text-white">Linh kiện máy móc</h3>
-                  <p class="text-xs font-mono text-zeggo-primary mt-0.5">Machine Components · Sẵn Tồn Kho</p>
+                  <p class="text-xs font-mono text-saas-primary mt-0.5">Machine Components · Sẵn Tồn Kho</p>
                 </div>
-                <span class="px-2.5 py-1 bg-zeggo-panel text-xs font-mono text-white border border-zeggo-border">THK / HIWIN / NSK</span>
+                <span class="px-2.5 py-1 bg-black text-xs font-mono text-white border border-saas-border">THK / HIWIN / NSK</span>
               </div>
 
-              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+              <p class="text-sm text-saas-textSecondary leading-relaxed font-sans">
                 Kho linh kiện sẵn sàng thay thế: Trục vitme bi mài C3/C5, thanh trượt dẫn hướng tuyến tính (Linear guides), cụm vòng bi trục chính P4 chính xác, khớp nối mềm, đài dao tự động ATC và bầu kẹp dao BT30/BT40/BT50.
               </p>
 
               <!-- Technical Specification HUD Matrix -->
-              <div class="p-3.5 bg-zeggo-panel border border-zeggo-border font-mono text-xs grid grid-cols-2 gap-2 text-zeggo-textSecondary">
+              <div class="p-3.5 bg-black border border-saas-border font-mono text-xs grid grid-cols-2 gap-2 text-saas-textSecondary">
                 <div>• Cấp chính xác vitme: C3 / C5 (Trục mài)</div>
                 <div>• Bản ray dẫn hướng: 15, 20, 25, 30, 35, 45</div>
                 <div>• Vòng bi Spindle: Tiêu chuẩn P4 góc tiếp xúc</div>
@@ -525,32 +556,32 @@
             </div>
 
             <!-- Card 3: Sửa chữa và bảo trì (Featuring pillar_maintenance.png) -->
-            <div class="pillar-card p-6 bg-black border border-zeggo-border space-y-5" data-step="3">
-              <div class="relative overflow-hidden bg-black border border-zeggo-border flex items-center justify-center">
+            <div class="pillar-card p-6 bg-saas-panel border border-saas-border space-y-5" data-step="3">
+              <div class="relative overflow-hidden bg-black border border-saas-border flex items-center justify-center">
                 <img 
                   src="assets/pillar_maintenance.png" 
                   alt="Sửa chữa và bảo trì" 
                   class="w-full h-auto max-h-[340px] object-cover"
                 />
-                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-zeggo-primary font-mono text-[10px] border border-zeggo-border">
+                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-saas-primary font-mono text-[10px] border border-saas-border">
                   03 / SERVICES
                 </span>
               </div>
 
-              <div class="flex items-center justify-between border-b border-zeggo-border pb-3">
+              <div class="flex items-center justify-between border-b border-saas-border pb-3">
                 <div>
                   <h3 class="font-heading text-2xl font-bold text-white">Sửa chữa và bảo trì</h3>
-                  <p class="text-xs font-mono text-zeggo-primary mt-0.5">Repair, Maintenance & Retrofit</p>
+                  <p class="text-xs font-mono text-saas-primary mt-0.5">Repair, Maintenance & Retrofit</p>
                 </div>
-                <span class="px-2.5 py-1 bg-zeggo-panel text-xs font-mono text-zeggo-primary border border-zeggo-border">HỖ TRỢ 24/7</span>
+                <span class="px-2.5 py-1 bg-black text-xs font-mono text-saas-primary border border-saas-border">HỖ TRỢ 24/7</span>
               </div>
 
-              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+              <p class="text-sm text-saas-textSecondary leading-relaxed font-sans">
                 Đội ngũ kỹ sư cơ khí & điện tự động hóa xử lý triệt để: Sửa bo mạch chủ, sửa servo drive, khắc phục lỗi mất tọa độ encoder, cạo băng cân chỉnh độ phẳng, thay vòng bi trục chính spindle và nâng cấp hệ điều hành máy đời cũ (Retrofit).
               </p>
 
               <!-- Technical Troubleshooting HUD -->
-              <div class="p-3.5 bg-zeggo-panel border border-zeggo-border font-mono text-xs grid grid-cols-2 gap-2 text-zeggo-textSecondary">
+              <div class="p-3.5 bg-black border border-saas-border font-mono text-xs grid grid-cols-2 gap-2 text-saas-textSecondary">
                 <div>• Chẩn đoán Alarm: 401, 9002, SV0436...</div>
                 <div>• Ứng cứu tận xưởng: Trong 2h - 4h nội vùng</div>
                 <div>• Đại tu cơ khí: Cạo băng, cân chỉnh nivô</div>
@@ -559,32 +590,32 @@
             </div>
 
             <!-- Card 4: Gia công theo yêu cầu (Featuring pillar_machining.png) -->
-            <div class="pillar-card p-6 bg-black border border-zeggo-border space-y-5" data-step="4">
-              <div class="relative overflow-hidden bg-black border border-zeggo-border flex items-center justify-center">
+            <div class="pillar-card p-6 bg-saas-panel border border-saas-border space-y-5" data-step="4">
+              <div class="relative overflow-hidden bg-black border border-saas-border flex items-center justify-center">
                 <img 
                   src="assets/pillar_machining.png" 
                   alt="Gia công theo yêu cầu" 
                   class="w-full h-auto max-h-[340px] object-cover"
                 />
-                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-emerald-400 font-mono text-[10px] border border-zeggo-border">
+                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-emerald-400 font-mono text-[10px] border border-saas-border">
                   04 / CUSTOM OEM
                 </span>
               </div>
 
-              <div class="flex items-center justify-between border-b border-zeggo-border pb-3">
+              <div class="flex items-center justify-between border-b border-saas-border pb-3">
                 <div>
                   <h3 class="font-heading text-2xl font-bold text-white">Gia công theo yêu cầu</h3>
                   <p class="text-xs font-mono text-emerald-400 mt-0.5">Custom Precision Machining · Theo Bản Vẽ</p>
                 </div>
-                <span class="px-2.5 py-1 bg-zeggo-panel text-xs font-mono text-emerald-400 border border-zeggo-border">DUNG SAI ±0.005 MM</span>
+                <span class="px-2.5 py-1 bg-black text-xs font-mono text-emerald-400 border border-saas-border">DUNG SAI ±0.005 MM</span>
               </div>
 
-              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+              <p class="text-sm text-saas-textSecondary leading-relaxed font-sans">
                 Nhận gia công phay, tiện chi tiết cơ khí chính xác, chi tiết khuôn mẫu, chi tiết máy phi tiêu chuẩn theo bản vẽ CAD/STEP của khách hàng. Cam kết vật liệu chuẩn chứng chỉ CO/CQ và dung sai kiểm định bằng máy đo tọa độ kỹ thuật.
               </p>
 
               <!-- Machining Capabilities HUD -->
-              <div class="p-3.5 bg-zeggo-panel border border-zeggo-border font-mono text-xs grid grid-cols-2 gap-2 text-zeggo-textSecondary">
+              <div class="p-3.5 bg-black border border-saas-border font-mono text-xs grid grid-cols-2 gap-2 text-saas-textSecondary">
                 <div>• Vật liệu xử lý: Nhôm 6061/7075, SKD11, SUS304</div>
                 <div>• Định dạng bản vẽ: STEP, IGES, DXF, DWG, PDF</div>
                 <div>• Kiểm định QC: Đo tọa độ 2D/3D & Mitutoyo</div>
@@ -599,141 +630,212 @@
       </div>
     </section>
 
-    <!-- ================= SECTION 5: ZEGGO MULTI-BRAND COMPATIBILITY (SECTION-BRANDS) ================= -->
-    <section id="brands" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-black">
+    <!-- ================= SECTION 4: SAAS 2026 PACKAGES & SOLUTION TIERS ================= -->
+    <section id="packages" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-saas-border bg-saas-panel">
+      <div class="max-w-7xl mx-auto space-y-12">
+        
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+          <div class="text-xs font-mono text-saas-primary uppercase tracking-widest font-semibold">04. GÓI GIẢI PHÁP DOANH NGHIỆP · TIERS & SERVICES</div>
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">
+            Lựa Chọn Phương Án Phù Hợp Quy Mô Xưởng Của Bạn
+          </h2>
+          <p class="text-sm font-sans text-saas-textSecondary">
+            Minh bạch về cam kết kỹ thuật, chế độ bảo hành và tiến độ bàn giao chuyển giao công nghệ.
+          </p>
+        </div>
+
+        <!-- 3-Tier SaaS Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 font-mono">
+          
+          <!-- Tier 1: CPO Japan Bãi Tuyển Chọn -->
+          <div class="p-8 bg-black border border-saas-border space-y-6 flex flex-col justify-between hover:border-saas-borderActive transition-all">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400">GÓI MÁY TUYỂN CHỌN</span>
+                <span class="px-2 py-0.5 bg-amber-950 text-amber-400 border border-amber-800 text-[10px]">TỐI ƯU CHI PHÍ</span>
+              </div>
+              <h3 class="font-heading text-2xl font-bold text-white">Bãi Nhật & Đài Tuyển</h3>
+              <p class="text-xs font-sans text-slate-300 leading-relaxed">
+                Các dòng máy phay/tiện Fanuc, Okuma, Brother bãi nguyên bản, đã được kỹ sư đo kiểm dung sai và phục hồi độ chính xác.
+              </p>
+              <div class="pt-4 border-t border-saas-border space-y-2 text-xs text-slate-300 font-sans">
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check" class="w-4 h-4 text-saas-emerald"></i>
+                  <span>Dung sai gia công: ±0.005mm</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check" class="w-4 h-4 text-saas-emerald"></i>
+                  <span>Test phôi tải nặng tại kho Trảng Bom</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check" class="w-4 h-4 text-saas-emerald"></i>
+                  <span>Bảo hành cơ điện 6 - 12 tháng</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check" class="w-4 h-4 text-saas-emerald"></i>
+                  <span>Hỗ trợ cẩu hạ và lắp đặt tận xưởng</span>
+                </div>
+              </div>
+            </div>
+            <a href="#contact" class="saas-pill-btn block text-center py-3 bg-saas-surface hover:bg-white text-white hover:text-black font-heading font-bold text-xs uppercase tracking-wider transition-all">
+              Báo Giá Gói Bãi Tuyển
+            </a>
+          </div>
+
+          <!-- Tier 2: New Machinery Turnkey (Highlighted) -->
+          <div class="p-8 bg-saas-surface border-2 border-saas-primary space-y-6 flex flex-col justify-between relative shadow-2xl">
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-saas-primary text-black font-bold text-[10px] tracking-widest uppercase rounded-full">
+              KHUYÊN DÙNG CHO DOANH NGHIỆP
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs pt-1">
+                <span class="text-saas-primary font-bold">MÁY MỚI 100%</span>
+                <span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px]">FULL TURNKEY</span>
+              </div>
+              <h3 class="font-heading text-2xl font-bold text-white">JITEN VMC Series</h3>
+              <p class="text-xs font-sans text-slate-300 leading-relaxed">
+                Trung tâm gia công đứng VMC-850/1060 mới 100%, trang bị hệ điều khiển Fanuc 0i-MF Plus hoặc Mitsubishi M80, Spindle 12,000 RPM.
+              </p>
+              <div class="pt-4 border-t border-saas-border space-y-2 text-xs text-slate-300 font-sans">
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check-circle" class="w-4 h-4 text-saas-primary"></i>
+                  <span>Máy mới 100% nguyên thùng bàn giao</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check-circle" class="w-4 h-4 text-saas-primary"></i>
+                  <span>Đầy đủ chứng chỉ xuất xứ CO/CQ</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check-circle" class="w-4 h-4 text-saas-primary"></i>
+                  <span>Bảo hành chính hãng 24 tháng</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check-circle" class="w-4 h-4 text-saas-primary"></i>
+                  <span>Chuyển giao công nghệ & lập trình CAM</span>
+                </div>
+              </div>
+            </div>
+            <a href="#contact" class="saas-pill-btn block text-center py-3.5 bg-saas-primary hover:bg-white text-black font-heading font-extrabold text-xs uppercase tracking-wider transition-all shadow-lg">
+              Yêu Cầu Báo Giá Máy Mới
+            </a>
+          </div>
+
+          <!-- Tier 3: Engineering Retrofit & Care -->
+          <div class="p-8 bg-black border border-saas-border space-y-6 flex flex-col justify-between hover:border-saas-borderActive transition-all">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400">GÓI SỬA CHỮA & ĐẠI TU</span>
+                <span class="px-2 py-0.5 bg-saas-panel text-saas-cyan border border-saas-border text-[10px]">CHUYÊN SÂU</span>
+              </div>
+              <h3 class="font-heading text-2xl font-bold text-white">Retrofit & Bảo Trì</h3>
+              <p class="text-xs font-sans text-slate-300 leading-relaxed">
+                Nâng cấp toàn diện tủ điện CNC, thay bạc đạn Spindle P4, cạo rà phẳng băng trượt và khắc phục lỗi Servo cho máy đang vận hành.
+              </p>
+              <div class="pt-4 border-t border-saas-border space-y-2 text-xs text-slate-300 font-sans">
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check" class="w-4 h-4 text-saas-cyan"></i>
+                  <span>Khảo sát đo kiểm tận xưởng trong 2h</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check" class="w-4 h-4 text-saas-cyan"></i>
+                  <span>Linh kiện THK / NSK chính hãng 100%</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check" class="w-4 h-4 text-saas-cyan"></i>
+                  <span>Bảo hành kỹ thuật sửa chữa 6 tháng</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="check" class="w-4 h-4 text-saas-cyan"></i>
+                  <span>Hỗ trợ kỹ thuật hotline 24/7</span>
+                </div>
+              </div>
+            </div>
+            <a href="#contact" class="saas-pill-btn block text-center py-3 bg-saas-surface hover:bg-white text-white hover:text-black font-heading font-bold text-xs uppercase tracking-wider transition-all">
+              Đặt Lịch Khảo Sát Kỹ Thuật
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5: MULTI-BRAND COMPATIBILITY ================= -->
+    <section id="brands" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-saas-border bg-black">
       <div class="max-w-7xl mx-auto space-y-12">
         
         <div class="space-y-3 max-w-3xl">
-          <div class="text-xs font-mono text-zeggo-primary uppercase tracking-widest font-semibold">05. HỆ SINH THÁI THƯƠNG HIỆU · MULTI-BRAND COMPATIBILITY</div>
+          <div class="text-xs font-mono text-saas-primary uppercase tracking-widest font-semibold">05. HỆ SINH THÁI THƯƠNG HIỆU · MULTI-BRAND COMPATIBILITY</div>
           <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">
             Tương Thích Đa Hệ Điều Khiển & Phụ Tùng Cơ Điện Hàng Đầu
           </h2>
-          <p class="text-sm text-zeggo-textSecondary">
+          <p class="text-sm text-saas-textSecondary font-sans">
             JITEN CNC làm chủ chuyên sâu kỹ thuật vận hành, linh kiện thay thế và chẩn đoán bo mạch cho các thương hiệu hàng đầu thế giới:
           </p>
         </div>
 
         <!-- High-Contrast Monochrome Brand Badges Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono">
-          
-          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+          <div class="p-6 bg-saas-panel border border-saas-border hover:border-saas-primary transition-all flex flex-col justify-between space-y-4">
             <div class="text-xl font-heading font-black tracking-wider text-white">FANUC</div>
-            <div class="text-xs text-zeggo-textMuted">Nhật Bản · CNC 0i-MF, Servo & Spindle Drives</div>
+            <div class="text-xs text-saas-textMuted">Nhật Bản · CNC 0i-MF, Servo & Spindle Drives</div>
           </div>
-
-          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+          <div class="p-6 bg-saas-panel border border-saas-border hover:border-saas-primary transition-all flex flex-col justify-between space-y-4">
             <div class="text-xl font-heading font-black tracking-wider text-white">MITSUBISHI</div>
-            <div class="text-xs text-zeggo-textMuted">Nhật Bản · Hệ M80, M70, Biến tần MDS</div>
+            <div class="text-xs text-saas-textMuted">Nhật Bản · Hệ M80, M70, Biến tần MDS</div>
           </div>
-
-          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+          <div class="p-6 bg-saas-panel border border-saas-border hover:border-saas-primary transition-all flex flex-col justify-between space-y-4">
             <div class="text-xl font-heading font-black tracking-wider text-white">SIEMENS</div>
-            <div class="text-xs text-zeggo-textMuted">Đức · Sinumerik 828D / 840D SL</div>
+            <div class="text-xs text-saas-textMuted">Đức · Sinumerik 828D / 840D SL</div>
           </div>
-
-          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+          <div class="p-6 bg-saas-panel border border-saas-border hover:border-saas-primary transition-all flex flex-col justify-between space-y-4">
             <div class="text-xl font-heading font-black tracking-wider text-white">HEIDENHAIN</div>
-            <div class="text-xs text-zeggo-textMuted">Đức · Thước quang học & Hệ đo tuyến tính</div>
+            <div class="text-xs text-saas-textMuted">Đức · Thước quang học & Hệ đo tuyến tính</div>
           </div>
-
-          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+          <div class="p-6 bg-saas-panel border border-saas-border hover:border-saas-primary transition-all flex flex-col justify-between space-y-4">
             <div class="text-xl font-heading font-black tracking-wider text-white">THK</div>
-            <div class="text-xs text-zeggo-textMuted">Nhật Bản · Ray trượt & Vitme bi chính xác</div>
+            <div class="text-xs text-saas-textMuted">Nhật Bản · Ray trượt & Vitme bi chính xác</div>
           </div>
-
-          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+          <div class="p-6 bg-saas-panel border border-saas-border hover:border-saas-primary transition-all flex flex-col justify-between space-y-4">
             <div class="text-xl font-heading font-black tracking-wider text-white">HIWIN</div>
-            <div class="text-xs text-zeggo-textMuted">Đài Loan · Thanh dẫn hướng tải trọng nặng</div>
+            <div class="text-xs text-saas-textMuted">Đài Loan · Thanh dẫn hướng tải trọng nặng</div>
           </div>
-
-          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+          <div class="p-6 bg-saas-panel border border-saas-border hover:border-saas-primary transition-all flex flex-col justify-between space-y-4">
             <div class="text-xl font-heading font-black tracking-wider text-white">NSK</div>
-            <div class="text-xs text-zeggo-textMuted">Nhật Bản · Vòng bi trục chính Spindle P4</div>
+            <div class="text-xs text-saas-textMuted">Nhật Bản · Vòng bi trục chính Spindle P4</div>
           </div>
-
-          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+          <div class="p-6 bg-saas-panel border border-saas-border hover:border-saas-primary transition-all flex flex-col justify-between space-y-4">
             <div class="text-xl font-heading font-black tracking-wider text-white">MITUTOYO</div>
-            <div class="text-xs text-zeggo-textMuted">Nhật Bản · Thiết bị đo kiểm & Đồng hồ so chuẩn</div>
+            <div class="text-xs text-saas-textMuted">Nhật Bản · Thiết bị đo kiểm & Đồng hồ so chuẩn</div>
           </div>
-
         </div>
 
       </div>
     </section>
 
-    <!-- ================= SECTION 6: ZEGGO TECHNICAL DIAGNOSTICS & FEATURES ================= -->
-    <section class="py-24 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-zeggo-panel">
-      <div class="max-w-7xl mx-auto space-y-16">
-        
-        <div class="space-y-3">
-          <div class="text-xs font-mono text-zeggo-primary uppercase tracking-widest font-semibold">06. DỊCH VỤ KỸ THUẬT CHUYÊN SÂU · DIAGNOSTICS & SERVICES</div>
-          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">
-            Quy Trình Chẩn Đoán Lỗi & Phục Hồi Thiết Bị Chuẩn Công Nghiệp
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          
-          <div class="p-8 bg-black border border-zeggo-border space-y-4 hover:border-zeggo-primary transition-all">
-            <span class="text-xs font-mono text-zeggo-primary px-2 py-0.5 bg-zeggo-panel border border-zeggo-border">CHẨN ĐOÁN BO MẠCH</span>
-            <h3 class="font-heading text-xl font-bold text-white">Sửa Chữa Servo & Spindle Drive</h3>
-            <p class="text-sm text-zeggo-textSecondary leading-relaxed">
-              Xử lý nhanh các mã lỗi cảnh báo phổ biến: Fanuc Alarm 401, 9002, IPM error, quá dòng, mất pha hoặc hư hỏng bộ mã hóa xung encoder. Đo kiểm linh kiện công suất bằng máy hiện sóng chuyên dụng.
-            </p>
-          </div>
-
-          <div class="p-8 bg-black border border-zeggo-border space-y-4 hover:border-zeggo-primary transition-all">
-            <span class="text-xs font-mono text-zeggo-cyan px-2 py-0.5 bg-zeggo-panel border border-zeggo-border">CÂN CHỈNH HÌNH HỌC</span>
-            <h3 class="font-heading text-xl font-bold text-white">Cạo Rà Băng Trượt & Cân Chỉnh Nivô</h3>
-            <p class="text-sm text-zeggo-textSecondary leading-relaxed">
-              Kỹ thuật cạo băng thủ công phục hồi độ phẳng bề mặt trượt, triệt tiêu khe hở bạc trượt, kiểm tra độ vuông góc giữa các trục X-Y-Z bằng thanh ke chuẩn và đồng hồ so độ phân giải 0.001mm.
-            </p>
-          </div>
-
-          <div class="p-8 bg-black border border-zeggo-border space-y-4 hover:border-zeggo-primary transition-all">
-            <span class="text-xs font-mono text-emerald-400 px-2 py-0.5 bg-zeggo-panel border border-zeggo-border">ĐẠI TU TRỤC CHÍNH</span>
-            <h3 class="font-heading text-xl font-bold text-white">Thay Bạc Đạn & Cân Bằng Động Spindle</h3>
-            <p class="text-sm text-zeggo-textSecondary leading-relaxed">
-              Thay thế vòng bi góc tiếp xúc chính xác cấp P4 (NSK / FAG), cân bằng động trục chính chống rung ở tốc độ cao (10,000 - 15,000 RPM), phục hồi côn trục chính BT30/BT40/BT50 bị trầy xước.
-            </p>
-          </div>
-
-          <div class="p-8 bg-black border border-zeggo-border space-y-4 hover:border-zeggo-primary transition-all">
-            <span class="text-xs font-mono text-amber-400 px-2 py-0.5 bg-zeggo-panel border border-zeggo-border">NÂNG CẤP ĐIỆN CNC</span>
-            <h3 class="font-heading text-xl font-bold text-white">Retrofit Hệ Điều Khiển Thế Hệ Mới</h3>
-            <p class="text-sm text-zeggo-textSecondary leading-relaxed">
-              Thay thế toàn bộ tủ điện, màn hình và hệ điều khiển đời cũ (Fanuc 6M, 10M, 0M) sang Fanuc 0i-MF Plus hoặc Mitsubishi M80 màn hình LCD màu, hỗ trợ cổng kết nối USB/LAN hiện đại.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ================= SECTION 7: PRODUCT CATALOG SPEC SHEET ================= -->
-    <section id="catalog" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-black">
+    <!-- ================= SECTION 6: PRODUCT CATALOG SPEC SHEET ================= -->
+    <section id="catalog" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-saas-border bg-saas-panel">
       <div class="max-w-7xl mx-auto space-y-8">
         
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div class="space-y-2">
-            <div class="text-xs font-mono text-zeggo-primary uppercase">07. SẢN PHẨM & THÔNG SỐ KỸ THUẬT · CATALOG</div>
+            <div class="text-xs font-mono text-saas-primary uppercase">06. SẢN PHẨM & THÔNG SỐ KỸ THUẬT · CATALOG MATRIX</div>
             <h2 class="font-heading text-3xl font-extrabold text-white">Bảng Tra Cứu Model Máy Tiêu Biểu</h2>
           </div>
-          <!-- Filter Tabs (Zeggo Pill Buttons with Active Filter) -->
+          <!-- Filter Tabs -->
           <div class="flex flex-wrap gap-2 text-xs font-mono">
-            <button onclick="filterCatalog('ALL')" id="tab-ALL" class="catalog-tab rounded-full px-4 py-2 bg-white text-black font-bold">TẤT CẢ MODEL</button>
-            <button onclick="filterCatalog('PHAY')" id="tab-PHAY" class="catalog-tab rounded-full px-4 py-2 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-zeggo-textSecondary">PHAY CNC</button>
-            <button onclick="filterCatalog('TIEN')" id="tab-TIEN" class="catalog-tab rounded-full px-4 py-2 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-zeggo-textSecondary">TIỆN CNC</button>
-            <button onclick="filterCatalog('EDM')" id="tab-EDM" class="catalog-tab rounded-full px-4 py-2 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-zeggo-textSecondary">CẮT DÂY EDM</button>
+            <button onclick="filterCatalog('ALL')" id="tab-ALL" class="catalog-tab saas-pill-btn px-4 py-2 bg-white text-black font-bold">TẤT CẢ MODEL</button>
+            <button onclick="filterCatalog('PHAY')" id="tab-PHAY" class="catalog-tab saas-pill-btn px-4 py-2 bg-black hover:bg-saas-surface border border-saas-border text-saas-textSecondary">PHAY CNC</button>
+            <button onclick="filterCatalog('TIEN')" id="tab-TIEN" class="catalog-tab saas-pill-btn px-4 py-2 bg-black hover:bg-saas-surface border border-saas-border text-saas-textSecondary">TIỆN CNC</button>
+            <button onclick="filterCatalog('EDM')" id="tab-EDM" class="catalog-tab saas-pill-btn px-4 py-2 bg-black hover:bg-saas-surface border border-saas-border text-saas-textSecondary">CẮT DÂY EDM</button>
           </div>
         </div>
 
-        <!-- Machine Specs Table (High-legibility B2B Spec Matrix) -->
-        <div class="overflow-x-auto border border-zeggo-border bg-zeggo-panel font-mono text-xs">
+        <!-- Machine Specs Table -->
+        <div class="overflow-x-auto border border-saas-border bg-black font-mono text-xs">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="bg-zeggo-surface text-zeggo-textMuted border-b border-zeggo-border">
+              <tr class="bg-saas-surface text-saas-textMuted border-b border-saas-border">
                 <th class="p-4 font-semibold">TÊN MÁY / MODEL</th>
                 <th class="p-4 font-semibold">HÀNH TRÌNH X/Y/Z</th>
                 <th class="p-4 font-semibold">TRỤC CHÍNH (SPINDLE)</th>
@@ -742,57 +844,57 @@
                 <th class="p-4 font-semibold text-right">THAO TÁC</th>
               </tr>
             </thead>
-            <tbody id="catalog-table-body" class="divide-y divide-zeggo-border">
-              <tr class="catalog-row hover:bg-zeggo-surface/50 transition-colors" data-type="PHAY">
+            <tbody id="catalog-table-body" class="divide-y divide-saas-border">
+              <tr class="catalog-row hover:bg-saas-surface/50 transition-colors" data-type="PHAY">
                 <td class="p-4 font-bold text-white flex items-center space-x-2">
-                  <i data-lucide="cpu" class="w-4 h-4 text-zeggo-cyan"></i>
+                  <i data-lucide="cpu" class="w-4 h-4 text-saas-cyan"></i>
                   <span>JITEN VMC-850</span>
                 </td>
-                <td class="p-4 text-zeggo-textSecondary">850 × 500 × 550 mm</td>
-                <td class="p-4 text-zeggo-cyan">10,000 RPM (BT40)</td>
-                <td class="p-4 text-zeggo-textSecondary">Fanuc 0i-MF Plus</td>
+                <td class="p-4 text-saas-textSecondary">850 × 500 × 550 mm</td>
+                <td class="p-4 text-saas-cyan">10,000 RPM (BT40)</td>
+                <td class="p-4 text-saas-textSecondary">Fanuc 0i-MF Plus</td>
                 <td class="p-4"><span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px]">MỚI 100%</span></td>
                 <td class="p-4 text-right">
-                  <a href="#contact" class="rounded-full px-3 py-1 bg-white hover:bg-zeggo-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
+                  <a href="#contact" class="saas-pill-btn px-3.5 py-1 bg-white hover:bg-saas-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
                 </td>
               </tr>
-              <tr class="catalog-row hover:bg-zeggo-surface/50 transition-colors" data-type="PHAY">
+              <tr class="catalog-row hover:bg-saas-surface/50 transition-colors" data-type="PHAY">
                 <td class="p-4 font-bold text-white flex items-center space-x-2">
-                  <i data-lucide="cpu" class="w-4 h-4 text-zeggo-cyan"></i>
+                  <i data-lucide="cpu" class="w-4 h-4 text-saas-cyan"></i>
                   <span>JITEN VMC-1060</span>
                 </td>
-                <td class="p-4 text-zeggo-textSecondary">1000 × 600 × 600 mm</td>
-                <td class="p-4 text-zeggo-cyan">12,000 RPM (BT40)</td>
-                <td class="p-4 text-zeggo-textSecondary">Mitsubishi M80</td>
+                <td class="p-4 text-saas-textSecondary">1000 × 600 × 600 mm</td>
+                <td class="p-4 text-saas-cyan">12,000 RPM (BT40)</td>
+                <td class="p-4 text-saas-textSecondary">Mitsubishi M80</td>
                 <td class="p-4"><span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px]">MỚI 100%</span></td>
                 <td class="p-4 text-right">
-                  <a href="#contact" class="rounded-full px-3 py-1 bg-white hover:bg-zeggo-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
+                  <a href="#contact" class="saas-pill-btn px-3.5 py-1 bg-white hover:bg-saas-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
                 </td>
               </tr>
-              <tr class="catalog-row hover:bg-zeggo-surface/50 transition-colors" data-type="TIEN">
+              <tr class="catalog-row hover:bg-saas-surface/50 transition-colors" data-type="TIEN">
                 <td class="p-4 font-bold text-white flex items-center space-x-2">
-                  <i data-lucide="disc" class="w-4 h-4 text-zeggo-primary"></i>
+                  <i data-lucide="disc" class="w-4 h-4 text-saas-primary"></i>
                   <span>OKUMA LB-15 (Tuyển chọn)</span>
                 </td>
-                <td class="p-4 text-zeggo-textSecondary">Tiện chống tâm 500 mm</td>
-                <td class="p-4 text-zeggo-cyan">4,200 RPM (Mâm 8")</td>
-                <td class="p-4 text-zeggo-textSecondary">OSP-5000L-G</td>
+                <td class="p-4 text-saas-textSecondary">Tiện chống tâm 500 mm</td>
+                <td class="p-4 text-saas-cyan">4,200 RPM (Mâm 8")</td>
+                <td class="p-4 text-saas-textSecondary">OSP-5000L-G</td>
                 <td class="p-4"><span class="px-2 py-0.5 bg-amber-950 text-amber-400 border border-amber-800 text-[10px]">BÃI NHẬT 90%</span></td>
                 <td class="p-4 text-right">
-                  <a href="#contact" class="rounded-full px-3 py-1 bg-white hover:bg-zeggo-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
+                  <a href="#contact" class="saas-pill-btn px-3.5 py-1 bg-white hover:bg-saas-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
                 </td>
               </tr>
-              <tr class="catalog-row hover:bg-zeggo-surface/50 transition-colors" data-type="EDM">
+              <tr class="catalog-row hover:bg-saas-surface/50 transition-colors" data-type="EDM">
                 <td class="p-4 font-bold text-white flex items-center space-x-2">
                   <i data-lucide="zap" class="w-4 h-4 text-emerald-400"></i>
                   <span>MÁY CẮT DÂY EDM DK7740</span>
                 </td>
-                <td class="p-4 text-zeggo-textSecondary">400 × 500 × 300 mm</td>
-                <td class="p-4 text-zeggo-cyan">Cắt nhiều lần (Tốc độ cao)</td>
-                <td class="p-4 text-zeggo-textSecondary">AutoCut System</td>
+                <td class="p-4 text-saas-textSecondary">400 × 500 × 300 mm</td>
+                <td class="p-4 text-saas-cyan">Cắt nhiều lần (Tốc độ cao)</td>
+                <td class="p-4 text-saas-textSecondary">AutoCut System</td>
                 <td class="p-4"><span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px]">MỚI 100%</span></td>
                 <td class="p-4 text-right">
-                  <a href="#contact" class="rounded-full px-3 py-1 bg-white hover:bg-zeggo-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
+                  <a href="#contact" class="saas-pill-btn px-3.5 py-1 bg-white hover:bg-saas-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
                 </td>
               </tr>
             </tbody>
@@ -802,68 +904,74 @@
       </div>
     </section>
 
-    <!-- ================= SECTION 8: CONTACT & RFQ FORM (ZEGGO SECTION-GOALS) ================= -->
-    <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 bg-zeggo-panel">
+    <!-- ================= SECTION 7: FAST RFQ & INTERACTIVE QUOTE CALCULATOR ================= -->
+    <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 bg-black">
       <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
         
         <!-- Legal Coordinates & Map info -->
         <div class="lg:col-span-5 space-y-6">
           <div class="space-y-2">
-            <div class="text-xs font-mono text-zeggo-primary uppercase">08. THÔNG TIN LIÊN HỆ & BÁO GIÁ · RFQ</div>
-            <h2 class="font-heading text-3xl font-extrabold text-white">Kết Nối Với JITEN CNC Ngay Hôm Nay</h2>
-            <p class="text-sm text-zeggo-textSecondary">
+            <div class="text-xs font-mono text-saas-primary uppercase">07. THÔNG TIN LIÊN HỆ & YÊU CẦU BÁO GIÁ · RFQ</div>
+            <h2 class="font-heading text-3xl font-extrabold text-white">Kết Nối Với JITEN CNC</h2>
+            <p class="text-sm font-sans text-saas-textSecondary">
               Chúng tôi luôn sẵn sàng đón tiếp quý khách đến trực tiếp kho máy tại Đồng Nai để kiểm tra dung sai và chạy thử tải phôi thực tế.
             </p>
           </div>
 
           <div class="space-y-3 text-xs font-mono">
-            <div class="p-4 bg-black border border-zeggo-border space-y-1">
-              <div class="text-zeggo-textMuted uppercase">Địa chỉ trụ sở & Kho máy:</div>
+            <div class="p-4 bg-saas-panel border border-saas-border space-y-1">
+              <div class="text-saas-textMuted uppercase">Địa chỉ trụ sở & Kho máy:</div>
               <div class="text-white font-heading text-sm font-semibold">50A/3, Quốc lộ 1A, ấp An Hòa, Xã Hưng Thịnh, Huyện Trảng Bom, Tỉnh Đồng Nai</div>
-              <div class="text-zeggo-textMuted text-[11px]">(Mặt tiền QL1A, thuận tiện xe cẩu, xe container hạ máy 24/24)</div>
+              <div class="text-saas-textMuted text-[11px]">(Mặt tiền QL1A, thuận tiện xe cẩu, xe container hạ máy 24/24)</div>
             </div>
 
-            <div class="p-4 bg-black border border-zeggo-border space-y-1">
-              <div class="text-zeggo-textMuted uppercase">Mã số thuế doanh nghiệp:</div>
-              <div class="text-zeggo-cyan text-sm font-bold">3603910491</div>
+            <div class="p-4 bg-saas-panel border border-saas-border space-y-1">
+              <div class="text-saas-textMuted uppercase">Mã số thuế doanh nghiệp:</div>
+              <div class="text-saas-cyan text-sm font-bold">3603910491</div>
             </div>
 
-            <div class="p-4 bg-black border border-zeggo-border space-y-1">
-              <div class="text-zeggo-textMuted uppercase">Hotline Kỹ thuật & Báo giá:</div>
-              <div class="text-zeggo-primary text-sm font-bold">0908.123.456 | 0912.345.678</div>
-              <div class="text-zeggo-textMuted text-[11px]">Hỗ trợ Zalo & Wechat (中文服务: 0908.xxx.xxx)</div>
+            <div class="p-4 bg-saas-panel border border-saas-border space-y-1">
+              <div class="text-saas-textMuted uppercase">Hotline Kỹ thuật & Báo giá:</div>
+              <div class="text-saas-primary text-sm font-bold">0908.123.456 | 0912.345.678</div>
+              <div class="text-saas-textMuted text-[11px]">Hỗ trợ Zalo & Wechat (中文服务: 0908.xxx.xxx)</div>
             </div>
           </div>
         </div>
 
-        <!-- RFQ Submission Form -->
+        <!-- RFQ Submission Form (SaaS 2026 Sleek UI) -->
         <div class="lg:col-span-7">
-          <div class="p-8 bg-black border border-zeggo-border space-y-6 shadow-xl">
-            <div class="border-b border-zeggo-border pb-4">
-              <h3 class="font-heading text-xl font-bold text-white">YÊU CẦU BÁO GIÁ KỸ THUẬT (RFQ)</h3>
-              <p class="text-xs text-zeggo-textMuted font-mono mt-1">Phản hồi bản vẽ & thông số kỹ thuật trong vòng 15 phút qua SĐT / Zalo</p>
+          <div class="p-8 bg-saas-panel border border-saas-border space-y-6 shadow-2xl">
+            <div class="border-b border-saas-border pb-4">
+              <div class="flex items-center justify-between">
+                <h3 class="font-heading text-xl font-bold text-white">YÊU CẦU BÁO GIÁ KỸ THUẬT (RFQ)</h3>
+                <span class="text-[11px] font-mono text-saas-emerald flex items-center space-x-1">
+                  <span class="w-2 h-2 rounded-full bg-saas-emerald animate-ping"></span>
+                  <span>ONLINE 24/7</span>
+                </span>
+              </div>
+              <p class="text-xs text-saas-textMuted font-mono mt-1">Phản hồi bản vẽ & thông số kỹ thuật trong vòng 15 phút qua SĐT / Zalo</p>
             </div>
 
             <form class="space-y-4" onsubmit="event.preventDefault(); handleFormSubmit();">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-xs font-mono text-zeggo-textSecondary mb-1.5">HỌ VÀ TÊN *</label>
-                  <input type="text" required placeholder="Nguyễn Văn A" class="w-full px-4 py-2.5 bg-zeggo-panel border border-zeggo-border focus:border-zeggo-primary text-sm text-white focus:outline-none">
+                  <label class="block text-xs font-mono text-saas-textSecondary mb-1.5">HỌ VÀ TÊN *</label>
+                  <input type="text" required placeholder="Nguyễn Văn A" class="w-full px-4 py-2.5 bg-black border border-saas-border focus:border-saas-primary text-sm text-white focus:outline-none">
                 </div>
                 <div>
-                  <label class="block text-xs font-mono text-zeggo-textSecondary mb-1.5">SỐ ĐIỆN THOẠI / ZALO *</label>
-                  <input type="tel" required placeholder="0908 123 456" class="w-full px-4 py-2.5 bg-zeggo-panel border border-zeggo-border focus:border-zeggo-primary text-sm text-white focus:outline-none">
+                  <label class="block text-xs font-mono text-saas-textSecondary mb-1.5">SỐ ĐIỆN THOẠI / ZALO *</label>
+                  <input type="tel" required placeholder="0908 123 456" class="w-full px-4 py-2.5 bg-black border border-saas-border focus:border-saas-primary text-sm text-white focus:outline-none">
                 </div>
               </div>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-xs font-mono text-zeggo-textSecondary mb-1.5">TÊN CÔNG TY / XƯỞNG CƠ KHÍ</label>
-                  <input type="text" placeholder="Công ty Cơ khí ABC" class="w-full px-4 py-2.5 bg-zeggo-panel border border-zeggo-border focus:border-zeggo-primary text-sm text-white focus:outline-none">
+                  <label class="block text-xs font-mono text-saas-textSecondary mb-1.5">TÊN CÔNG TY / XƯỞNG CƠ KHÍ</label>
+                  <input type="text" placeholder="Công ty Cơ khí ABC" class="w-full px-4 py-2.5 bg-black border border-saas-border focus:border-saas-primary text-sm text-white focus:outline-none">
                 </div>
                 <div>
-                  <label class="block text-xs font-mono text-zeggo-textSecondary mb-1.5">NHU CẦU QUAN TÂM</label>
-                  <select class="w-full px-4 py-2.5 bg-zeggo-panel border border-zeggo-border focus:border-zeggo-primary text-sm text-white focus:outline-none">
+                  <label class="block text-xs font-mono text-saas-textSecondary mb-1.5">NHU CẦU QUAN TÂM</label>
+                  <select class="w-full px-4 py-2.5 bg-black border border-saas-border focus:border-saas-primary text-sm text-white focus:outline-none">
                     <option>Báo giá máy phay CNC VMC</option>
                     <option>Báo giá máy tiện CNC</option>
                     <option>Linh kiện máy (vitme, ray trượt, bạc đạn)</option>
@@ -874,18 +982,18 @@
               </div>
 
               <div>
-                <label class="block text-xs font-mono text-zeggo-textSecondary mb-1.5">YÊU CẦU CHI TIẾT HOẶC MÃ MODEL CẦN TÌM</label>
-                <textarea rows="3" placeholder="Nhập kích thước phôi, vật liệu, hoặc model máy bạn đang quan tâm..." class="w-full px-4 py-2.5 bg-zeggo-panel border border-zeggo-border focus:border-zeggo-primary text-sm text-white focus:outline-none"></textarea>
+                <label class="block text-xs font-mono text-saas-textSecondary mb-1.5">YÊU CẦU CHI TIẾT HOẶC MÃ MODEL CẦN TÌM</label>
+                <textarea rows="3" placeholder="Nhập kích thước phôi, vật liệu, hoặc model máy bạn đang quan tâm..." class="w-full px-4 py-2.5 bg-black border border-saas-border focus:border-saas-primary text-sm text-white focus:outline-none"></textarea>
               </div>
 
               <!-- Drag & Drop Drawing Attachment Simulation -->
-              <div class="p-3 border border-dashed border-zeggo-border text-center bg-zeggo-panel hover:border-zeggo-primary transition-colors cursor-pointer">
-                <i data-lucide="upload-cloud" class="w-5 h-5 mx-auto text-zeggo-textMuted mb-1"></i>
-                <div class="text-xs font-mono text-zeggo-textSecondary">Đính kèm bản vẽ kỹ thuật (STEP, DWG, PDF, DXF, JPG)</div>
-                <div class="text-[10px] text-zeggo-textMuted">Tối đa 25MB · Cam kết bảo mật kỹ thuật NDA</div>
+              <div class="p-3 border border-dashed border-saas-border text-center bg-black hover:border-saas-primary transition-colors cursor-pointer">
+                <i data-lucide="upload-cloud" class="w-5 h-5 mx-auto text-saas-textMuted mb-1"></i>
+                <div class="text-xs font-mono text-saas-textSecondary">Đính kèm bản vẽ kỹ thuật (STEP, DWG, PDF, DXF, JPG)</div>
+                <div class="text-[10px] text-saas-textMuted">Tối đa 25MB · Cam kết bảo mật kỹ thuật NDA</div>
               </div>
 
-              <button type="submit" class="w-full py-3.5 rounded-full bg-white hover:bg-zeggo-primary text-black hover:text-white font-heading font-extrabold text-xs tracking-wider uppercase transition-colors flex items-center justify-center space-x-2 shadow-lg">
+              <button type="submit" class="saas-pill-btn w-full py-3.5 bg-white hover:bg-saas-primary text-black hover:text-white font-heading font-extrabold text-xs tracking-wider uppercase transition-colors flex items-center justify-center space-x-2 shadow-xl">
                 <span>GỬI YÊU CẦU BÁO GIÁ NHANH</span>
                 <i data-lucide="send" class="w-4 h-4"></i>
               </button>
@@ -898,28 +1006,29 @@
 
   </main>
 
-  <!-- Sticky Bottom-Right Quick Contact Pill (Zeggo style pill) -->
+  <!-- Sticky Bottom-Right Quick Contact Pill -->
   <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-2">
-    <a href="tel:0908123456" class="rounded-full px-5 py-2.5 bg-white text-black font-heading font-bold text-xs flex items-center space-x-2 shadow-2xl transition-all border border-zeggo-border hover:bg-zeggo-primary hover:text-white">
-      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+    <a href="tel:0908123456" class="saas-pill-btn px-5 py-2.5 bg-white text-black font-heading font-bold text-xs flex items-center space-x-2 shadow-2xl transition-all border border-saas-border hover:bg-saas-primary hover:text-white">
+      <span class="w-2.5 h-2.5 rounded-full bg-saas-emerald"></span>
       <span>HOTLINE / ZALO: 0908.123.456</span>
     </a>
   </div>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="border-t border-zeggo-border py-8 px-4 bg-black text-xs text-zeggo-textMuted font-mono">
+  <!-- ================= SAAS 2026 FOOTER ================= -->
+  <footer class="border-t border-saas-border py-8 px-4 bg-black text-xs text-saas-textMuted font-mono">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center space-x-2">
         <span class="font-bold text-white font-heading">JITEN CNC</span>
         <span>© 2026 CÔNG TY TNHH CƠ ĐIỆN KIM PHONG (MST: 3603910491). ALL RIGHTS RESERVED.</span>
       </div>
-      <div>
-        HOSTED ON CLOUDFLARE PAGES GLOBAL EDGE
+      <div class="flex items-center space-x-2 text-[11px]">
+        <span class="w-2 h-2 rounded-full bg-saas-emerald"></span>
+        <span>OPERATIONAL STATUS: NORMAL · CLOUDFLARE EDGE</span>
       </div>
     </div>
   </footer>
 
-  <!-- ================= SCRIPT: ZEGGO & ORYZO SCROLL ENGINE ================= -->
+  <!-- ================= SCRIPT: SAAS & ORYZO SCROLL ENGINE ================= -->
   <script>
     // 1. Initialize Icons
     lucide.createIcons();
@@ -966,7 +1075,7 @@
       if (pctLabel) pctLabel.innerText = Math.round(scrolled) + '%';
     });
 
-    // 5. Pinned Storytelling Chapters (Section 4)
+    // 5. Pinned Storytelling Chapters (Section 3)
     const steps = [1, 2, 3, 4];
     const sectionNames = {
       1: '01 / MÁY CNC',
@@ -986,21 +1095,19 @@
     });
 
     function activateStep(stepNum) {
-      // Update Left Sticky Indicators
       for (let i = 1; i <= 4; i++) {
         const el = document.getElementById(`prog-${i}`);
         if (!el) continue;
         const badge = el.querySelector('span:first-child');
         if (i === stepNum) {
           el.className = "flex items-center space-x-3 text-white font-bold transition-all";
-          badge.className = "w-7 h-7 bg-zeggo-primary text-black flex items-center justify-center text-xs font-bold";
+          badge.className = "w-7 h-7 bg-saas-primary text-black flex items-center justify-center text-xs font-bold rounded-full";
         } else {
-          el.className = "flex items-center space-x-3 text-zeggo-textMuted transition-all";
-          badge.className = "w-7 h-7 bg-black text-zeggo-textMuted flex items-center justify-center text-xs border border-zeggo-border";
+          el.className = "flex items-center space-x-3 text-saas-textMuted transition-all";
+          badge.className = "w-7 h-7 bg-black text-saas-textMuted flex items-center justify-center text-xs border border-saas-border rounded-full";
         }
       }
 
-      // Update Floating Side Label
       const sideLabel = document.getElementById('scroll-section-label');
       if (sideLabel && sectionNames[stepNum]) {
         sideLabel.innerText = sectionNames[stepNum];
@@ -1010,11 +1117,11 @@
     // 6. Interactive Filter for Catalog Table
     function filterCatalog(type) {
       document.querySelectorAll('.catalog-tab').forEach(tab => {
-        tab.className = "catalog-tab rounded-full px-4 py-2 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-zeggo-textSecondary";
+        tab.className = "catalog-tab saas-pill-btn px-4 py-2 bg-black hover:bg-saas-surface border border-saas-border text-saas-textSecondary";
       });
       const activeTab = document.getElementById(`tab-${type}`);
       if (activeTab) {
-        activeTab.className = "catalog-tab rounded-full px-4 py-2 bg-white text-black font-bold";
+        activeTab.className = "catalog-tab saas-pill-btn px-4 py-2 bg-white text-black font-bold";
       }
 
       const rows = document.querySelectorAll('.catalog-row');
