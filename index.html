@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JITEN CNC | Công Ty TNHH Cơ Điện Kim Phong - Giải Pháp Máy Công Cụ & Tự Động Hóa</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Fonts: Be Vietnam Pro (100% Chuyên trị Tiếng Việt không bao giờ vỡ font) + Inter + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            // ZEGGO-Inspired High-Tech Industrial Palette (Pitch Black + Electric Coral + Precision Ice Blue)
+            zeggo: {
+              bg: '#000000',           // Pure Pitch Black (Zeggo signature oklch(0% 0 0))
+              panel: '#090D14',        // Deep Obsidian Base
+              surface: '#101722',      // Architectural Card Surface
+              surfaceHover: '#162030', // Interactive Hover Surface
+              border: '#1E293B',       // Crisp Hairline Line (1px)
+              borderActive: '#FF5E2B', // Zeggo Warm Coral/Orange
+              primary: '#FF5E2B',      // Zeggo Signature Brand Accent
+              primaryHover: '#FF7347',
+              cyan: '#38BDF8',         // Precision Engineering Sky Blue
+              white: '#FFFFFF',
+              textPrimary: '#F8FAFC',
+              textSecondary: '#CBD5E1',
+              textMuted: '#94A3B8',
+            }
+          },
+          fontFamily: {
+            heading: ['"Be Vietnam Pro"', 'sans-serif'],
+            sans: ['Inter', '"Be Vietnam Pro"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ZEGGO Architectural System: Pitch black, crisp 1px borders, bold kinetic typography */
+    body {
+      background-color: #000000;
+      color: #CBD5E1;
+      font-family: 'Inter', 'Be Vietnam Pro', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .font-heading { 
+      font-family: 'Be Vietnam Pro', sans-serif; 
+      letter-spacing: -0.025em;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* ZEGGO Signature <color-stop> inline highlight */
+    color-stop, .color-stop {
+      color: #FF5E2B;
+      font-weight: inherit;
+    }
+
+    .color-stop-cyan {
+      color: #38BDF8;
+      font-weight: inherit;
+    }
+
+    /* Minimalist Custom Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #000000; }
+    ::-webkit-scrollbar-thumb { background: #1E293B; }
+    ::-webkit-scrollbar-thumb:hover { background: #FF5E2B; }
+
+    /* Top Reading Progress Bar */
+    #site-header-line {
+      height: 2px;
+      background-color: #FF5E2B;
+      width: 0%;
+      transition: width 0.05s linear;
+    }
+
+    /* Floating Hotspot Pin */
+    .hotspot-pin {
+      animation: hotspotPulse 2.5s infinite ease-in-out;
+    }
+    @keyframes hotspotPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-zeggo-primary selection:text-white">
+
+  <!-- ================= TOP READING SCROLL PROGRESS LINE ================= -->
+  <div class="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+    <div id="site-header-line"></div>
+  </div>
+
+  <!-- ================= FLOATING SIDE PROGRESS SCRUBBER ================= -->
+  <aside class="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-end space-y-4 font-mono text-[11px] pointer-events-none select-none">
+    <div class="flex items-center space-x-2 text-zeggo-primary">
+      <span id="scroll-section-label" class="tracking-widest uppercase font-bold">01 / KHỞI ĐẦU</span>
+    </div>
+    
+    <!-- Vertical Progress Track -->
+    <div class="w-1 h-36 bg-zeggo-border rounded-none relative overflow-hidden">
+      <div id="scroll-track-fill" class="w-full bg-zeggo-primary h-0 transition-all duration-100"></div>
+    </div>
+
+    <div class="text-[10px] text-zeggo-textMuted" id="scroll-pct">0%</div>
+  </aside>
+
+  <!-- ================= 1. ENTERPRISE HEADER (CLEANED UP PER USER SPEC) ================= -->
+  <header class="fixed top-0 left-0 right-0 z-40 bg-black/95 border-b border-zeggo-border backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Identity (Refined Badge + Clear Legal Name) -->
+      <a href="#home" class="flex items-center space-x-3.5 group">
+        <div class="px-2.5 py-1 bg-white text-black font-heading font-black text-sm tracking-widest border border-white">
+          JITEN
+        </div>
+        <div class="border-l border-zeggo-border pl-3.5">
+          <div class="flex items-center space-x-2">
+            <span class="font-heading font-extrabold text-base tracking-wide text-white">JITEN CNC</span>
+            <span class="text-[9px] px-1.5 py-0.2 bg-zeggo-surface border border-zeggo-border text-zeggo-primary font-mono font-semibold">ĐỒNG NAI</span>
+          </div>
+          <p class="text-[10.5px] text-slate-400 uppercase tracking-wider font-medium">CÔNG TY TNHH CƠ ĐIỆN KIM PHONG</p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu (Zeggo-style: Uncluttered, High Precision) -->
+      <nav class="hidden lg:flex items-center space-x-7 text-sm font-medium">
+        <a href="#home" class="text-white hover:text-zeggo-primary transition-colors">
+          Trang chủ
+        </a>
+        <a href="#why-us" class="text-zeggo-textSecondary hover:text-zeggo-primary transition-colors">
+          Tại sao chọn chúng tôi
+        </a>
+        <a href="#services-story" class="text-zeggo-textSecondary hover:text-zeggo-primary transition-colors">
+          Lĩnh vực năng lực
+        </a>
+        <a href="#brands" class="text-zeggo-textSecondary hover:text-zeggo-primary transition-colors">
+          Thương hiệu & Đối tác
+        </a>
+        <a href="#catalog" class="text-zeggo-textSecondary hover:text-zeggo-primary transition-colors">
+          Sản phẩm & Thông số
+        </a>
+        <a href="#contact" class="text-zeggo-textSecondary hover:text-zeggo-primary transition-colors">
+          Báo giá & Liên hệ
+        </a>
+      </nav>
+
+      <!-- Action Group (Language Switcher + ZEGGO Pill Button CTA - Hotline link removed) -->
+      <div class="flex items-center space-x-4">
+        
+        <!-- Clean Language Switcher -->
+        <div class="flex items-center p-0.5 bg-zeggo-panel border border-zeggo-border text-xs font-mono">
+          <button class="bg-white text-black px-2 py-0.5 font-bold">VI</button>
+          <button class="text-zeggo-textMuted hover:text-white px-2 py-0.5 transition-colors">EN</button>
+          <button class="text-zeggo-textMuted hover:text-white px-2 py-0.5 transition-colors">ZH</button>
+        </div>
+
+        <!-- Zeggo Pill CTA Button -->
+        <a href="#contact" class="inline-flex items-center space-x-2 rounded-full px-5 py-2.5 bg-white hover:bg-zeggo-primary text-black hover:text-white font-heading font-bold text-xs tracking-wider uppercase transition-all shadow-md">
+          <span>BÁO GIÁ NHANH</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-300 hover:text-white border border-zeggo-border bg-zeggo-panel">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-zeggo-border bg-black px-4 py-4 space-y-3 font-medium text-sm">
+      <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-white hover:text-zeggo-primary">Trang chủ</a>
+      <a href="#why-us" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-zeggo-primary">Tại sao chọn chúng tôi</a>
+      <a href="#services-story" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-zeggo-primary">Lĩnh vực năng lực</a>
+      <a href="#brands" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-zeggo-primary">Thương hiệu & Đối tác</a>
+      <a href="#catalog" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-zeggo-primary">Sản phẩm & Thông số</a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-zeggo-primary">Báo giá & Liên hệ</a>
+      <div class="pt-2 border-t border-zeggo-border flex items-center justify-between text-xs font-mono">
+        <span class="text-slate-400">KHO MÁY TRẢNG BOM:</span>
+        <span class="text-zeggo-primary font-bold">0908.123.456</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN SINGLE PAGE CONTAINER ================= -->
+  <main class="pt-20">
+
+    <!-- ================= SECTION 1: ZEGGO HERO SHOWCASE ================= -->
+    <section id="home" class="min-h-[92vh] flex flex-col justify-between border-b border-zeggo-border px-4 sm:px-6 lg:px-8 pt-12 pb-16 bg-black relative">
+      <div class="max-w-7xl mx-auto w-full space-y-10">
+        
+        <!-- Hero Text Block (ZEGGO Editorial Typographic Scale + Color-stop) -->
+        <div class="space-y-5 max-w-4xl">
+          <div class="inline-flex items-center space-x-2 text-xs sm:text-sm font-mono text-zeggo-primary tracking-widest font-semibold uppercase">
+            <span class="w-2 h-2 bg-zeggo-primary"></span>
+            <span>JITEN CNC · INDUSTRIAL MACHINERY & ENGINEERING</span>
+          </div>
+
+          <h1 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08]">
+            Giải Pháp Toàn Diện Cho Ngành <color-stop>Máy Công Cụ</color-stop> & Cơ Khí
+          </h1>
+
+          <p class="text-base sm:text-xl text-zeggo-textSecondary font-normal leading-relaxed max-w-3xl">
+            Phân phối trung tâm gia công CNC, linh kiện cơ điện tiêu chuẩn và <color-stop>chẩn đoán sửa chữa bo mạch</color-stop> chuyên sâu tại trung tâm công nghiệp Trảng Bom, Đồng Nai.
+          </p>
+
+          <div class="pt-2 flex flex-wrap gap-4 items-center">
+            <!-- Zeggo Pill CTA Buttons -->
+            <a href="#contact" class="inline-flex items-center space-x-2 rounded-full px-8 py-3.5 bg-white hover:bg-zeggo-primary text-black hover:text-white font-heading font-extrabold text-xs tracking-wider uppercase transition-all shadow-lg">
+              <span>YÊU CẦU BÁO GIÁ KỸ THUẬT</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+
+            <a href="#services-story" class="inline-flex items-center space-x-2 rounded-full px-6 py-3.5 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-white text-xs font-mono font-semibold transition-all">
+              <span>XEM KHO MÁY THỰC TẾ</span>
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+            </a>
+
+            <div class="text-xs font-mono text-zeggo-textMuted flex items-center space-x-3 pl-2">
+              <span>• KHO MÁY TRẢNG BOM</span>
+              <span>• ĐỦ MÁY CHẠY THỬ PHÔI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Machine Stage with Zeggo/Oryzo Telemetry Badges -->
+        <div class="relative w-full border border-zeggo-border overflow-hidden bg-black shadow-2xl group">
+          <img 
+            src="assets/hero_machine.png" 
+            alt="Trung tâm gia công phay CNC công nghiệp JITEN" 
+            class="w-full h-auto max-h-[580px] object-cover object-center"
+          />
+
+          <!-- Live Technical Telemetry Hotspots -->
+          <div class="absolute top-1/4 left-1/3 hidden md:flex items-center space-x-2 px-3 py-1.5 bg-black/90 border border-zeggo-border text-[11px] font-mono text-white shadow-xl">
+            <span class="w-2 h-2 rounded-full bg-zeggo-cyan hotspot-pin"></span>
+            <span>TRỤC CHÍNH SPINDLE 12,000 RPM (BT40)</span>
+          </div>
+
+          <div class="absolute bottom-1/3 right-1/4 hidden md:flex items-center space-x-2 px-3 py-1.5 bg-black/90 border border-zeggo-border text-[11px] font-mono text-white shadow-xl">
+            <span class="w-2 h-2 rounded-full bg-zeggo-primary hotspot-pin"></span>
+            <span>HỆ ĐIỀU KHIỂN FANUC 0i-MF PLUS</span>
+          </div>
+
+          <!-- Real Image Watermark Badges -->
+          <div class="absolute bottom-4 left-4 px-3 py-1.5 bg-black/90 border border-zeggo-border text-[11px] font-mono text-zeggo-textSecondary flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>slmncncmachine.com · KHO MÁY TRẢNG BOM ĐỒNG NAI</span>
+          </div>
+
+          <!-- Down Arrow Indicator -->
+          <a href="#why-us" class="absolute bottom-4 right-1/2 translate-x-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-black flex items-center justify-center transition-all shadow-lg">
+            <i data-lucide="arrow-down" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2: ZEGGO "WHY US" ARCHITECTURAL 3-COLUMN ================= -->
+    <section id="why-us" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-zeggo-panel">
+      <div class="max-w-7xl mx-auto space-y-16">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zeggo-border pb-8">
+          <div class="space-y-2">
+            <div class="text-xs font-mono text-zeggo-primary uppercase tracking-widest font-semibold">02. TẠI SAO CHỌN JITEN CNC · WHY US</div>
+            <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Cam Kết Chất Lượng Bằng Năng Lực Kỹ Thuật</h2>
+          </div>
+          <p class="text-xs font-mono text-zeggo-textMuted max-w-sm">
+            Phục vụ hơn 500+ xưởng gia công cơ khí chính xác tại Đồng Nai, Bình Dương, TP.HCM và Long An.
+          </p>
+        </div>
+
+        <!-- 3-Column ZEGGO Layout (Numbered 01, 02, 03) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Column 01: Precision -->
+          <div class="p-8 bg-black border border-zeggo-border space-y-5 flex flex-col justify-between hover:border-zeggo-primary transition-all">
+            <div class="space-y-4">
+              <span class="text-3xl font-mono font-bold text-zeggo-primary">01</span>
+              <h3 class="font-heading text-xl font-bold text-white">Độ Chính Xác Tuyệt Đối</h3>
+              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+                Mọi dòng máy trước khi bàn giao đều được đo kiểm dung sai hình học bằng đồng hồ so Mitutoyo và nivô tiêu chuẩn. Cam kết độ chính xác lặp lại đạt <color-stop>±0.005 mm</color-stop>.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-zeggo-border text-xs font-mono text-zeggo-textMuted flex items-center space-x-2">
+              <i data-lucide="check-circle" class="w-4 h-4 text-zeggo-cyan"></i>
+              <span>Kiểm định tải nặng tại xưởng</span>
+            </div>
+          </div>
+
+          <!-- Column 02: Continuity & Inventory -->
+          <div class="p-8 bg-black border border-zeggo-border space-y-5 flex flex-col justify-between hover:border-zeggo-primary transition-all">
+            <div class="space-y-4">
+              <span class="text-3xl font-mono font-bold text-zeggo-primary">02</span>
+              <h3 class="font-heading text-xl font-bold text-white">Nguồn Hàng & Linh Kiện Sẵn Kho</h3>
+              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+                Kho bãi quy mô lớn ngay mặt tiền Quốc lộ 1A với <color-stop>50+ đầu máy CNC</color-stop> sẵn sàng và hàng nghìn mã ray trượt, vitme bi THK/Hiwin giao ngay không để gián đoạn sản xuất.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-zeggo-border text-xs font-mono text-zeggo-textMuted flex items-center space-x-2">
+              <i data-lucide="package-check" class="w-4 h-4 text-zeggo-primary"></i>
+              <span>Giao hàng & lắp đặt 24/7</span>
+            </div>
+          </div>
+
+          <!-- Column 03: Mastery & Support -->
+          <div class="p-8 bg-black border border-zeggo-border space-y-5 flex flex-col justify-between hover:border-zeggo-primary transition-all">
+            <div class="space-y-4">
+              <span class="text-3xl font-mono font-bold text-zeggo-primary">03</span>
+              <h3 class="font-heading text-xl font-bold text-white">Làm Chủ Kỹ Thuật Điện - Cơ Khí</h3>
+              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+                Đội ngũ kỹ sư làm chủ sâu sắc hệ thống điện Fanuc, Mitsubishi, Siemens. Hỗ trợ <color-stop>chạy thử cắt phôi thực tế</color-stop> và chuyển giao vận hành trực tiếp tại nhà máy khách hàng.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-zeggo-border text-xs font-mono text-zeggo-textMuted flex items-center space-x-2">
+              <i data-lucide="wrench" class="w-4 h-4 text-emerald-400"></i>
+              <span>Bảo hành kỹ thuật tận nơi</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3: ABOUT US & LEGAL METRICS ================= -->
+    <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-black">
+      <div class="max-w-7xl mx-auto space-y-12">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-4 space-y-2">
+            <div class="text-xs font-mono text-zeggo-primary uppercase tracking-widest font-semibold">03. DOANH NGHIỆP · ENTERPRISE PROFILE</div>
+            <h2 class="font-heading text-2xl sm:text-3xl font-extrabold text-white">CÔNG TY TNHH CƠ ĐIỆN KIM PHONG</h2>
+            <p class="text-xs font-mono text-zeggo-textMuted">Mã số thuế: <span class="text-white font-bold font-mono">3603910491</span></p>
+          </div>
+          <div class="lg:col-span-8 text-sm text-zeggo-textSecondary space-y-3 leading-relaxed border-l-0 lg:border-l border-zeggo-border lg:pl-8">
+            <p>
+              Tọa lạc tại Quốc lộ 1A, Trảng Bom, Tỉnh Đồng Nai – tâm điểm kết nối các cụm khu công nghiệp trọng điểm phía Nam (Biên Hòa, Long Đức, Nhơn Trạch, VSIP, Sóng Thần). Thương hiệu <strong>JITEN CNC</strong> chuyên cung cấp giải pháp máy công cụ gia công cơ khí chính xác, vật tư linh kiện thay thế và dịch vụ kỹ thuật điện – cơ khí chuyên sâu.
+            </p>
+            <p>
+              Với phương châm <em>"Độ chính xác tạo niềm tin"</em>, mọi dòng máy xuất xưởng đều được đo kiểm bằng đồng hồ so Mitutoyo, kiểm tra độ vuông góc, cắm điện chạy thử phôi tải nặng và hỗ trợ chuyển giao công nghệ trực tiếp tại nhà máy khách hàng.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4 Core Metrics Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-zeggo-border pt-8 font-mono">
+          <div class="p-4 bg-zeggo-panel border border-zeggo-border">
+            <div class="text-2xl sm:text-3xl font-bold text-white">10+ NĂM</div>
+            <div class="text-xs text-zeggo-textMuted mt-1">Kinh nghiệm ngành cơ điện</div>
+          </div>
+          <div class="p-4 bg-zeggo-panel border border-zeggo-border">
+            <div class="text-2xl sm:text-3xl font-bold text-zeggo-cyan">50+ MÁY</div>
+            <div class="text-xs text-zeggo-textMuted mt-1">Luôn sẵn sàng tại kho Đồng Nai</div>
+          </div>
+          <div class="p-4 bg-zeggo-panel border border-zeggo-border">
+            <div class="text-2xl sm:text-3xl font-bold text-white">500+ DỰ ÁN</div>
+            <div class="text-xs text-zeggo-textMuted mt-1">Đã bàn giao cho các xưởng B2B</div>
+          </div>
+          <div class="p-4 bg-zeggo-panel border border-zeggo-border">
+            <div class="text-2xl sm:text-3xl font-bold text-zeggo-primary">100% KỸ SƯ</div>
+            <div class="text-xs text-zeggo-textMuted mt-1">Làm chủ công nghệ điện CNC</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4: ZEGGO STICKY STORYTELLING & 4 CORE PILLARS ================= -->
+    <section id="services-story" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-zeggo-panel relative">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          <!-- LEFT COLUMN: PINNED STICKY PANEL (ZEGGO Continuous Scroll Navigation) -->
+          <div class="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
+            <div class="inline-flex items-center space-x-2 text-xs font-mono text-zeggo-primary uppercase">
+              <span class="w-6 h-px bg-zeggo-primary"></span>
+              <span>04. LĨNH VỰC HOẠT ĐỘNG · CORE PILLARS</span>
+            </div>
+            
+            <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+              Hệ Sinh Thái Thiết Bị & Dịch Vụ Cơ Điện Toàn Diện
+            </h2>
+            
+            <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+              Kéo chuột xuống để xem chi tiết 4 trụ cột năng lực của JITEN CNC. Trang web tự động đồng bộ tiến trình theo từng bước cuộn chuột của bạn.
+            </p>
+
+            <!-- Zeggo Progressive Vertical Chapter Index -->
+            <div class="space-y-3 pt-4 font-mono text-xs hidden lg:block">
+              <div id="prog-1" class="flex items-center space-x-3 text-white font-bold transition-all">
+                <span class="w-7 h-7 bg-zeggo-primary text-black flex items-center justify-center text-xs font-bold">01</span>
+                <span>MÁY CÔNG CỤ CNC (CNC Machine Tools)</span>
+              </div>
+              <div id="prog-2" class="flex items-center space-x-3 text-zeggo-textMuted transition-all">
+                <span class="w-7 h-7 bg-black text-zeggo-textMuted flex items-center justify-center text-xs border border-zeggo-border">02</span>
+                <span>LINH KIỆN MÁY MÓC (Machine Components)</span>
+              </div>
+              <div id="prog-3" class="flex items-center space-x-3 text-zeggo-textMuted transition-all">
+                <span class="w-7 h-7 bg-black text-zeggo-textMuted flex items-center justify-center text-xs border border-zeggo-border">03</span>
+                <span>SỬA CHỮA VÀ BẢO TRÌ (Maintenance & Retrofit)</span>
+              </div>
+              <div id="prog-4" class="flex items-center space-x-3 text-zeggo-textMuted transition-all">
+                <span class="w-7 h-7 bg-black text-zeggo-textMuted flex items-center justify-center text-xs border border-zeggo-border">04</span>
+                <span>GIA CÔNG THEO YÊU CẦU (Custom Machining)</span>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <a href="#contact" class="inline-flex items-center space-x-2 text-xs font-mono text-zeggo-primary hover:underline">
+                <span>Cần tư vấn cụ thể từng hạng mục? Gửi liên hệ ngay</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: CONTINUOUS SCROLL CARDS (Featuring Authentic Cropped Images) -->
+          <div class="lg:col-span-7 space-y-16">
+
+            <!-- Card 1: Máy công cụ CNC (Featuring pillar_cnc_machine.png) -->
+            <div class="pillar-card p-6 bg-black border border-zeggo-border space-y-5" data-step="1">
+              <div class="relative overflow-hidden bg-white border border-zeggo-border p-4 flex items-center justify-center">
+                <img 
+                  src="assets/pillar_cnc_machine.png" 
+                  alt="Máy công cụ CNC" 
+                  class="w-full h-auto max-h-[340px] object-contain"
+                />
+                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-white font-mono text-[10px] border border-zeggo-border">
+                  01 / MACHINE TOOLS
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between border-b border-zeggo-border pb-3">
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-white">Máy công cụ CNC</h3>
+                  <p class="text-xs font-mono text-zeggo-primary mt-0.5">CNC Machine Tools · Mới 100% & Bãi Tuyển Chọn</p>
+                </div>
+                <span class="px-2.5 py-1 bg-zeggo-panel text-xs font-mono text-white border border-zeggo-border">ĐÀI LOAN & NHẬT</span>
+              </div>
+
+              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+                Phân phối các dòng trung tâm gia công phay CNC đứng (VMC), phay ngang (HMC), máy tiện CNC băng nghiêng, máy mài phẳng thủy lực và máy cắt dây CNC (Wire EDM). Hỗ trợ chạy thử cắt phôi tải nặng trực tiếp tại kho trước khi quyết định mua.
+              </p>
+
+              <!-- Technical Specification HUD Matrix -->
+              <div class="p-3.5 bg-zeggo-panel border border-zeggo-border font-mono text-xs grid grid-cols-2 gap-2 text-zeggo-textSecondary">
+                <div>• Trục chính: BT30 / BT40 / BT50</div>
+                <div>• Tốc độ Spindle: 8,000 - 15,000 RPM</div>
+                <div>• Hệ điều khiển: Fanuc, Mitsubishi, Siemens</div>
+                <div>• Dung sai kiểm định: ±0.005 mm</div>
+              </div>
+            </div>
+
+            <!-- Card 2: Linh kiện máy móc (Featuring pillar_components.png) -->
+            <div class="pillar-card p-6 bg-black border border-zeggo-border space-y-5" data-step="2">
+              <div class="relative overflow-hidden bg-[#ECEEF1] border border-zeggo-border p-4 flex items-center justify-center">
+                <img 
+                  src="assets/pillar_components.png" 
+                  alt="Linh kiện máy móc" 
+                  class="w-full h-auto max-h-[340px] object-contain"
+                />
+                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-white font-mono text-[10px] border border-zeggo-border">
+                  02 / COMPONENTS
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between border-b border-zeggo-border pb-3">
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-white">Linh kiện máy móc</h3>
+                  <p class="text-xs font-mono text-zeggo-primary mt-0.5">Machine Components · Sẵn Tồn Kho</p>
+                </div>
+                <span class="px-2.5 py-1 bg-zeggo-panel text-xs font-mono text-white border border-zeggo-border">THK / HIWIN / NSK</span>
+              </div>
+
+              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+                Kho linh kiện sẵn sàng thay thế: Trục vitme bi mài C3/C5, thanh trượt dẫn hướng tuyến tính (Linear guides), cụm vòng bi trục chính P4 chính xác, khớp nối mềm, đài dao tự động ATC và bầu kẹp dao BT30/BT40/BT50.
+              </p>
+
+              <!-- Technical Specification HUD Matrix -->
+              <div class="p-3.5 bg-zeggo-panel border border-zeggo-border font-mono text-xs grid grid-cols-2 gap-2 text-zeggo-textSecondary">
+                <div>• Cấp chính xác vitme: C3 / C5 (Trục mài)</div>
+                <div>• Bản ray dẫn hướng: 15, 20, 25, 30, 35, 45</div>
+                <div>• Vòng bi Spindle: Tiêu chuẩn P4 góc tiếp xúc</div>
+                <div>• Gia công tiện đầu trục: Theo quy cách bạc đạn</div>
+              </div>
+            </div>
+
+            <!-- Card 3: Sửa chữa và bảo trì (Featuring pillar_maintenance.png) -->
+            <div class="pillar-card p-6 bg-black border border-zeggo-border space-y-5" data-step="3">
+              <div class="relative overflow-hidden bg-black border border-zeggo-border flex items-center justify-center">
+                <img 
+                  src="assets/pillar_maintenance.png" 
+                  alt="Sửa chữa và bảo trì" 
+                  class="w-full h-auto max-h-[340px] object-cover"
+                />
+                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-zeggo-primary font-mono text-[10px] border border-zeggo-border">
+                  03 / SERVICES
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between border-b border-zeggo-border pb-3">
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-white">Sửa chữa và bảo trì</h3>
+                  <p class="text-xs font-mono text-zeggo-primary mt-0.5">Repair, Maintenance & Retrofit</p>
+                </div>
+                <span class="px-2.5 py-1 bg-zeggo-panel text-xs font-mono text-zeggo-primary border border-zeggo-border">HỖ TRỢ 24/7</span>
+              </div>
+
+              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+                Đội ngũ kỹ sư cơ khí & điện tự động hóa xử lý triệt để: Sửa bo mạch chủ, sửa servo drive, khắc phục lỗi mất tọa độ encoder, cạo băng cân chỉnh độ phẳng, thay vòng bi trục chính spindle và nâng cấp hệ điều hành máy đời cũ (Retrofit).
+              </p>
+
+              <!-- Technical Troubleshooting HUD -->
+              <div class="p-3.5 bg-zeggo-panel border border-zeggo-border font-mono text-xs grid grid-cols-2 gap-2 text-zeggo-textSecondary">
+                <div>• Chẩn đoán Alarm: 401, 9002, SV0436...</div>
+                <div>• Ứng cứu tận xưởng: Trong 2h - 4h nội vùng</div>
+                <div>• Đại tu cơ khí: Cạo băng, cân chỉnh nivô</div>
+                <div>• Bảo hành sửa chữa: 3 - 6 tháng tiêu chuẩn</div>
+              </div>
+            </div>
+
+            <!-- Card 4: Gia công theo yêu cầu (Featuring pillar_machining.png) -->
+            <div class="pillar-card p-6 bg-black border border-zeggo-border space-y-5" data-step="4">
+              <div class="relative overflow-hidden bg-black border border-zeggo-border flex items-center justify-center">
+                <img 
+                  src="assets/pillar_machining.png" 
+                  alt="Gia công theo yêu cầu" 
+                  class="w-full h-auto max-h-[340px] object-cover"
+                />
+                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-emerald-400 font-mono text-[10px] border border-zeggo-border">
+                  04 / CUSTOM OEM
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between border-b border-zeggo-border pb-3">
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-white">Gia công theo yêu cầu</h3>
+                  <p class="text-xs font-mono text-emerald-400 mt-0.5">Custom Precision Machining · Theo Bản Vẽ</p>
+                </div>
+                <span class="px-2.5 py-1 bg-zeggo-panel text-xs font-mono text-emerald-400 border border-zeggo-border">DUNG SAI ±0.005 MM</span>
+              </div>
+
+              <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+                Nhận gia công phay, tiện chi tiết cơ khí chính xác, chi tiết khuôn mẫu, chi tiết máy phi tiêu chuẩn theo bản vẽ CAD/STEP của khách hàng. Cam kết vật liệu chuẩn chứng chỉ CO/CQ và dung sai kiểm định bằng máy đo tọa độ kỹ thuật.
+              </p>
+
+              <!-- Machining Capabilities HUD -->
+              <div class="p-3.5 bg-zeggo-panel border border-zeggo-border font-mono text-xs grid grid-cols-2 gap-2 text-zeggo-textSecondary">
+                <div>• Vật liệu xử lý: Nhôm 6061/7075, SKD11, SUS304</div>
+                <div>• Định dạng bản vẽ: STEP, IGES, DXF, DWG, PDF</div>
+                <div>• Kiểm định QC: Đo tọa độ 2D/3D & Mitutoyo</div>
+                <div>• Đơn hàng: Đơn chiếc mẫu (Prototype) & Hàng loạt</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5: ZEGGO MULTI-BRAND COMPATIBILITY (SECTION-BRANDS) ================= -->
+    <section id="brands" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-black">
+      <div class="max-w-7xl mx-auto space-y-12">
+        
+        <div class="space-y-3 max-w-3xl">
+          <div class="text-xs font-mono text-zeggo-primary uppercase tracking-widest font-semibold">05. HỆ SINH THÁI THƯƠNG HIỆU · MULTI-BRAND COMPATIBILITY</div>
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">
+            Tương Thích Đa Hệ Điều Khiển & Phụ Tùng Cơ Điện Hàng Đầu
+          </h2>
+          <p class="text-sm text-zeggo-textSecondary">
+            JITEN CNC làm chủ chuyên sâu kỹ thuật vận hành, linh kiện thay thế và chẩn đoán bo mạch cho các thương hiệu hàng đầu thế giới:
+          </p>
+        </div>
+
+        <!-- High-Contrast Monochrome Brand Badges Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono">
+          
+          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+            <div class="text-xl font-heading font-black tracking-wider text-white">FANUC</div>
+            <div class="text-xs text-zeggo-textMuted">Nhật Bản · CNC 0i-MF, Servo & Spindle Drives</div>
+          </div>
+
+          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+            <div class="text-xl font-heading font-black tracking-wider text-white">MITSUBISHI</div>
+            <div class="text-xs text-zeggo-textMuted">Nhật Bản · Hệ M80, M70, Biến tần MDS</div>
+          </div>
+
+          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+            <div class="text-xl font-heading font-black tracking-wider text-white">SIEMENS</div>
+            <div class="text-xs text-zeggo-textMuted">Đức · Sinumerik 828D / 840D SL</div>
+          </div>
+
+          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+            <div class="text-xl font-heading font-black tracking-wider text-white">HEIDENHAIN</div>
+            <div class="text-xs text-zeggo-textMuted">Đức · Thước quang học & Hệ đo tuyến tính</div>
+          </div>
+
+          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+            <div class="text-xl font-heading font-black tracking-wider text-white">THK</div>
+            <div class="text-xs text-zeggo-textMuted">Nhật Bản · Ray trượt & Vitme bi chính xác</div>
+          </div>
+
+          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+            <div class="text-xl font-heading font-black tracking-wider text-white">HIWIN</div>
+            <div class="text-xs text-zeggo-textMuted">Đài Loan · Thanh dẫn hướng tải trọng nặng</div>
+          </div>
+
+          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+            <div class="text-xl font-heading font-black tracking-wider text-white">NSK</div>
+            <div class="text-xs text-zeggo-textMuted">Nhật Bản · Vòng bi trục chính Spindle P4</div>
+          </div>
+
+          <div class="p-6 bg-zeggo-panel border border-zeggo-border hover:border-zeggo-primary transition-all flex flex-col justify-between space-y-4">
+            <div class="text-xl font-heading font-black tracking-wider text-white">MITUTOYO</div>
+            <div class="text-xs text-zeggo-textMuted">Nhật Bản · Thiết bị đo kiểm & Đồng hồ so chuẩn</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6: ZEGGO TECHNICAL DIAGNOSTICS & FEATURES ================= -->
+    <section class="py-24 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-zeggo-panel">
+      <div class="max-w-7xl mx-auto space-y-16">
+        
+        <div class="space-y-3">
+          <div class="text-xs font-mono text-zeggo-primary uppercase tracking-widest font-semibold">06. DỊCH VỤ KỸ THUẬT CHUYÊN SÂU · DIAGNOSTICS & SERVICES</div>
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">
+            Quy Trình Chẩn Đoán Lỗi & Phục Hồi Thiết Bị Chuẩn Công Nghiệp
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <div class="p-8 bg-black border border-zeggo-border space-y-4 hover:border-zeggo-primary transition-all">
+            <span class="text-xs font-mono text-zeggo-primary px-2 py-0.5 bg-zeggo-panel border border-zeggo-border">CHẨN ĐOÁN BO MẠCH</span>
+            <h3 class="font-heading text-xl font-bold text-white">Sửa Chữa Servo & Spindle Drive</h3>
+            <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+              Xử lý nhanh các mã lỗi cảnh báo phổ biến: Fanuc Alarm 401, 9002, IPM error, quá dòng, mất pha hoặc hư hỏng bộ mã hóa xung encoder. Đo kiểm linh kiện công suất bằng máy hiện sóng chuyên dụng.
+            </p>
+          </div>
+
+          <div class="p-8 bg-black border border-zeggo-border space-y-4 hover:border-zeggo-primary transition-all">
+            <span class="text-xs font-mono text-zeggo-cyan px-2 py-0.5 bg-zeggo-panel border border-zeggo-border">CÂN CHỈNH HÌNH HỌC</span>
+            <h3 class="font-heading text-xl font-bold text-white">Cạo Rà Băng Trượt & Cân Chỉnh Nivô</h3>
+            <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+              Kỹ thuật cạo băng thủ công phục hồi độ phẳng bề mặt trượt, triệt tiêu khe hở bạc trượt, kiểm tra độ vuông góc giữa các trục X-Y-Z bằng thanh ke chuẩn và đồng hồ so độ phân giải 0.001mm.
+            </p>
+          </div>
+
+          <div class="p-8 bg-black border border-zeggo-border space-y-4 hover:border-zeggo-primary transition-all">
+            <span class="text-xs font-mono text-emerald-400 px-2 py-0.5 bg-zeggo-panel border border-zeggo-border">ĐẠI TU TRỤC CHÍNH</span>
+            <h3 class="font-heading text-xl font-bold text-white">Thay Bạc Đạn & Cân Bằng Động Spindle</h3>
+            <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+              Thay thế vòng bi góc tiếp xúc chính xác cấp P4 (NSK / FAG), cân bằng động trục chính chống rung ở tốc độ cao (10,000 - 15,000 RPM), phục hồi côn trục chính BT30/BT40/BT50 bị trầy xước.
+            </p>
+          </div>
+
+          <div class="p-8 bg-black border border-zeggo-border space-y-4 hover:border-zeggo-primary transition-all">
+            <span class="text-xs font-mono text-amber-400 px-2 py-0.5 bg-zeggo-panel border border-zeggo-border">NÂNG CẤP ĐIỆN CNC</span>
+            <h3 class="font-heading text-xl font-bold text-white">Retrofit Hệ Điều Khiển Thế Hệ Mới</h3>
+            <p class="text-sm text-zeggo-textSecondary leading-relaxed">
+              Thay thế toàn bộ tủ điện, màn hình và hệ điều khiển đời cũ (Fanuc 6M, 10M, 0M) sang Fanuc 0i-MF Plus hoặc Mitsubishi M80 màn hình LCD màu, hỗ trợ cổng kết nối USB/LAN hiện đại.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7: PRODUCT CATALOG SPEC SHEET ================= -->
+    <section id="catalog" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-zeggo-border bg-black">
+      <div class="max-w-7xl mx-auto space-y-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div class="space-y-2">
+            <div class="text-xs font-mono text-zeggo-primary uppercase">07. SẢN PHẨM & THÔNG SỐ KỸ THUẬT · CATALOG</div>
+            <h2 class="font-heading text-3xl font-extrabold text-white">Bảng Tra Cứu Model Máy Tiêu Biểu</h2>
+          </div>
+          <!-- Filter Tabs (Zeggo Pill Buttons with Active Filter) -->
+          <div class="flex flex-wrap gap-2 text-xs font-mono">
+            <button onclick="filterCatalog('ALL')" id="tab-ALL" class="catalog-tab rounded-full px-4 py-2 bg-white text-black font-bold">TẤT CẢ MODEL</button>
+            <button onclick="filterCatalog('PHAY')" id="tab-PHAY" class="catalog-tab rounded-full px-4 py-2 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-zeggo-textSecondary">PHAY CNC</button>
+            <button onclick="filterCatalog('TIEN')" id="tab-TIEN" class="catalog-tab rounded-full px-4 py-2 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-zeggo-textSecondary">TIỆN CNC</button>
+            <button onclick="filterCatalog('EDM')" id="tab-EDM" class="catalog-tab rounded-full px-4 py-2 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-zeggo-textSecondary">CẮT DÂY EDM</button>
+          </div>
+        </div>
+
+        <!-- Machine Specs Table (High-legibility B2B Spec Matrix) -->
+        <div class="overflow-x-auto border border-zeggo-border bg-zeggo-panel font-mono text-xs">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-zeggo-surface text-zeggo-textMuted border-b border-zeggo-border">
+                <th class="p-4 font-semibold">TÊN MÁY / MODEL</th>
+                <th class="p-4 font-semibold">HÀNH TRÌNH X/Y/Z</th>
+                <th class="p-4 font-semibold">TRỤC CHÍNH (SPINDLE)</th>
+                <th class="p-4 font-semibold">HỆ ĐIỀU KHIỂN</th>
+                <th class="p-4 font-semibold">TÌNH TRẠNG</th>
+                <th class="p-4 font-semibold text-right">THAO TÁC</th>
+              </tr>
+            </thead>
+            <tbody id="catalog-table-body" class="divide-y divide-zeggo-border">
+              <tr class="catalog-row hover:bg-zeggo-surface/50 transition-colors" data-type="PHAY">
+                <td class="p-4 font-bold text-white flex items-center space-x-2">
+                  <i data-lucide="cpu" class="w-4 h-4 text-zeggo-cyan"></i>
+                  <span>JITEN VMC-850</span>
+                </td>
+                <td class="p-4 text-zeggo-textSecondary">850 × 500 × 550 mm</td>
+                <td class="p-4 text-zeggo-cyan">10,000 RPM (BT40)</td>
+                <td class="p-4 text-zeggo-textSecondary">Fanuc 0i-MF Plus</td>
+                <td class="p-4"><span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px]">MỚI 100%</span></td>
+                <td class="p-4 text-right">
+                  <a href="#contact" class="rounded-full px-3 py-1 bg-white hover:bg-zeggo-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
+                </td>
+              </tr>
+              <tr class="catalog-row hover:bg-zeggo-surface/50 transition-colors" data-type="PHAY">
+                <td class="p-4 font-bold text-white flex items-center space-x-2">
+                  <i data-lucide="cpu" class="w-4 h-4 text-zeggo-cyan"></i>
+                  <span>JITEN VMC-1060</span>
+                </td>
+                <td class="p-4 text-zeggo-textSecondary">1000 × 600 × 600 mm</td>
+                <td class="p-4 text-zeggo-cyan">12,000 RPM (BT40)</td>
+                <td class="p-4 text-zeggo-textSecondary">Mitsubishi M80</td>
+                <td class="p-4"><span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px]">MỚI 100%</span></td>
+                <td class="p-4 text-right">
+                  <a href="#contact" class="rounded-full px-3 py-1 bg-white hover:bg-zeggo-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
+                </td>
+              </tr>
+              <tr class="catalog-row hover:bg-zeggo-surface/50 transition-colors" data-type="TIEN">
+                <td class="p-4 font-bold text-white flex items-center space-x-2">
+                  <i data-lucide="disc" class="w-4 h-4 text-zeggo-primary"></i>
+                  <span>OKUMA LB-15 (Tuyển chọn)</span>
+                </td>
+                <td class="p-4 text-zeggo-textSecondary">Tiện chống tâm 500 mm</td>
+                <td class="p-4 text-zeggo-cyan">4,200 RPM (Mâm 8")</td>
+                <td class="p-4 text-zeggo-textSecondary">OSP-5000L-G</td>
+                <td class="p-4"><span class="px-2 py-0.5 bg-amber-950 text-amber-400 border border-amber-800 text-[10px]">BÃI NHẬT 90%</span></td>
+                <td class="p-4 text-right">
+                  <a href="#contact" class="rounded-full px-3 py-1 bg-white hover:bg-zeggo-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
+                </td>
+              </tr>
+              <tr class="catalog-row hover:bg-zeggo-surface/50 transition-colors" data-type="EDM">
+                <td class="p-4 font-bold text-white flex items-center space-x-2">
+                  <i data-lucide="zap" class="w-4 h-4 text-emerald-400"></i>
+                  <span>MÁY CẮT DÂY EDM DK7740</span>
+                </td>
+                <td class="p-4 text-zeggo-textSecondary">400 × 500 × 300 mm</td>
+                <td class="p-4 text-zeggo-cyan">Cắt nhiều lần (Tốc độ cao)</td>
+                <td class="p-4 text-zeggo-textSecondary">AutoCut System</td>
+                <td class="p-4"><span class="px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 text-[10px]">MỚI 100%</span></td>
+                <td class="p-4 text-right">
+                  <a href="#contact" class="rounded-full px-3 py-1 bg-white hover:bg-zeggo-primary text-black hover:text-white text-[11px] font-sans font-bold transition-all">BÁO GIÁ</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8: CONTACT & RFQ FORM (ZEGGO SECTION-GOALS) ================= -->
+    <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 bg-zeggo-panel">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Legal Coordinates & Map info -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="space-y-2">
+            <div class="text-xs font-mono text-zeggo-primary uppercase">08. THÔNG TIN LIÊN HỆ & BÁO GIÁ · RFQ</div>
+            <h2 class="font-heading text-3xl font-extrabold text-white">Kết Nối Với JITEN CNC Ngay Hôm Nay</h2>
+            <p class="text-sm text-zeggo-textSecondary">
+              Chúng tôi luôn sẵn sàng đón tiếp quý khách đến trực tiếp kho máy tại Đồng Nai để kiểm tra dung sai và chạy thử tải phôi thực tế.
+            </p>
+          </div>
+
+          <div class="space-y-3 text-xs font-mono">
+            <div class="p-4 bg-black border border-zeggo-border space-y-1">
+              <div class="text-zeggo-textMuted uppercase">Địa chỉ trụ sở & Kho máy:</div>
+              <div class="text-white font-heading text-sm font-semibold">50A/3, Quốc lộ 1A, ấp An Hòa, Xã Hưng Thịnh, Huyện Trảng Bom, Tỉnh Đồng Nai</div>
+              <div class="text-zeggo-textMuted text-[11px]">(Mặt tiền QL1A, thuận tiện xe cẩu, xe container hạ máy 24/24)</div>
+            </div>
+
+            <div class="p-4 bg-black border border-zeggo-border space-y-1">
+              <div class="text-zeggo-textMuted uppercase">Mã số thuế doanh nghiệp:</div>
+              <div class="text-zeggo-cyan text-sm font-bold">3603910491</div>
+            </div>
+
+            <div class="p-4 bg-black border border-zeggo-border space-y-1">
+              <div class="text-zeggo-textMuted uppercase">Hotline Kỹ thuật & Báo giá:</div>
+              <div class="text-zeggo-primary text-sm font-bold">0908.123.456 | 0912.345.678</div>
+              <div class="text-zeggo-textMuted text-[11px]">Hỗ trợ Zalo & Wechat (中文服务: 0908.xxx.xxx)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RFQ Submission Form -->
+        <div class="lg:col-span-7">
+          <div class="p-8 bg-black border border-zeggo-border space-y-6 shadow-xl">
+            <div class="border-b border-zeggo-border pb-4">
+              <h3 class="font-heading text-xl font-bold text-white">YÊU CẦU BÁO GIÁ KỸ THUẬT (RFQ)</h3>
+              <p class="text-xs text-zeggo-textMuted font-mono mt-1">Phản hồi bản vẽ & thông số kỹ thuật trong vòng 15 phút qua SĐT / Zalo</p>
+            </div>
+
+            <form class="space-y-4" onsubmit="event.preventDefault(); handleFormSubmit();">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-mono text-zeggo-textSecondary mb-1.5">HỌ VÀ TÊN *</label>
+                  <input type="text" required placeholder="Nguyễn Văn A" class="w-full px-4 py-2.5 bg-zeggo-panel border border-zeggo-border focus:border-zeggo-primary text-sm text-white focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-mono text-zeggo-textSecondary mb-1.5">SỐ ĐIỆN THOẠI / ZALO *</label>
+                  <input type="tel" required placeholder="0908 123 456" class="w-full px-4 py-2.5 bg-zeggo-panel border border-zeggo-border focus:border-zeggo-primary text-sm text-white focus:outline-none">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-mono text-zeggo-textSecondary mb-1.5">TÊN CÔNG TY / XƯỞNG CƠ KHÍ</label>
+                  <input type="text" placeholder="Công ty Cơ khí ABC" class="w-full px-4 py-2.5 bg-zeggo-panel border border-zeggo-border focus:border-zeggo-primary text-sm text-white focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-mono text-zeggo-textSecondary mb-1.5">NHU CẦU QUAN TÂM</label>
+                  <select class="w-full px-4 py-2.5 bg-zeggo-panel border border-zeggo-border focus:border-zeggo-primary text-sm text-white focus:outline-none">
+                    <option>Báo giá máy phay CNC VMC</option>
+                    <option>Báo giá máy tiện CNC</option>
+                    <option>Linh kiện máy (vitme, ray trượt, bạc đạn)</option>
+                    <option>Dịch vụ sửa chữa bo mạch điện CNC</option>
+                    <option>Gia công cơ khí theo bản vẽ chi tiết</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono text-zeggo-textSecondary mb-1.5">YÊU CẦU CHI TIẾT HOẶC MÃ MODEL CẦN TÌM</label>
+                <textarea rows="3" placeholder="Nhập kích thước phôi, vật liệu, hoặc model máy bạn đang quan tâm..." class="w-full px-4 py-2.5 bg-zeggo-panel border border-zeggo-border focus:border-zeggo-primary text-sm text-white focus:outline-none"></textarea>
+              </div>
+
+              <!-- Drag & Drop Drawing Attachment Simulation -->
+              <div class="p-3 border border-dashed border-zeggo-border text-center bg-zeggo-panel hover:border-zeggo-primary transition-colors cursor-pointer">
+                <i data-lucide="upload-cloud" class="w-5 h-5 mx-auto text-zeggo-textMuted mb-1"></i>
+                <div class="text-xs font-mono text-zeggo-textSecondary">Đính kèm bản vẽ kỹ thuật (STEP, DWG, PDF, DXF, JPG)</div>
+                <div class="text-[10px] text-zeggo-textMuted">Tối đa 25MB · Cam kết bảo mật kỹ thuật NDA</div>
+              </div>
+
+              <button type="submit" class="w-full py-3.5 rounded-full bg-white hover:bg-zeggo-primary text-black hover:text-white font-heading font-extrabold text-xs tracking-wider uppercase transition-colors flex items-center justify-center space-x-2 shadow-lg">
+                <span>GỬI YÊU CẦU BÁO GIÁ NHANH</span>
+                <i data-lucide="send" class="w-4 h-4"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Bottom-Right Quick Contact Pill (Zeggo style pill) -->
+  <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-2">
+    <a href="tel:0908123456" class="rounded-full px-5 py-2.5 bg-white text-black font-heading font-bold text-xs flex items-center space-x-2 shadow-2xl transition-all border border-zeggo-border hover:bg-zeggo-primary hover:text-white">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+      <span>HOTLINE / ZALO: 0908.123.456</span>
+    </a>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t border-zeggo-border py-8 px-4 bg-black text-xs text-zeggo-textMuted font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="font-bold text-white font-heading">JITEN CNC</span>
+        <span>© 2026 CÔNG TY TNHH CƠ ĐIỆN KIM PHONG (MST: 3603910491). ALL RIGHTS RESERVED.</span>
+      </div>
+      <div>
+        HOSTED ON CLOUDFLARE PAGES GLOBAL EDGE
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= SCRIPT: ZEGGO & ORYZO SCROLL ENGINE ================= -->
+  <script>
+    // 1. Initialize Icons
+    lucide.createIcons();
+
+    // 2. Initialize Lenis Smooth Scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // 3. Register GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    // 4. Top Header Progress Line + Right Side Track Scrubber
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+
+      // Update Top Header Line
+      const headerLine = document.getElementById('site-header-line');
+      if (headerLine) headerLine.style.width = scrolled + '%';
+
+      // Update Right Track Scrubber
+      const trackFill = document.getElementById('scroll-track-fill');
+      if (trackFill) trackFill.style.height = scrolled + '%';
+
+      const pctLabel = document.getElementById('scroll-pct');
+      if (pctLabel) pctLabel.innerText = Math.round(scrolled) + '%';
+    });
+
+    // 5. Pinned Storytelling Chapters (Section 4)
+    const steps = [1, 2, 3, 4];
+    const sectionNames = {
+      1: '01 / MÁY CNC',
+      2: '02 / LINH KIỆN',
+      3: '03 / BẢO TRÌ',
+      4: '04 / GIA CÔNG'
+    };
+
+    steps.forEach((step) => {
+      ScrollTrigger.create({
+        trigger: `.pillar-card[data-step="${step}"]`,
+        start: "top 60%",
+        end: "bottom 60%",
+        onEnter: () => activateStep(step),
+        onEnterBack: () => activateStep(step),
+      });
+    });
+
+    function activateStep(stepNum) {
+      // Update Left Sticky Indicators
+      for (let i = 1; i <= 4; i++) {
+        const el = document.getElementById(`prog-${i}`);
+        if (!el) continue;
+        const badge = el.querySelector('span:first-child');
+        if (i === stepNum) {
+          el.className = "flex items-center space-x-3 text-white font-bold transition-all";
+          badge.className = "w-7 h-7 bg-zeggo-primary text-black flex items-center justify-center text-xs font-bold";
+        } else {
+          el.className = "flex items-center space-x-3 text-zeggo-textMuted transition-all";
+          badge.className = "w-7 h-7 bg-black text-zeggo-textMuted flex items-center justify-center text-xs border border-zeggo-border";
+        }
+      }
+
+      // Update Floating Side Label
+      const sideLabel = document.getElementById('scroll-section-label');
+      if (sideLabel && sectionNames[stepNum]) {
+        sideLabel.innerText = sectionNames[stepNum];
+      }
+    }
+
+    // 6. Interactive Filter for Catalog Table
+    function filterCatalog(type) {
+      document.querySelectorAll('.catalog-tab').forEach(tab => {
+        tab.className = "catalog-tab rounded-full px-4 py-2 bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-zeggo-textSecondary";
+      });
+      const activeTab = document.getElementById(`tab-${type}`);
+      if (activeTab) {
+        activeTab.className = "catalog-tab rounded-full px-4 py-2 bg-white text-black font-bold";
+      }
+
+      const rows = document.querySelectorAll('.catalog-row');
+      rows.forEach(row => {
+        if (type === 'ALL' || row.getAttribute('data-type') === type) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    // 7. Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // 8. Form Submission Handler
+    function handleFormSubmit() {
+      alert('Yêu cầu báo giá kỹ thuật đã được ghi nhận thành công! Kỹ sư JITEN CNC sẽ liên hệ tư vấn qua SĐT/Zalo trong vòng 15 phút.');
+    }
+  </script>
+</body>
+</html>
