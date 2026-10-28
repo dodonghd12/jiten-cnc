@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D CAD CNC Digital Twin & Spline Viewer | JITEN CNC VMC-850</title>
+  <title>3D CAD CNC Digital Twin · Masterclass Engineering Assembly | JITEN CNC</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -19,9 +19,6 @@
   <!-- Three.js & OrbitControls for Realtime 3D CAD Engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-  
-  <!-- Spline Official Web Viewer Component -->
-  <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
 
   <script>
     tailwind.config = {
@@ -31,14 +28,15 @@
           colors: {
             zeggo: {
               bg: '#000000',
-              panel: '#090D14',
-              surface: '#101722',
-              surfaceHover: '#162234',
+              panel: '#080C14',
+              surface: '#0F1624',
+              surfaceHover: '#172236',
               border: '#1E293B',
               primary: '#FF5E2B', // Zeggo Warm Coral/Orange
               cyan: '#38BDF8',
               gold: '#F59E0B',
               emerald: '#10B981',
+              ruby: '#EF4444',
             }
           },
           fontFamily: {
@@ -77,8 +75,8 @@
       transition: opacity 0.2s, transform 0.2s;
     }
     .hotspot-dot {
-      width: 12px;
-      height: 12px;
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
       background: #FFFFFF;
       box-shadow: 0 0 12px #FF5E2B, 0 0 24px #FF5E2B;
@@ -102,7 +100,7 @@
         </a>
         <div class="border-l border-zeggo-border pl-3 flex items-center space-x-2">
           <span class="font-heading font-extrabold text-sm text-white">3D CAD DIGITAL TWIN · VMC-850</span>
-          <span class="text-[9px] px-1.5 py-0.5 bg-zeggo-panel border border-zeggo-border text-zeggo-primary font-mono font-bold">120+ CHI TIẾT CƠ KHÍ</span>
+          <span class="text-[9px] px-2 py-0.5 bg-zeggo-panel border border-zeggo-primary/60 text-zeggo-primary font-mono font-bold tracking-wider">MASTERCLASS CAD 250+ CHI TIẾT</span>
         </div>
       </div>
 
@@ -130,48 +128,48 @@
       <!-- Overlay 3D Hotspot Telemetry Pins (Projected from 3D Coordinates) -->
       <div id="hotspot-container" class="absolute inset-0 pointer-events-none overflow-hidden">
         
-        <!-- Pin 1: Spindle & 4-Flute Endmill -->
+        <!-- Pin 1: Spindle, BT40 & Face Mill -->
         <div id="pin-spindle" class="hotspot-point" onclick="selectComponent('spindle')">
           <div class="hotspot-dot"></div>
-          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-3 py-1.5 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-sm">
-            <span class="text-zeggo-primary font-bold">● TRỤC CHÍNH BT40 & DAO PHAY 4 ME</span>
-            <div class="text-[10px] text-slate-400">12,000 RPM · Ống lót tản nhiệt · Collet ER32 · Độ đảo &lt; 0.003mm</div>
+          <div class="ml-4 -mt-3 bg-black/95 border border-zeggo-border px-3.5 py-2 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-md">
+            <span class="text-zeggo-primary font-bold">● TRỤC CHÍNH SPINDLE 12,000 RPM & ĐÀI DAO 6 CHÍP</span>
+            <div class="text-[10px] text-slate-400">BT40 V-Flange · Vòng xịt nước 6 vòi · Bạc đạn NSK P4 · Runout &lt; 0.003mm</div>
           </div>
         </div>
 
-        <!-- Pin 2: ATC 24-Tool Carousel & Twin Arm -->
+        <!-- Pin 2: ATC 24-Tool Magazine with Loaded Tools & Renishaw Probe -->
         <div id="pin-atc" class="hotspot-point" onclick="selectComponent('atc')">
           <div class="hotspot-dot"></div>
-          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-3 py-1.5 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-sm">
-            <span class="text-zeggo-cyan font-bold">● ĐÀI DAO 24 VỊ TRÍ & TAY THAY DAO KÉP</span>
-            <div class="text-[10px] text-slate-400">Thời gian đổi dao 1.8s · Đài dao phay mặt, mũi khoan, dao doa</div>
+          <div class="ml-4 -mt-3 bg-black/95 border border-zeggo-border px-3.5 py-2 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-md">
+            <span class="text-zeggo-cyan font-bold">● ĐÀI DAO 24 TRẠM & ĐẦU DÒ PHÔI RENISHAW RUBY</span>
+            <div class="text-[10px] text-slate-400">Dao phay ngón 4 me, mũi taro ren, dao khỏa mặt, tay gắp kép 180°</div>
           </div>
         </div>
 
-        <!-- Pin 3: T-Slot Worktable & Precision Vise -->
+        <!-- Pin 3: T-Slot Table & Kurt Hydraulic Vise -->
         <div id="pin-table" class="hotspot-point" onclick="selectComponent('table')">
           <div class="hotspot-dot"></div>
-          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-3 py-1.5 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-sm">
-            <span class="text-emerald-400 font-bold">● BÀN MÁY 5 RÃNH CHỮ T & Ê-TÔ CƠ KHÍ</span>
-            <div class="text-[10px] text-slate-400">Rãnh T chuẩn 18H8 · Ê-tô kẹp phôi nhôm 6061 phay dở dang</div>
+          <div class="ml-4 -mt-3 bg-black/95 border border-zeggo-border px-3.5 py-2 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-md">
+            <span class="text-emerald-400 font-bold">● BÀN MÁY 5 RÃNH CHỮ T & PHÔI NHÔM 6061 PHAY HỐC</span>
+            <div class="text-[10px] text-slate-400">Rãnh T 18H8 · Ê-tô thủy lực Kurt · Máng xả phoi bao quanh mặt bàn</div>
           </div>
         </div>
 
-        <!-- Pin 4: Dual THK Linear Rails & Ballscrew -->
+        <!-- Pin 4: Dual THK Linear Rails & Ground Ballscrew -->
         <div id="pin-rails" class="hotspot-point" onclick="selectComponent('rails')">
           <div class="hotspot-dot"></div>
-          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-3 py-1.5 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-sm">
-            <span class="text-zeggo-gold font-bold">● RAY TRƯỢT THK & TRỤC VÍT ME BI C3</span>
-            <div class="text-[10px] text-slate-400">2 ray song song mỗi trục · Con trượt có phốt chắn phoi · Gối đỡ BK/BF</div>
+          <div class="ml-4 -mt-3 bg-black/95 border border-zeggo-border px-3.5 py-2 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-md">
+            <span class="text-zeggo-gold font-bold">● CẶP RAY THK PROFILE & VITME BI XOẮN REN C3</span>
+            <div class="text-[10px] text-slate-400">Con trượt 4 hàng bi · Gối đỡ bi BK/BF · Khớp nối mềm chống rung</div>
           </div>
         </div>
 
-        <!-- Pin 5: Z-Axis Way Covers & Servos -->
+        <!-- Pin 5: Telescopic Stainless Way Covers & Meehanite Base -->
         <div id="pin-column" class="hotspot-point" onclick="selectComponent('column')">
           <div class="hotspot-dot"></div>
-          <div class="ml-4 -mt-3 bg-black/90 border border-zeggo-border px-3 py-1.5 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-sm">
-            <span class="text-white font-bold">● BĂNG MÁY INOX XẾP LỚP & ĐẾ ĐÚC FC-300</span>
-            <div class="text-[10px] text-slate-400">Telescopic Way Covers · 6 chân tăng chỉnh nivô · Máng vát thoát phoi</div>
+          <div class="ml-4 -mt-3 bg-black/95 border border-zeggo-border px-3.5 py-2 text-[11px] font-mono text-white whitespace-nowrap shadow-2xl backdrop-blur-md">
+            <span class="text-white font-bold">● BĂNG MÁY INOX XẾP LỚP & ĐẾ ĐÚC MEEHANITE FC-300</span>
+            <div class="text-[10px] text-slate-400">Lá thép chữ A nghiêng thoát phoi · Xích dẫn cáp Igus · 6 chân nivô ren</div>
           </div>
         </div>
 
@@ -181,34 +179,34 @@
       <div class="absolute top-4 left-4 z-20 bg-black/90 border border-zeggo-border p-4 font-mono text-xs space-y-2 pointer-events-none max-w-sm shadow-2xl backdrop-blur-md">
         <div class="flex items-center justify-between text-zeggo-primary font-bold border-b border-zeggo-border pb-1.5">
           <span class="flex items-center space-x-1.5">
-            <i data-lucide="cpu" class="w-4 h-4"></i>
+            <i data-lucide="layers" class="w-4 h-4"></i>
             <span>VMC-850 CAD DIGITAL TWIN</span>
           </span>
-          <span class="px-1.5 py-0.2 bg-zeggo-primary/20 text-zeggo-primary text-[10px] font-bold">HI-FIDELITY</span>
+          <span class="px-1.5 py-0.2 bg-zeggo-primary/20 text-zeggo-primary text-[10px] font-bold">250+ PARTS</span>
         </div>
         <div class="text-slate-400 space-y-1 text-[11px]">
-          <div>• Chi tiết lắp ráp: <span class="text-white font-semibold">120+ Bộ phận cơ khí chi tiết</span></div>
-          <div>• Trục chính: <span class="text-zeggo-primary font-semibold">BT40 Stepped Quill + Mũi dao xoắn ốc</span></div>
-          <div>• Hệ dẫn hướng: <span class="text-zeggo-gold font-semibold">Cặp ray trượt THK + Vitme bi C3 mài</span></div>
-          <div>• Bàn gá kẹp: <span class="text-emerald-400 font-semibold">5 Rãnh T + Ê-tô thủy lực + Phôi mẫu</span></div>
-          <div>• Điều khiển: <span class="text-slate-300">Chuột trái: Xoay | Phải: Kéo | Lăn: Zoom</span></div>
+          <div>• Độ chi tiết CAD: <span class="text-white font-semibold">Cơ cấu cơ khí đa tầng chính xác cao</span></div>
+          <div>• Cụm trục chính: <span class="text-zeggo-primary font-semibold">Spindle BT40 + Đài khỏa mặt 6 chíp vàng</span></div>
+          <div>• Đài dao ATC: <span class="text-zeggo-cyan font-semibold">24 Ổ dao + Đầu dò quang học Ruby</span></div>
+          <div>• Dẫn hướng trục: <span class="text-zeggo-gold font-semibold">Ray THK rãnh bi + Vitme ren xoắn C3</span></div>
+          <div>• Thao tác 3D: <span class="text-slate-300">Chuột trái: Xoay | Phải: Kéo | Lăn: Zoom</span></div>
         </div>
       </div>
 
       <!-- HUD Top Right Component Inspector Box -->
       <div id="inspector-card" class="absolute top-4 right-4 z-20 bg-black/90 border border-zeggo-border p-4 font-mono text-xs space-y-2.5 max-w-sm hidden sm:block shadow-2xl backdrop-blur-md">
         <div class="flex items-center justify-between border-b border-zeggo-border pb-1.5">
-          <span class="text-xs font-bold uppercase text-white" id="ins-title">THÔNG SỐ CỤM CHI TIẾT</span>
-          <span class="text-[10px] text-zeggo-cyan" id="ins-id">CAD: VMC-SPN-40</span>
+          <span class="text-xs font-bold uppercase text-white" id="ins-title">THÔNG SỐ CỤM CƠ KHÍ CHI TIẾT</span>
+          <span class="text-[10px] text-zeggo-cyan" id="ins-id">ISO CAD: VMC-SPN-BT40</span>
         </div>
         <div class="text-slate-300 text-[11px] leading-relaxed space-y-1" id="ins-desc">
-          Nhấp vào bất kỳ điểm ghim hoặc chi tiết nào để xem thông số kiểm định, hãng sản xuất và dung sai lắp ghép.
+          Nhấp vào bất kỳ điểm ghim hoặc chi tiết nào để xem thông số kiểm định, dung sai lắp ghép và tiêu chuẩn vật liệu chế tạo.
         </div>
-        <div class="grid grid-cols-2 gap-2 text-[10px] bg-zeggo-panel p-2 border border-zeggo-border text-slate-400" id="ins-specs">
-          <div>Vật liệu: <span class="text-white">Thép hợp kim SCM415</span></div>
-          <div>Độ cứng: <span class="text-white">HRC 58 - 62</span></div>
-          <div>Dung sai: <span class="text-zeggo-primary">±0.003 mm</span></div>
-          <div>Bôi trơn: <span class="text-white">Mỡ Kluber Isoflex</span></div>
+        <div class="grid grid-cols-2 gap-2 text-[10px] bg-zeggo-panel p-2.5 border border-zeggo-border text-slate-400" id="ins-specs">
+          <div>Vật liệu thân: <span class="text-white">Thép SCM415 thấm C</span></div>
+          <div>Độ cứng bề mặt: <span class="text-white">HRC 60 ± 2</span></div>
+          <div>Dung sai kiểm định: <span class="text-zeggo-primary">±0.0025 mm</span></div>
+          <div>Bôi trơn trục: <span class="text-white">Mỡ Kluber NBU 15</span></div>
         </div>
       </div>
 
@@ -220,7 +218,7 @@
           <div class="flex items-center justify-between text-xs font-mono">
             <span class="flex items-center space-x-1.5 text-white font-semibold">
               <i data-lucide="layers" class="w-4 h-4 text-zeggo-primary"></i>
-              <span>MỨC ĐỘ PHÂN RÃ CHI TIẾT (EXPLODED ASSEMBLY):</span>
+              <span>MỨC ĐỘ PHÂN RÃ CỤM LẮP RÁP (EXPLODED ASSEMBLY):</span>
             </span>
             <span id="slider-label" class="text-slate-300 font-bold text-sm">0% (LẮP RÁP NGUYÊN KHỐI)</span>
           </div>
@@ -247,7 +245,7 @@
               Blueprint Blue
             </button>
             <button onclick="setRenderMode('solid-pbr')" id="btn-solid" class="px-3 py-1 rounded-full text-slate-400 hover:text-white">
-              Realistic Metallic PBR
+              Metallic CAD Colors
             </button>
           </div>
 
@@ -257,7 +255,7 @@
               Góc ISO
             </button>
             <button onclick="setCameraView('spindle')" class="px-2.5 py-1 rounded-full bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-slate-300 hover:text-white text-[11px]">
-              Cận Trục Chính
+              Cận Trục Chính & Dao
             </button>
             <button onclick="setCameraView('table')" class="px-2.5 py-1 rounded-full bg-zeggo-panel hover:bg-zeggo-surface border border-zeggo-border text-slate-300 hover:text-white text-[11px]">
               Bàn Máy & Ê-tô
@@ -278,48 +276,75 @@
     <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
       
       <div class="space-y-3 border-b border-zeggo-border pb-6">
-        <div class="text-xs font-mono text-zeggo-primary tracking-widest font-semibold uppercase">HƯỚNG DẪN KỸ THUẬT & TÀI LIỆU CAD</div>
+        <div class="text-xs font-mono text-zeggo-primary tracking-widest font-semibold uppercase">TÀI LIỆU KỸ THUẬT & QUY TRÌNH CHUYỂN ĐỔI CAD</div>
         <h2 class="font-heading text-2xl sm:text-3xl font-extrabold text-white">
-          Nghiên Cứu Chi Tiết File 3D CAD Máy CNC & Cách Triển Khai Vào Spline.design
+          Kiến Trúc Cơ Khí Máy CNC & Quy Trình Chuyển Đổi Sang Spline.design
         </h2>
         <p class="text-sm text-slate-400 leading-relaxed">
-          Phân tích sự khác biệt giữa hình khối cơ bản (Primitive Boxes) và mô hình cơ khí chính xác cao (Precision Mechanical Assembly).
+          Phân tích chi tiết từng cụm chi tiết cơ khí bên trong trung tâm gia công đứng VMC-850 và cách tối ưu hóa đa giác polygon khi đưa vào WebGL.
         </p>
       </div>
 
-      <!-- Comparison Breakdown: Why Primitive Boxes Fail vs Hi-Fidelity CAD -->
+      <!-- 4 Deep CAD Modules Breakdown -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 font-mono text-xs">
         
-        <div class="p-6 bg-red-950/20 border border-red-900/50 space-y-3">
-          <div class="text-red-400 font-bold text-sm flex items-center space-x-2">
-            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
-            <span>Hình Khối Đơn Giản (Primitive Geometry)</span>
+        <div class="p-6 bg-zeggo-panel border border-zeggo-border space-y-4">
+          <div class="text-zeggo-primary font-bold text-sm flex items-center space-x-2">
+            <i data-lucide="crosshair" class="w-4 h-4"></i>
+            <span>1. Cụm Cắt Gọt: Đài Dao Khỏa Mặt & Đầu Dò Renishaw</span>
           </div>
           <p class="text-slate-300 font-sans text-xs leading-relaxed">
-            Chỉ sử dụng các khối lập phương (BoxGeometry) hoặc hình trụ trơn (CylinderGeometry). Không thể hiện được:
+            Các dòng máy CNC chuyên nghiệp không bao giờ chỉ có 1 mũi dao đơn giản. Trong mô hình nâng cấp này:
           </p>
-          <ul class="text-slate-400 space-y-1 text-[11px]">
-            <li>❌ Bàn máy phẳng lì, không có rãnh chữ T kẹp phôi.</li>
-            <li>❌ Trục chính trơn tuột, không có me cắt xoắn ốc dao phay hay chuôi côn BT40.</li>
-            <li>❌ Đài dao chỉ là 1 đĩa tròn, không có các chấu kẹp dao và dao cụ.</li>
-            <li>❌ Thiếu hoàn toàn cặp ray trượt tuyến tính THK và trục vít me bi mài.</li>
+          <ul class="text-slate-400 space-y-1.5 text-[11px]">
+            <li>• **Đài dao phay khỏa mặt (Face Mill Ø63mm):** 6 mảnh chíp hợp kim vuông phủ PVD TiN màu vàng đồng có góc vát nghiêng $45^\circ$.</li>
+            <li>• **Vòng xịt nước đa điểm (Coolant Ring):** 6 vòi phun áp lực cao bố trí quanh miệng trục chính tạo màn nước giải nhiệt tập trung.</li>
+            <li>• **Đầu dò phôi quang học (Renishaw 3D Touch Probe):** Có kim đo bằng hợp kim và đầu dò viên bi ruby đỏ dùng để rà gốc tọa độ phôi $G54$.</li>
           </ul>
         </div>
 
-        <div class="p-6 bg-emerald-950/20 border border-emerald-900/50 space-y-3">
-          <div class="text-emerald-400 font-bold text-sm flex items-center space-x-2">
-            <i data-lucide="check-circle" class="w-4 h-4"></i>
-            <span>Cụm Cơ Khí Hi-Fidelity (Bản Cập Nhật Hiện Tại)</span>
+        <div class="p-6 bg-zeggo-panel border border-zeggo-border space-y-4">
+          <div class="text-zeggo-cyan font-bold text-sm flex items-center space-x-2">
+            <i data-lucide="sliders" class="w-4 h-4"></i>
+            <span>2. Hệ Dẫn Hướng THK & Vitme Bi Mài C3</span>
           </div>
           <p class="text-slate-300 font-sans text-xs leading-relaxed">
-            Xây dựng đầy đủ 120+ chi tiết cơ khí tỉ mỉ chuẩn bản vẽ kỹ thuật:
+            Khác hoàn toàn với các thanh phẳng trơn, hệ thống dẫn hướng cơ khí được dựng theo đúng tiêu chuẩn catalogue của hãng THK (Nhật Bản):
           </p>
-          <ul class="text-slate-300 space-y-1 text-[11px]">
-            <li>✅ Bàn máy có 5 rãnh chữ T chuẩn 18H8 + rãnh thu nước tưới nguội bao quanh.</li>
-            <li>✅ Trục chính BT40 có ống lót tản nhiệt, collet ER32 và dao phay 4 me xoắn ốc.</li>
-            <li>✅ Đài dao ATC 24 vị trí có chấu kẹp U và tay thay dao kép xoay 180°.</li>
-            <li>✅ Hệ dẫn hướng kép ray trượt THK + trục vitme bi có gối đỡ BK/BF và động cơ Servo.</li>
-            <li>✅ Băng máy inox dạng lá xếp chevron (Telescopic Way Covers).</li>
+          <ul class="text-slate-400 space-y-1.5 text-[11px]">
+            <li>• **Ray trượt có rãnh bi chữ V (Profile Rail):** Bề mặt có hàng lỗ bắt bulông lục giác chìm cách đều nhau $60\text{mm}$.</li>
+            <li>• **Con trượt chịu tải 4 hướng:** Có nắp chắn phoi màu đỏ, tấm thép bọc ngoài và vú bơm mỡ bôi trơn lục giác.</li>
+            <li>• **Trục vitme bi xoắn ren:** Thân trục ren xoắn ốc bước $10\text{mm}$, đai ốc bi đôi có ống hồi bi uốn cong bên ngoài.</li>
+          </ul>
+        </div>
+
+        <div class="p-6 bg-zeggo-panel border border-zeggo-border space-y-4">
+          <div class="text-emerald-400 font-bold text-sm flex items-center space-x-2">
+            <i data-lucide="grid" class="w-4 h-4"></i>
+            <span>3. Bàn Máy 5 Rãnh Chữ T & Ê-Tô Kẹp Thủy Lực</span>
+          </div>
+          <p class="text-slate-300 font-sans text-xs leading-relaxed">
+            Mặt bàn làm việc được tái hiện như một bản vẽ gia công thực tế:
+          </p>
+          <ul class="text-slate-400 space-y-1.5 text-[11px]">
+            <li>• **5 Rãnh T chuẩn 18H8:** Phay chìm có chiều rộng miệng $18\text{mm}$, khoang đáy rộng $30\text{mm}$ để gài đai ốc T-nut.</li>
+            <li>• **Ê-tô kẹp phôi chính xác Kurt-Type:** Gồm má kẹp động, má kẹp tĩnh có rãnh khía caro chống trượt phôi khi phay tải nặng.</li>
+            <li>• **Phôi chi tiết máy:** Khối phôi hợp kim nhôm 6061 đang phay dở một hốc tròn và đường vát mép counterbore.</li>
+          </ul>
+        </div>
+
+        <div class="p-6 bg-zeggo-panel border border-zeggo-border space-y-4">
+          <div class="text-zeggo-gold font-bold text-sm flex items-center space-x-2">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+            <span>4. Băng Máy Inox Xếp Lớp (Telescopic Way Covers)</span>
+          </div>
+          <p class="text-slate-300 font-sans text-xs leading-relaxed">
+            Bảo vệ ray trượt và trục vít me là nhiệm vụ then chốt trong máy CNC:
+          </p>
+          <ul class="text-slate-400 space-y-1.5 text-[11px]">
+            <li>• **Lá thép inox hình chữ A (Chevron Design):** 4 tầng lá kim loại vát dốc sang hai bên để phoi kim loại rơi xuống máng thu hồi.</li>
+            <li>• **Xích dẫn cáp Igus (Cable Carrier):** Tái hiện chuỗi mắt xích nhựa đan lồng chứa đường dây điện servo và ống dầu.</li>
+            <li>• **Thân đế Meehanite FC-300:** Đúc gân gia cường tổ ong bên dưới, máng nghiêng thu phoi dẫn ra thùng lọc phôi.</li>
           </ul>
         </div>
 
@@ -396,20 +421,24 @@
     controls.maxDistance = 50;
     controls.minDistance = 3;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.6;
-    controls.target.set(0, 1.5, 0);
+    controls.autoRotateSpeed = 0.5;
+    controls.target.set(0, 1.2, 0);
 
     // 2. Lighting Setup
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.0);
+    const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.1);
     dirLight1.position.set(15, 25, 20);
     scene.add(dirLight1);
 
     const dirLight2 = new THREE.DirectionalLight(0x38bdf8, 0.5);
     dirLight2.position.set(-15, -10, -15);
     scene.add(dirLight2);
+
+    const dirLight3 = new THREE.DirectionalLight(0xff5e2b, 0.35);
+    dirLight3.position.set(0, -10, 15);
+    scene.add(dirLight3);
 
     // Grid Floor for CAD Blueprint Look
     const grid = new THREE.GridHelper(36, 36, 0x1e293b, 0x090d14);
@@ -421,12 +450,12 @@
       orange: 0xff5e2b,
       blue: 0x38bdf8,
       steel: 0x222a38,
-      brightSteel: 0x94a3b8,
-      castIron: 0x161b24,
+      brightSteel: 0xc8d1dc,
+      castIron: 0x141820,
       brassGold: 0xf59e0b,
+      rubyRed: 0xef4444,
       fanucYellow: 0xeab308,
-      servoBlack: 0x0f172a,
-      railSteel: 0xd1d5db,
+      carriageRed: 0xd97706,
     };
 
     let currentMode = 'wireframe-orange';
@@ -437,38 +466,46 @@
           body: new THREE.MeshBasicMaterial({ color: 0x03060a, transparent: true, opacity: 0.85 }),
           edge: new THREE.LineBasicMaterial({ color: COLORS.orange, linewidth: 1.5 }),
           accentEdge: new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 2 }),
-          metal: new THREE.MeshBasicMaterial({ color: 0x080f18, transparent: true, opacity: 0.9 }),
-          brass: new THREE.LineBasicMaterial({ color: COLORS.brassGold }),
+          gold: new THREE.MeshBasicMaterial({ color: 0x140e04 }),
+          goldEdge: new THREE.LineBasicMaterial({ color: COLORS.brassGold, linewidth: 2 }),
+          ruby: new THREE.MeshBasicMaterial({ color: 0x250606 }),
+          rubyEdge: new THREE.LineBasicMaterial({ color: COLORS.rubyRed, linewidth: 2 }),
+          isSolid: false
         };
       } else if (mode === 'wireframe-blue') {
         return {
           body: new THREE.MeshBasicMaterial({ color: 0x02050b, transparent: true, opacity: 0.85 }),
           edge: new THREE.LineBasicMaterial({ color: COLORS.blue, linewidth: 1.5 }),
           accentEdge: new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 2 }),
-          metal: new THREE.MeshBasicMaterial({ color: 0x040e1a, transparent: true, opacity: 0.9 }),
-          brass: new THREE.LineBasicMaterial({ color: 0x38bdf8 }),
+          gold: new THREE.MeshBasicMaterial({ color: 0x02050b }),
+          goldEdge: new THREE.LineBasicMaterial({ color: 0x38bdf8, linewidth: 2 }),
+          ruby: new THREE.MeshBasicMaterial({ color: 0x02050b }),
+          rubyEdge: new THREE.LineBasicMaterial({ color: 0x7dd3fc, linewidth: 2 }),
+          isSolid: false
         };
       } else {
-        // Solid PBR
+        // Metallic CAD Colors
         return {
-          body: new THREE.MeshStandardMaterial({ color: COLORS.castIron, roughness: 0.6, metalness: 0.5 }),
-          edge: new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.2 }),
+          body: new THREE.MeshStandardMaterial({ color: COLORS.castIron, roughness: 0.5, metalness: 0.6 }),
+          edge: new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.25 }),
           accentEdge: new THREE.LineBasicMaterial({ color: COLORS.orange, linewidth: 1 }),
-          metal: new THREE.MeshStandardMaterial({ color: COLORS.brightSteel, roughness: 0.25, metalness: 0.9 }),
-          brass: new THREE.MeshStandardMaterial({ color: COLORS.brassGold, roughness: 0.3, metalness: 0.8 }),
+          gold: new THREE.MeshStandardMaterial({ color: COLORS.brassGold, roughness: 0.25, metalness: 0.9 }),
+          goldEdge: new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.4 }),
+          ruby: new THREE.MeshStandardMaterial({ color: COLORS.rubyRed, roughness: 0.1, metalness: 0.1 }),
+          rubyEdge: new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 }),
+          isSolid: true
         };
       }
     }
 
     let mats = getMaterials('wireframe-orange');
 
-    // 4. Procedural CAD CNC Machine Hierarchy with 120+ Mechanical Parts
+    // 4. Procedural CAD CNC Machine Hierarchy with 250+ Mechanical Parts
     const cncMachine = new THREE.Group();
     scene.add(cncMachine);
 
     const explodedParts = [];
 
-    // Helper to register an exploded group
     function registerExplodedGroup(name, group, defaultPos, explodeDir) {
       group.position.copy(defaultPos);
       cncMachine.add(group);
@@ -482,209 +519,326 @@
     }
 
     // Helper to build a styled sub-part with edges
-    function addSubPart(parent, geometry, customMat, isAccent = false) {
-      const meshMat = (customMat && customMat.mesh) ? customMat.mesh : mats.body;
-      const edgeMat = isAccent ? mats.accentEdge : ((customMat && customMat.edge) ? customMat.edge : mats.edge);
+    function addPart(parent, geometry, type = 'body') {
+      let meshMat = mats.body;
+      let edgeMat = mats.edge;
+
+      if (type === 'gold') {
+        meshMat = mats.gold;
+        edgeMat = mats.goldEdge;
+      } else if (type === 'ruby') {
+        meshMat = mats.ruby;
+        edgeMat = mats.rubyEdge;
+      } else if (type === 'accent') {
+        edgeMat = mats.accentEdge;
+      }
 
       const mesh = new THREE.Mesh(geometry, meshMat);
       const edges = new THREE.EdgesGeometry(geometry, 25);
       const line = new THREE.LineSegments(edges, edgeMat);
 
       mesh.userData.line = line;
+      mesh.userData.type = type;
       parent.add(mesh);
       parent.add(line);
       return mesh;
     }
 
     // ==========================================
-    // GROUP 1: MACHINE BASE & CHIP SLOPES (Đế đúc & Máng phoi)
+    // GROUP 1: BASE CASTING, LEVELING & CHIP PAN
     // ==========================================
     const baseGroup = new THREE.Group();
-    // 1.1 Main Cast Bed with Stepped Slopes
-    addSubPart(baseGroup, new THREE.BoxGeometry(8, 1.4, 9), null, false).position.set(0, -3.1, 0);
-    addSubPart(baseGroup, new THREE.BoxGeometry(7, 0.8, 8), null, false).position.set(0, -2.1, 0.2);
-    // 1.2 Sloped Chip Trough
-    const chipPanGeo = new THREE.CylinderGeometry(3.6, 2.5, 0.6, 4);
-    chipPanGeo.rotateY(Math.PI / 4);
-    addSubPart(baseGroup, chipPanGeo, null, false).position.set(0, -1.8, 1.2);
-    // 1.3 6 Leveling Foundation Pads (Chân tăng chỉnh nivô)
-    const padPositions = [
-      [-3.6, -3.7, 4], [3.6, -3.7, 4],
-      [-3.8, -3.7, 0], [3.8, -3.7, 0],
-      [-3.6, -3.7, -4], [3.6, -3.7, -4]
+    // 1.1 Heavy Meehanite Base with Stepped Castings
+    addPart(baseGroup, new THREE.BoxGeometry(8.4, 1.4, 9.4)).position.set(0, -3.1, 0);
+    addPart(baseGroup, new THREE.BoxGeometry(7.2, 0.9, 8.2)).position.set(0, -2.1, 0.2);
+    // 1.2 Chip drainage chute slopes
+    const chuteGeo = new THREE.CylinderGeometry(3.6, 2.4, 0.7, 4);
+    chuteGeo.rotateY(Math.PI / 4);
+    addPart(baseGroup, chuteGeo).position.set(0, -1.75, 1.2);
+    // 1.3 6 Leveling Foundation Pads with Threaded Jackscrews
+    const pads = [
+      [-3.8, -3.7, 4.2], [3.8, -3.7, 4.2],
+      [-4.0, -3.7, 0],   [4.0, -3.7, 0],
+      [-3.8, -3.7, -4.2], [3.8, -3.7, -4.2]
     ];
-    padPositions.forEach(pos => {
-      addSubPart(baseGroup, new THREE.CylinderGeometry(0.5, 0.5, 0.2, 16), null, true).position.set(...pos);
-      addSubPart(baseGroup, new THREE.CylinderGeometry(0.18, 0.18, 0.6, 12), null, false).position.set(pos[0], pos[1] + 0.3, pos[2]);
+    pads.forEach(p => {
+      addPart(baseGroup, new THREE.CylinderGeometry(0.55, 0.55, 0.2, 16), 'accent').position.set(...p);
+      addPart(baseGroup, new THREE.CylinderGeometry(0.2, 0.2, 0.65, 12)).position.set(p[0], p[1] + 0.35, p[2]);
     });
-    // 1.4 Y-Axis Dual Linear Guide Rails on Base (2 Ray THK trục Y)
-    [-1.6, 1.6].forEach(x => {
-      const railGeo = new THREE.BoxGeometry(0.24, 0.22, 6.5);
-      addSubPart(baseGroup, railGeo, null, true).position.set(x, -1.6, 0);
+    // 1.4 Y-Axis Dual THK Profile Linear Rails on Base
+    [-1.7, 1.7].forEach(x => {
+      // Rail base profile
+      addPart(baseGroup, new THREE.BoxGeometry(0.28, 0.24, 7.2), 'accent').position.set(x, -1.55, 0);
+      // Rail mounting counterbore bolt holes along the rail
+      for (let z = -3.2; z <= 3.2; z += 0.8) {
+        addPart(baseGroup, new THREE.CylinderGeometry(0.06, 0.06, 0.26, 8)).position.set(x, -1.54, z);
+      }
     });
-    // 1.5 Y-Axis Ground Ballscrew (Trục vitme bi trục Y)
-    const yScrew = new THREE.CylinderGeometry(0.12, 0.12, 6.2, 16);
+    // 1.5 Y-Axis Ground Precision Ballscrew & End Bearing Mounts
+    const yScrew = new THREE.CylinderGeometry(0.14, 0.14, 7.0, 24);
     yScrew.rotateX(Math.PI / 2);
-    addSubPart(baseGroup, yScrew, null, false).position.set(0, -1.6, 0);
+    addPart(baseGroup, yScrew).position.set(0, -1.55, 0);
+    // Ballscrew spiral thread ridges
+    for (let z = -3.0; z <= 3.0; z += 0.3) {
+      const threadRing = new THREE.TorusGeometry(0.145, 0.015, 6, 16);
+      threadRing.rotateX(Math.PI / 2);
+      addPart(baseGroup, threadRing, 'accent').position.set(0, -1.55, z);
+    }
+    // Fixed End Bearing Block (BK Gối đỡ bi)
+    addPart(baseGroup, new THREE.BoxGeometry(0.8, 0.6, 0.6), 'accent').position.set(0, -1.55, -3.4);
+    // Supported End (BF)
+    addPart(baseGroup, new THREE.BoxGeometry(0.7, 0.5, 0.5), 'accent').position.set(0, -1.55, 3.4);
 
-    registerExplodedGroup('Base', baseGroup, new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, -1.5, 0));
+    registerExplodedGroup('Base', baseGroup, new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, -1.6, 0));
 
     // ==========================================
-    // GROUP 2: Y-AXIS CROSS SADDLE & X-RAILS (Bàn trượt chữ thập & Ray X)
+    // GROUP 2: Y-AXIS SADDLE & X-AXIS LINEAR MOTION
     // ==========================================
     const saddleGroup = new THREE.Group();
-    // 2.1 Heavy Cross Saddle Casting
-    addSubPart(saddleGroup, new THREE.BoxGeometry(6.5, 0.7, 5.2), null, false).position.set(0, 0, 0);
-    // 2.2 4 Linear Bearing Blocks under Saddle (Con trượt THK trục Y)
-    [[-1.6, -0.45, 1.5], [-1.6, -0.45, -1.5], [1.6, -0.45, 1.5], [1.6, -0.45, -1.5]].forEach(pos => {
-      addSubPart(saddleGroup, new THREE.BoxGeometry(0.45, 0.3, 0.7), null, true).position.set(...pos);
+    // 2.1 Cross Saddle Casting Body
+    addPart(saddleGroup, new THREE.BoxGeometry(7.0, 0.75, 5.6)).position.set(0, 0, 0);
+    // 2.2 4 THK Linear Bearing Carriages under Saddle
+    [[-1.7, -0.48, 1.8], [-1.7, -0.48, -1.8], [1.7, -0.48, 1.8], [1.7, -0.48, -1.8]].forEach(pos => {
+      // Carriage block
+      addPart(saddleGroup, new THREE.BoxGeometry(0.5, 0.32, 0.8), 'accent').position.set(...pos);
+      // Grease zerk fitting
+      addPart(saddleGroup, new THREE.CylinderGeometry(0.04, 0.04, 0.15, 6), 'gold').position.set(pos[0], pos[1], pos[2] + 0.45);
     });
-    // 2.3 X-Axis Dual Linear Rails on Saddle Top (2 Ray THK trục X)
-    [-1.5, 1.5].forEach(z => {
-      const xRail = new THREE.BoxGeometry(7.2, 0.22, 0.24);
-      addSubPart(saddleGroup, xRail, null, true).position.set(0, 0.45, z);
+    // 2.3 X-Axis Dual Linear Rails on Top of Saddle
+    [-1.6, 1.6].forEach(z => {
+      addPart(saddleGroup, new THREE.BoxGeometry(7.6, 0.24, 0.28), 'accent').position.set(0, 0.48, z);
+      // Bolt holes along X rail
+      for (let x = -3.4; x <= 3.4; x += 0.8) {
+        addPart(saddleGroup, new THREE.CylinderGeometry(0.06, 0.06, 0.26, 8)).position.set(x, 0.49, z);
+      }
     });
-    // 2.4 X-Axis Ground Ballscrew & Nut (Trục vitme bi trục X)
-    const xScrew = new THREE.CylinderGeometry(0.12, 0.12, 7.0, 16);
+    // 2.4 X-Axis Ground Ballscrew & Nut Assembly
+    const xScrew = new THREE.CylinderGeometry(0.14, 0.14, 7.4, 24);
     xScrew.rotateZ(Math.PI / 2);
-    addSubPart(saddleGroup, xScrew, null, false).position.set(0, 0.45, 0);
-    // 2.5 X-Axis AC Servo Motor on Saddle Right
-    const xServo = new THREE.BoxGeometry(0.8, 0.8, 1.2);
-    addSubPart(saddleGroup, xServo, null, true).position.set(4.0, 0.45, 0);
+    addPart(saddleGroup, xScrew).position.set(0, 0.48, 0);
+    for (let x = -3.2; x <= 3.2; x += 0.3) {
+      const xThread = new THREE.TorusGeometry(0.145, 0.015, 6, 16);
+      xThread.rotateY(Math.PI / 2);
+      addPart(saddleGroup, xThread, 'accent').position.set(x, 0.48, 0);
+    }
+    // Ballscrew Flange Nut on Saddle
+    addPart(saddleGroup, new THREE.CylinderGeometry(0.3, 0.3, 0.6, 16)).position.set(0, 0.48, 0);
+    // 2.5 Right-Mounted X-Axis Fanuc AC Servo Motor
+    addPart(saddleGroup, new THREE.BoxGeometry(0.9, 0.9, 1.3), 'accent').position.set(4.2, 0.48, 0);
+    addPart(saddleGroup, new THREE.CylinderGeometry(0.25, 0.25, 0.4, 12)).position.set(3.5, 0.48, 0); // Flexible coupling
 
-    registerExplodedGroup('Saddle', saddleGroup, new THREE.Vector3(0, -1.2, 0.2), new THREE.Vector3(0, 0, 3.5));
+    registerExplodedGroup('Saddle', saddleGroup, new THREE.Vector3(0, -1.2, 0.2), new THREE.Vector3(0, 0, 3.8));
 
     // ==========================================
-    // GROUP 3: T-SLOT WORKTABLE & CNC VISE (Bàn máy kẹp phôi & Ê-tô thủy lực)
+    // GROUP 3: T-SLOT TABLE, VISE & MACHINED WORKPIECE
     // ==========================================
     const tableGroup = new THREE.Group();
-    // 3.1 Ground Table Surface with Perimeter Trough
-    addSubPart(tableGroup, new THREE.BoxGeometry(7.6, 0.65, 3.0), null, false).position.set(0, 0, 0);
-    // 3.2 5 Longitudinal T-Slots (5 Rãnh chữ T phay chìm trên bàn)
-    [-1.0, -0.5, 0, 0.5, 1.0].forEach(z => {
-      const slotGeo = new THREE.BoxGeometry(7.6, 0.08, 0.12);
-      addSubPart(tableGroup, slotGeo, null, true).position.set(0, 0.34, z);
+    // 3.1 Main Ground Worktable Plate
+    addPart(tableGroup, new THREE.BoxGeometry(8.0, 0.7, 3.2)).position.set(0, 0, 0);
+    // 3.2 5 Longitudinal Inverted-T Slots (5 Rãnh T chuẩn)
+    [-1.1, -0.55, 0, 0.55, 1.1].forEach(z => {
+      // Slot surface opening
+      addPart(tableGroup, new THREE.BoxGeometry(8.0, 0.08, 0.14), 'accent').position.set(0, 0.36, z);
+      // T-Slot lower cavity
+      addPart(tableGroup, new THREE.BoxGeometry(8.0, 0.12, 0.28)).position.set(0, 0.26, z);
     });
-    // 3.3 4 Linear Bearing Blocks under Table (Con trượt ôm ray X)
-    [[-2.2, -0.45, -1.5], [-2.2, -0.45, 1.5], [2.2, -0.45, -1.5], [2.2, -0.45, 1.5]].forEach(pos => {
-      addSubPart(tableGroup, new THREE.BoxGeometry(0.7, 0.3, 0.45), null, true).position.set(...pos);
+    // 3.3 Perimeter Coolant Gutter around Table Edge
+    addPart(tableGroup, new THREE.BoxGeometry(8.05, 0.06, 0.12)).position.set(0, 0.36, 1.5);
+    addPart(tableGroup, new THREE.BoxGeometry(8.05, 0.06, 0.12)).position.set(0, 0.36, -1.5);
+    // 3.4 4 THK Carriages under Table
+    [[-2.4, -0.48, -1.6], [-2.4, -0.48, 1.6], [2.4, -0.48, -1.6], [2.4, -0.48, 1.6]].forEach(pos => {
+      addPart(tableGroup, new THREE.BoxGeometry(0.8, 0.32, 0.5), 'accent').position.set(...pos);
     });
-    // 3.4 CNC Precision Machine Vise Assembly (Ê-tô kẹp cơ khí)
-    const viseBase = new THREE.BoxGeometry(1.6, 0.4, 2.2);
-    addSubPart(tableGroup, viseBase, null, true).position.set(0, 0.5, 0);
-    // Vise Stationary Jaw
-    addSubPart(tableGroup, new THREE.BoxGeometry(1.6, 0.45, 0.25), null, false).position.set(0, 0.85, -0.7);
-    // Vise Movable Jaw
-    addSubPart(tableGroup, new THREE.BoxGeometry(1.6, 0.45, 0.25), null, false).position.set(0, 0.85, 0.3);
-    // Clamped Workpiece (Phôi nhôm 6061 đang phay dở dang)
-    const workpiece = new THREE.BoxGeometry(1.4, 0.5, 0.75);
-    addSubPart(tableGroup, workpiece, null, true).position.set(0, 0.9, -0.2);
+    // 3.5 Kurt Precision CNC AngleLock Vise Assembly
+    // Vise base body with ground keyway
+    addPart(tableGroup, new THREE.BoxGeometry(1.8, 0.45, 2.4), 'accent').position.set(0, 0.56, 0);
+    // Stationary Jaw
+    addPart(tableGroup, new THREE.BoxGeometry(1.8, 0.5, 0.3)).position.set(0, 0.95, -0.8);
+    // Movable Jaw with drive screw
+    addPart(tableGroup, new THREE.BoxGeometry(1.8, 0.5, 0.3)).position.set(0, 0.95, 0.35);
+    // Vise Lead Screw Hex Socket
+    const viseHex = new THREE.CylinderGeometry(0.14, 0.14, 0.4, 6);
+    viseHex.rotateX(Math.PI / 2);
+    addPart(tableGroup, viseHex, 'gold').position.set(0, 0.7, 1.3);
+    // 3.6 Machined Aerospace Aluminum Workpiece (Phôi nhôm phay chi tiết)
+    const workBlock = new THREE.BoxGeometry(1.5, 0.55, 0.85);
+    addPart(tableGroup, workBlock, 'accent').position.set(0, 1.0, -0.22);
+    // Milled circular pocket inside workpiece
+    const milledPocket = new THREE.CylinderGeometry(0.28, 0.28, 0.2, 16);
+    addPart(tableGroup, milledPocket).position.set(0, 1.2, -0.22);
+    // Counterbore bolt holes
+    [-0.45, 0.45].forEach(x => {
+      addPart(tableGroup, new THREE.CylinderGeometry(0.08, 0.08, 0.3, 12)).position.set(x, 1.15, -0.22);
+    });
 
-    registerExplodedGroup('Table', tableGroup, new THREE.Vector3(0, -0.4, 0.2), new THREE.Vector3(4.5, 0, 1.5));
+    registerExplodedGroup('Table', tableGroup, new THREE.Vector3(0, -0.4, 0.2), new THREE.Vector3(5.0, 0, 1.8));
 
     // ==========================================
-    // GROUP 4: Z-COLUMN, WAY COVERS & SERVOS (Cột đứng Z & Băng máy)
+    // GROUP 4: Z-COLUMN, ACCORDION WAY COVERS & SERVOS
     // ==========================================
     const colGroup = new THREE.Group();
-    // 4.1 Heavy Pyramidal Tapered Column with Ribs (Thân cột Z hình thang đúc)
-    const colGeo = new THREE.BoxGeometry(4.8, 7.5, 3.4);
-    addSubPart(colGroup, colGeo, null, false).position.set(0, 3.4, -2.4);
-    // 4.2 Z-Axis Dual Linear Guide Rails (2 Ray THK dọc trên cột Z)
-    [-1.2, 1.2].forEach(x => {
-      const zRail = new THREE.BoxGeometry(0.24, 6.8, 0.22);
-      addSubPart(colGroup, zRail, null, true).position.set(x, 3.4, -0.6);
+    // 4.1 Pyramidal Ribbed Column Body
+    addPart(colGroup, new THREE.BoxGeometry(5.2, 8.0, 3.6)).position.set(0, 3.5, -2.6);
+    // Triangular Stiffening Flank Ribs on Column Sides
+    [-2.6, 2.6].forEach(x => {
+      const ribGeo = new THREE.BoxGeometry(0.25, 4.5, 1.8);
+      addPart(colGroup, ribGeo).position.set(x, 2.2, -1.8);
     });
-    // 4.3 Z-Axis Ground Ballscrew (Trục vitme bi dọc Z)
-    const zScrew = new THREE.CylinderGeometry(0.12, 0.12, 6.8, 16);
-    addSubPart(colGroup, zScrew, null, false).position.set(0, 3.4, -0.6);
-    // 4.4 Top Z-Axis AC Servo Motor with Brake
-    addSubPart(colGroup, new THREE.BoxGeometry(1.0, 1.4, 1.0), null, true).position.set(0, 7.6, -0.6);
-    // 4.5 Dual Pneumatic Counterbalance Cylinders (2 Xi lanh khí nén cân bằng)
-    [-2.0, 2.0].forEach(x => {
-      addSubPart(colGroup, new THREE.CylinderGeometry(0.2, 0.2, 5.0, 16), null, false).position.set(x, 3.5, -1.0);
-      addSubPart(colGroup, new THREE.CylinderGeometry(0.08, 0.08, 4.0, 12), null, true).position.set(x, 1.5, -1.0);
+    // 4.2 Z-Axis Dual THK Linear Rails on Column Front
+    [-1.3, 1.3].forEach(x => {
+      addPart(colGroup, new THREE.BoxGeometry(0.26, 7.4, 0.24), 'accent').position.set(x, 3.5, -0.7);
+      for (let y = 0.2; y <= 6.8; y += 0.8) {
+        addPart(colGroup, new THREE.CylinderGeometry(0.06, 0.06, 0.26, 8)).position.set(x, y, -0.69);
+      }
     });
-    // 4.6 Telescopic Stainless Steel Way Covers (Băng máy inox xếp lớp 4 tầng)
-    [0.9, 2.1, 3.3, 4.5].forEach((y, i) => {
-      const coverGeo = new THREE.BoxGeometry(2.8 + i * 0.15, 1.2, 0.15);
-      addSubPart(colGroup, coverGeo, null, true).position.set(0, y, -0.4 - i * 0.05);
+    // 4.3 Z-Axis Ground Precision Ballscrew & End Bearing Mounts
+    const zScrew = new THREE.CylinderGeometry(0.14, 0.14, 7.4, 24);
+    addPart(colGroup, zScrew).position.set(0, 3.5, -0.7);
+    for (let y = 0.2; y <= 6.8; y += 0.3) {
+      const zThread = new THREE.TorusGeometry(0.145, 0.015, 6, 16);
+      addPart(colGroup, zThread, 'accent').position.set(0, y, -0.7);
+    }
+    // 4.4 Top Z-Axis AC Servo Motor with Fail-Safe Brake
+    addPart(colGroup, new THREE.BoxGeometry(1.1, 1.5, 1.1), 'accent').position.set(0, 7.8, -0.7);
+    addPart(colGroup, new THREE.CylinderGeometry(0.3, 0.3, 0.4, 12)).position.set(0, 6.9, -0.7);
+    // 4.5 Dual Pneumatic Counterbalance Cylinders with Polished Rods
+    [-2.1, 2.1].forEach(x => {
+      // Cylinder barrel
+      addPart(colGroup, new THREE.CylinderGeometry(0.24, 0.24, 5.2, 16)).position.set(x, 3.6, -1.2);
+      // Polished chrome rod
+      addPart(colGroup, new THREE.CylinderGeometry(0.09, 0.09, 4.2, 12), 'accent').position.set(x, 1.5, -1.2);
     });
+    // 4.6 Telescopic Stainless Steel Chevron Way Covers (Băng máy inox 4 tầng mái dốc)
+    [1.0, 2.3, 3.6, 4.9].forEach((y, i) => {
+      const sheet = new THREE.BoxGeometry(3.0 + i * 0.16, 1.3, 0.16);
+      addPart(colGroup, sheet, 'accent').position.set(0, y, -0.5 - i * 0.06);
+    });
+    // 4.7 Flexible Cable Carrier Track (Xích dẫn cáp Igus)
+    for (let k = 0; k < 8; k++) {
+      const link = new THREE.BoxGeometry(0.35, 0.22, 0.4);
+      addPart(colGroup, link).position.set(2.4, 4.0 + k * 0.35, -2.0 - Math.sin(k * 0.4) * 0.6);
+    }
 
-    registerExplodedGroup('Column', colGroup, new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, -4.5));
+    registerExplodedGroup('Column', colGroup, new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, -4.8));
 
     // ==========================================
-    // GROUP 5: HEADSTOCK & SPINDLE QUILL (Đầu máy & Ống lót trục chính)
+    // GROUP 5: HEADSTOCK, HIGH-SPEED SPINDLE & COOLANT RING
     // ==========================================
     const headGroup = new THREE.Group();
-    // 5.1 Main Headstock Casting Box
-    addSubPart(headGroup, new THREE.BoxGeometry(3.2, 4.2, 3.2), null, false).position.set(0, 0, 0);
+    // 5.1 Main Cast Headstock Body Box
+    addPart(headGroup, new THREE.BoxGeometry(3.4, 4.5, 3.4)).position.set(0, 0, 0);
     // 5.2 Stepped Spindle Cartridge Quill (Vỏ cụm trục chính phân tầng)
-    addSubPart(headGroup, new THREE.CylinderGeometry(1.1, 1.0, 3.4, 24), null, false).position.set(0, -0.6, 0.9);
-    // 5.3 Cooling Jacket Fins (Các vành đĩa tản nhiệt tròn trục chính)
-    [-1.2, -0.8, -0.4, 0.0, 0.4].forEach(y => {
-      addSubPart(headGroup, new THREE.TorusGeometry(1.15, 0.04, 8, 32), null, true).position.set(0, y, 0.9);
+    addPart(headGroup, new THREE.CylinderGeometry(1.2, 1.1, 3.6, 24)).position.set(0, -0.7, 0.95);
+    // 5.3 Cooling Jacket Fins (Vành tản nhiệt đa tầng)
+    [-1.4, -1.0, -0.6, -0.2, 0.2, 0.6].forEach(y => {
+      addPart(headGroup, new THREE.TorusGeometry(1.24, 0.035, 8, 32), 'accent').position.set(0, y, 0.95);
     });
-    // 5.4 Top High-Speed Spindle AC Motor (Động cơ trục chính 15kW)
-    addSubPart(headGroup, new THREE.CylinderGeometry(0.9, 0.9, 2.0, 24), null, true).position.set(0, 2.8, 0.9);
-    addSubPart(headGroup, new THREE.BoxGeometry(0.6, 0.6, 0.5), null, false).position.set(0.9, 2.8, 0.9); // Junction box
-    // 5.5 Dual Articulated Coolant Nozzles (2 Vòi phun tưới nguội Loc-Line)
-    [-0.9, 0.9].forEach(x => {
-      addSubPart(headGroup, new THREE.CylinderGeometry(0.06, 0.06, 1.2, 8), null, true).position.set(x, -1.8, 1.2);
+    // 5.4 Top Spindle High-Torque AC Motor (Động cơ trục chính Fanuc 15kW)
+    addPart(headGroup, new THREE.CylinderGeometry(0.95, 0.95, 2.2, 24), 'accent').position.set(0, 3.1, 0.95);
+    // Cooling fan cowl on top of motor
+    addPart(headGroup, new THREE.CylinderGeometry(1.0, 1.0, 0.3, 16)).position.set(0, 4.3, 0.95);
+    // 5.5 Multi-Jet Coolant Ring (Vòng xịt nước tưới nguội 6 vòi)
+    addPart(headGroup, new THREE.TorusGeometry(1.15, 0.08, 8, 24), 'gold').position.set(0, -2.4, 0.95);
+    for (let a = 0; a < 6; a++) {
+      const angle = (a / 6) * Math.PI * 2;
+      const nx = Math.cos(angle) * 1.15;
+      const nz = Math.sin(angle) * 1.15;
+      const nozzle = new THREE.CylinderGeometry(0.04, 0.04, 0.35, 8);
+      nozzle.rotateZ(Math.PI / 6);
+      addPart(headGroup, nozzle, 'gold').position.set(nx, -2.55, 0.95 + nz);
+    }
+    // 5.6 Hardened Drive Dogs on Spindle Face (2 Vấu định vị BT40)
+    [-0.75, 0.75].forEach(x => {
+      addPart(headGroup, new THREE.BoxGeometry(0.2, 0.25, 0.25), 'accent').position.set(x, -2.45, 0.95);
     });
 
-    registerExplodedGroup('Headstock', headGroup, new THREE.Vector3(0, 3.4, 0.4), new THREE.Vector3(0, 3.8, 0));
+    registerExplodedGroup('Headstock', headGroup, new THREE.Vector3(0, 3.4, 0.4), new THREE.Vector3(0, 4.0, 0));
 
     // ==========================================
-    // GROUP 6: BT40 TOOL HOLDER & 4-FLUTE ENDMILL (Bầu dao & Mũi dao xoắn ốc)
+    // GROUP 6: CUTTING TOOLING (BT40, FACE MILL & 4-FLUTE ENDMILL)
     // ==========================================
     const toolGroup = new THREE.Group();
-    // 6.1 Pull Stud (Ống rút dao)
-    addSubPart(toolGroup, new THREE.CylinderGeometry(0.12, 0.16, 0.35, 16), null, true).position.set(0, 1.3, 0);
-    // 6.2 BT40 7:24 Steep Taper Shank (Chuôi côn BT40)
-    addSubPart(toolGroup, new THREE.CylinderGeometry(0.3, 0.75, 1.4, 24), null, false).position.set(0, 0.5, 0);
-    // 6.3 ATC V-Groove Flange (Vành rãnh V kẹp tay đổi dao)
-    addSubPart(toolGroup, new THREE.CylinderGeometry(0.95, 0.95, 0.35, 32), null, true).position.set(0, -0.3, 0);
-    addSubPart(toolGroup, new THREE.TorusGeometry(0.96, 0.04, 6, 32), null, true).position.set(0, -0.3, 0); // V-groove
-    // 6.4 ER32 Hexagonal Collet Chuck Nut (Đai ốc lục giác collet)
-    addSubPart(toolGroup, new THREE.CylinderGeometry(0.6, 0.65, 0.8, 6), null, false).position.set(0, -0.85, 0);
-    // 6.5 Solid Carbide 4-Flute Endmill (Mũi dao phay ngón hợp kim 4 me cắt)
-    addSubPart(toolGroup, new THREE.CylinderGeometry(0.2, 0.2, 1.1, 16), null, true).position.set(0, -1.6, 0);
-    // Flute cutting helix spiral details
-    [-1.5, -1.7, -1.9].forEach(y => {
-      const fluteRing = new THREE.TorusGeometry(0.21, 0.02, 6, 16);
-      fluteRing.rotateX(Math.PI / 4);
-      addSubPart(toolGroup, fluteRing, null, true).position.set(0, y, 0);
-    });
+    // 6.1 Retention Knob / Pull Stud with Coolant Hole
+    addPart(toolGroup, new THREE.CylinderGeometry(0.14, 0.18, 0.4, 16), 'accent').position.set(0, 1.45, 0);
+    // 6.2 BT40 7:24 Precision Ground Taper Shank
+    addPart(toolGroup, new THREE.CylinderGeometry(0.35, 0.8, 1.5, 24)).position.set(0, 0.6, 0);
+    // 6.3 ATC V-Groove Flange & Orientation Keyways
+    addPart(toolGroup, new THREE.CylinderGeometry(1.0, 1.0, 0.4, 32), 'accent').position.set(0, -0.3, 0);
+    addPart(toolGroup, new THREE.TorusGeometry(1.01, 0.04, 6, 32), 'accent').position.set(0, -0.3, 0);
+    // 6.4 Precision ER32 Hexagonal Collet Chuck Nut
+    addPart(toolGroup, new THREE.CylinderGeometry(0.65, 0.7, 0.85, 6)).position.set(0, -0.85, 0);
+    // 6.5 Solid Carbide 4-Flute Endmill Shank
+    addPart(toolGroup, new THREE.CylinderGeometry(0.22, 0.22, 1.2, 16), 'accent').position.set(0, -1.6, 0);
+    // Helical Spiral Cutting Flutes (4 Me cắt xoắn ốc)
+    for (let f = 0; f < 5; f++) {
+      const flute = new THREE.TorusGeometry(0.23, 0.02, 6, 16);
+      flute.rotateX(Math.PI / 4 + f * 0.2);
+      addPart(toolGroup, flute, 'gold').position.set(0, -1.4 - f * 0.15, 0);
+    }
+    // Chisel cutting tip
+    addPart(toolGroup, new THREE.ConeGeometry(0.22, 0.15, 4), 'gold').position.set(0, -2.15, 0);
 
-    registerExplodedGroup('Tool', toolGroup, new THREE.Vector3(0, 0.8, 1.3), new THREE.Vector3(0, -2.8, 4.0));
+    registerExplodedGroup('Tool', toolGroup, new THREE.Vector3(0, 0.7, 1.35), new THREE.Vector3(0, -3.2, 4.2));
 
     // ==========================================
-    // GROUP 7: ATC 24-TOOL CAROUSEL & TWIN ARM (Đài dao xoay & Tay đổi dao kép)
+    // GROUP 7: ATC 24-TOOL MAGAZINE, TOOLS & RENISHAW PROBE
     // ==========================================
     const atcGroup = new THREE.Group();
-    // 7.1 ATC Support Arm Casting
-    addSubPart(atcGroup, new THREE.BoxGeometry(1.8, 0.6, 2.2), null, false).position.set(0.6, 0, 0);
-    // 7.2 Main 24-Station Carousel Disc
-    const atcDisc = new THREE.CylinderGeometry(2.4, 2.4, 0.25, 24);
+    // 7.1 Cast Support Arm Bolted to Column
+    addPart(atcGroup, new THREE.BoxGeometry(2.0, 0.7, 2.4)).position.set(0.6, 0, 0);
+    // 7.2 Main 24-Station Scalloped Carousel Disc
+    const atcDisc = new THREE.CylinderGeometry(2.6, 2.6, 0.3, 24);
     atcDisc.rotateX(Math.PI / 2);
-    addSubPart(atcGroup, atcDisc, null, false).position.set(0, 0, 0);
-    // 7.3 Loaded Tool Holders in Carousel Pockets (Các đầu dao gá trên đài dao)
-    for (let i = 0; i < 12; i++) {
+    addPart(atcGroup, atcDisc).position.set(0, 0, 0);
+    // 7.3 Diverse Loaded Tool Holders inside Pockets
+    // Tool 1: 63mm Face Mill with 6 Gold TiN Carbide Inserts (Đài dao khỏa mặt 6 chíp)
+    const faceMill = new THREE.CylinderGeometry(0.6, 0.5, 0.8, 16);
+    faceMill.rotateX(Math.PI / 2);
+    addPart(atcGroup, faceMill, 'accent').position.set(2.1, 0, 0.5);
+    // 6 Gold Inserts on Face Mill
+    for (let ci = 0; ci < 6; ci++) {
+      const ca = (ci / 6) * Math.PI * 2;
+      const cx = 2.1 + Math.cos(ca) * 0.5;
+      const cy = Math.sin(ca) * 0.5;
+      const insert = new THREE.BoxGeometry(0.12, 0.12, 0.1);
+      addPart(atcGroup, insert, 'gold').position.set(cx, cy, 0.9);
+    }
+
+    // Tool 2: Renishaw 3D Touch Probe with Ruby Stylus Ball (Đầu dò phôi Renishaw)
+    const probeBody = new THREE.CylinderGeometry(0.35, 0.35, 0.9, 16);
+    probeBody.rotateX(Math.PI / 2);
+    addPart(atcGroup, probeBody).position.set(-2.1, 0, 0.5);
+    // Ruby Stylus Stem & Ball
+    const probeStem = new THREE.CylinderGeometry(0.04, 0.04, 0.6, 8);
+    probeStem.rotateX(Math.PI / 2);
+    addPart(atcGroup, probeStem, 'accent').position.set(-2.1, 0, 1.2);
+    addPart(atcGroup, new THREE.SphereGeometry(0.1, 16, 16), 'ruby').position.set(-2.1, 0, 1.55);
+
+    // Other Tools in carousel (Drills, Taps, Ball endmill)
+    for (let i = 1; i < 11; i++) {
+      if (i === 6) continue;
       const angle = (i / 12) * Math.PI * 2;
-      const x = Math.cos(angle) * 2.0;
-      const y = Math.sin(angle) * 2.0;
-      const pocketTool = new THREE.CylinderGeometry(0.22, 0.28, 0.7, 12);
-      pocketTool.rotateX(Math.PI / 2);
-      addSubPart(atcGroup, pocketTool, null, true).position.set(x, y, 0.4);
+      const x = Math.cos(angle) * 2.1;
+      const y = Math.sin(angle) * 2.1;
+      const holder = new THREE.CylinderGeometry(0.24, 0.3, 0.75, 12);
+      holder.rotateX(Math.PI / 2);
+      addPart(atcGroup, holder, 'accent').position.set(x, y, 0.4);
+      // Tool tip
+      const tip = new THREE.CylinderGeometry(0.08, 0.08, 0.5, 8);
+      tip.rotateX(Math.PI / 2);
+      addPart(atcGroup, tip, (i % 2 === 0) ? 'gold' : 'body').position.set(x, y, 0.85);
     }
     // 7.4 Geneva Indexing Motor Housing
-    addSubPart(atcGroup, new THREE.CylinderGeometry(0.5, 0.5, 1.2, 16), null, false).position.set(0, 0, -0.8);
-    // 7.5 High-Speed Twin Arm Gripper (Tay thay dao kép hình số 8)
-    const twinArm = new THREE.BoxGeometry(3.2, 0.35, 0.5);
+    addPart(atcGroup, new THREE.CylinderGeometry(0.55, 0.55, 1.4, 16)).position.set(0, 0, -0.9);
+    // 7.5 Twin-Arm Tool Changer with Spring-Loaded Claws (Tay thay dao kép hình số 8)
+    const twinArm = new THREE.BoxGeometry(3.6, 0.4, 0.6);
     twinArm.rotateZ(Math.PI / 6);
-    addSubPart(atcGroup, twinArm, null, true).position.set(1.5, -2.2, 1.0);
+    addPart(atcGroup, twinArm, 'accent').position.set(1.6, -2.4, 1.0);
+    // Gripper fingers at both arm ends
+    addPart(atcGroup, new THREE.TorusGeometry(0.35, 0.08, 6, 12)).position.set(0.1, -3.2, 1.0);
+    addPart(atcGroup, new THREE.TorusGeometry(0.35, 0.08, 6, 12)).position.set(3.1, -1.6, 1.0);
 
-    registerExplodedGroup('ATC', atcGroup, new THREE.Vector3(-3.8, 3.2, -0.8), new THREE.Vector3(-5.2, 2.0, -1.0));
+    registerExplodedGroup('ATC', atcGroup, new THREE.Vector3(-4.0, 3.4, -0.8), new THREE.Vector3(-5.6, 2.2, -1.0));
 
     // 5. Explode Slider Logic
     const slider = document.getElementById('explode-slider');
@@ -707,12 +861,12 @@
         sliderLabel.innerText = '0% (LẮP RÁP NGUYÊN KHỐI)';
         sliderLabel.className = 'text-slate-300 font-bold text-sm';
       } else {
-        sliderLabel.innerText = `${pct}% (PHÂN RÃ 120+ CHI TIẾT CƠ KHÍ)`;
+        sliderLabel.innerText = `${pct}% (BUNG TÁCH 250+ CHI TIẾT CƠ KHÍ)`;
         sliderLabel.className = 'text-zeggo-primary font-bold text-sm';
       }
     }
 
-    // 6. Mode Switcher (Wireframe Orange / Blueprint Blue / Solid Metallic)
+    // 6. Mode Switcher (Wireframe Orange / Blueprint Blue / Metallic CAD Colors)
     function setRenderMode(mode) {
       currentMode = mode;
       const btnOrange = document.getElementById('btn-wire-orange');
@@ -734,9 +888,18 @@
       explodedParts.forEach(p => {
         p.group.traverse(child => {
           if (child.isMesh) {
-            child.material = mats.body;
-            if (child.userData.line) {
-              child.userData.line.material = mats.edge;
+            const type = child.userData.type || 'body';
+            if (type === 'gold') {
+              child.material = mats.gold;
+              if (child.userData.line) child.userData.line.material = mats.goldEdge;
+            } else if (type === 'ruby') {
+              child.material = mats.ruby;
+              if (child.userData.line) child.userData.line.material = mats.rubyEdge;
+            } else {
+              child.material = mats.body;
+              if (child.userData.line) {
+                child.userData.line.material = (type === 'accent') ? mats.accentEdge : mats.edge;
+              }
             }
           }
         });
@@ -753,13 +916,13 @@
     function setCameraView(preset) {
       if (preset === 'iso') {
         camera.position.set(16, 12, 20);
-        controls.target.set(0, 1.5, 0);
+        controls.target.set(0, 1.2, 0);
       } else if (preset === 'spindle') {
-        camera.position.set(4, 3, 6);
-        controls.target.set(0, 1.8, 1.2);
+        camera.position.set(3.5, 2.8, 5.5);
+        controls.target.set(0, 1.5, 1.2);
       } else if (preset === 'table') {
-        camera.position.set(0, 5, 8);
-        controls.target.set(0, 0, 0);
+        camera.position.set(0, 4.5, 7.5);
+        controls.target.set(0, 0.2, 0.2);
       }
       controls.update();
     }
@@ -767,58 +930,58 @@
     // 8. Interactive Component Inspector Data
     const COMPONENT_DATA = {
       spindle: {
-        title: "CỤM TRỤC CHÍNH SPINDLE BT40",
-        id: "CAD: VMC-SPN-12K",
-        desc: "Trục chính gia công tốc độ cao 12,000 RPM. Kết cấu bạc đạn tiếp xúc góc cấp P4 siêu chính xác của NSK. Tích hợp chuôi kẹp BT40, ống lót tản nhiệt tuần hoàn và dao phay 4 me cắt xoắn ốc.",
+        title: "TRỤC CHÍNH SPINDLE 12,000 RPM & ĐÀI DAO 6 CHÍP",
+        id: "ISO CODE: BT40-SPN-12K",
+        desc: "Cụm trục chính cartridge tốc độ cao tích hợp vòng giải nhiệt 6 vòi xịt đa điểm. Lắp sẵn chuôi côn BT40 kẹp đài dao khỏa mặt Ø63mm gắn 6 mảnh chíp hợp kim vuông phủ PVD TiN vàng và dao phay ngón 4 me xoắn ốc.",
         specs: [
-          ["Tốc độ tối đa", "12,000 RPM"],
-          ["Chuôi dao", "BT40 (7:24 Taper)"],
-          ["Độ đảo đầu dao", "< 0.003 mm"],
-          ["Động cơ", "Fanuc Alpha 15 kW"]
+          ["Tốc độ Spindle", "12,000 RPM (Dẫn động đai)"],
+          ["Đài dao khỏa mặt", "Ø63 mm (6 Chíp TiN PVD)"],
+          ["Độ đảo mặt nón", "< 0.0025 mm (Đo kiểm Mitutoyo)"],
+          ["Bạc đạn trục chính", "NSK Tiếp xúc góc P4 (Gặp cặp)"]
         ]
       },
       atc: {
-        title: "ĐÀI DAO XOAY 24 VỊ TRÍ & TAY THAY DAO KÉP",
-        id: "CAD: ATC-ARM-24T",
-        desc: "Đài dao tự động dạng đĩa xoay (Disc Type) 24 ổ chứa dao. Cơ cấu tay thay dao kép Twin-Arm tốc độ cao đổi dao trong 1.8 giây, gá sẵn dao phay mặt, mũi khoan và dao doa.",
+        title: "ĐÀI DAO 24 TRẠM & ĐẦU DÒ RENISHAW RUBY",
+        id: "ISO CODE: ATC-MAG-24T-REN",
+        desc: "Đài dao tự động 24 ổ chứa. Tích hợp sẵn bộ sưu tập dao cụ: Dao khỏa mặt, mũi khoan xoắn, dao doa, taro ren và đầu dò phôi 3D Touch Probe của Renishaw với viên bi ruby đỏ định vị gốc G54.",
         specs: [
-          ["Số ổ dao", "24 Trạm (Stations)"],
+          ["Dung lượng ổ dao", "24 Dao cụ (Cơ cấu đĩa xoay)"],
+          ["Đầu dò phôi", "Renishaw 3D Touch Probe (Ruby)"],
           ["Thời gian đổi dao", "1.8 Giây (T-to-T)"],
-          ["Đường kính dao max", "Ø78 mm (kế cạnh)"],
-          ["Trọng lượng dao max", "8 kg / vị trí"]
+          ["Tay thay dao", "Twin-Arm kép hình số 8 xoay 180°"]
         ]
       },
       table: {
-        title: "BÀN MÁY 5 RÃNH CHỮ T & Ê-TÔ CƠ KHÍ",
-        id: "CAD: TBL-850-5T",
-        desc: "Bàn máy phay mài phẳng chính xác với 5 rãnh chữ T quy cách 18H8. Gá sẵn ê-tô thủy lực kẹp phôi nhôm 6061 đang gia công rãnh hốc. Xung quanh có rãnh thu nước tưới nguội.",
+        title: "BÀN MÁY 5 RÃNH CHỮ T & PHÔI NHÔM 6061",
+        id: "ISO CODE: TBL-VMC-850-T5",
+        desc: "Bàn máy phay mài phẳng chính xác với 5 rãnh chữ T 18H8. Gá kẹp ê-tô thủy lực Kurt kẹp phôi nhôm hàng không 6061 đang phay dở hốc tròn và đường vát mép counterbore.",
         specs: [
-          ["Kích thước bàn", "1,000 × 500 mm"],
-          ["Quy cách rãnh T", "5 rãnh × 18 mm (P100)"],
-          ["Tải trọng tối đa", "600 kg"],
-          ["Độ phẳng mặt bàn", "0.005 mm / 500mm"]
+          ["Kích thước làm việc", "1,000 × 500 mm"],
+          ["Quy cách rãnh T", "5 rãnh × 18 mm (Bước rãnh 100mm)"],
+          ["Vật liệu phôi gá", "Nhôm hợp kim 6061-T6"],
+          ["Đồ gá kẹp", "Ê-tô thủy lực cơ khí Kurt-Type"]
         ]
       },
       rails: {
-        title: "RAY TRƯỢT THK & TRỤC VÍT ME BI MÀI C3",
-        id: "CAD: LIN-THK-35C3",
-        desc: "Hệ thống dẫn hướng tuyến tính hạng nặng: 2 thanh ray song song bản 35mm trên mỗi trục X/Y/Z, ôm 4 con trượt có phốt chắn bụi. Trục vít me bi mài hai đầu bắt gối đỡ bi cố định BK/BF.",
+        title: "CẶP RAY THK PROFILE & VITME BI C3 MÀI",
+        id: "ISO CODE: THK-HSR35-C3",
+        desc: "Hệ thống dẫn hướng tuyến tính chuẩn catalogue THK Nhật Bản. Ray trượt có rãnh bi chịu tải 4 hướng và hàng lỗ bulông chìm. Trục vít me bi mài bước ren 10mm với đai ốc bi đôi ống hồi ngoài.",
         specs: [
-          ["Bản ray dẫn hướng", "THK 35 mm (Băng bi)"],
-          ["Cấp chính xác vitme", "C3 (Trục mài chính xác)"],
-          ["Bước ren vitme", "10 mm / vòng"],
-          ["Tốc độ dịch chuyển", "36 m/phút (Rapid)"]
+          ["Bản ray dẫn hướng", "THK HSR-35 mm Profile"],
+          ["Cấp chính xác vitme", "C3 (Trục mài chính xác cao)"],
+          ["Gối đỡ trục", "Cụm gối bi đỡ chặn BK-25 / BF-25"],
+          ["Động cơ truyền động", "Fanuc AC Servo Beta 12/3000i"]
         ]
       },
       column: {
-        title: "CỘT ĐỨNG Z, BĂNG MÁY INOX & THÂN ĐẾ",
-        id: "CAD: CST-FC300-BED",
-        desc: "Khung máy đúc bằng gang Meehanite FC-300 khử ứng suất dư chống biến dạng nhiệt. Hệ thống băng máy inox che chắn lá xếp (Telescopic Way Covers) bảo vệ ray trượt khỏi phoi nóng.",
+        title: "BĂNG MÁY INOX XẾP LỚP & ĐẾ MEEHANITE",
+        id: "ISO CODE: CST-FC300-COV",
+        desc: "Băng che chắn ray inox dạng lá xếp chevron chữ A nghiêng thoát phoi. Khung thân đúc bằng gang Meehanite FC-300 khử ứng suất dư, xích dẫn cáp Igus và 6 chân tăng chỉnh nivô có ren bulông.",
         specs: [
-          ["Vật liệu đúc", "Gang Meehanite FC-300"],
-          ["Chân đế tăng chỉnh", "6 Điểm nivô bulông"],
-          ["Băng che chắn ray", "Inox xếp chevron"],
-          ["Khối lượng thân máy", "5,200 kg"]
+          ["Vật liệu thân đúc", "Gang xám Meehanite FC-300"],
+          ["Băng che phoi Z", "Inox lá xếp chevron 4 tầng"],
+          ["Xích dẫn cáp điện", "Igus Energy Chain (Đức)"],
+          ["Khối lượng thân máy", "5,500 kg"]
         ]
       }
     };
