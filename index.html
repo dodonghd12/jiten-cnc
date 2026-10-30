@@ -120,6 +120,156 @@
       border-radius: 9999px;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
+    /* ================= GSAP PINNED ARCH STORYTELLING ================= */
+    .arch {
+      display: flex;
+      gap: 64px;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin-inline: auto;
+      position: relative;
+    }
+
+    .arch__left {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 320px;
+    }
+
+    .arch__left .arch__info {
+      max-width: 480px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: 60px;
+    }
+
+    .arch__left .arch__info h2.header {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: clamp(28px, 3.2vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: #FFFFFF;
+    }
+
+    .arch__left .arch__info p.desc {
+      color: #94A3B8;
+      font-size: 15px;
+      line-height: 1.65;
+      margin-block: 16px 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .arch__left .arch__info a.link {
+      text-decoration: none;
+      padding: 13px 24px;
+      color: #000000;
+      border-radius: 9999px;
+      display: inline-flex;
+      gap: 8px;
+      width: fit-content;
+      align-items: center;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .arch__left .arch__info a.link:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .arch__right {
+      flex-shrink: 0;
+      height: 100vh;
+      width: 100%;
+      max-width: 540px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .arch__right .img-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 420px;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
+      background-color: #0B111E;
+    }
+
+    .arch__right .img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    @media (max-width: 1024px) {
+      .arch {
+        gap: 36px;
+      }
+      .arch__right {
+        max-width: 440px;
+      }
+      .arch__right .img-wrapper {
+        height: 350px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .arch {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .arch__left,
+      .arch__right {
+        display: contents;
+      }
+
+      .arch__right {
+        height: auto;
+        max-width: 100%;
+      }
+
+      .arch__right .img-wrapper {
+        position: static;
+        transform: none;
+        height: 300px;
+        width: 100%;
+        margin-bottom: 32px;
+        border-radius: 14px;
+      }
+
+      .arch__left .arch__info {
+        min-height: auto;
+        height: auto;
+        padding: 24px 0 12px 0;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .arch__right .img-wrapper {
+        border-radius: 12px;
+        height: 240px;
+      }
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-saas-primary selection:text-white saas-grid-bg">
@@ -432,199 +582,173 @@
       </div>
     </section>
 
-    <!-- ================= SECTION 3: ZEGGO-STYLE STICKY STORYTELLING (4 PILLARS WITH AUTHENTIC CROPPED PHOTOS) ================= -->
-    <section id="services-story" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-saas-border bg-black relative">
-      <div class="max-w-7xl mx-auto">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
-          <!-- LEFT COLUMN: PINNED STICKY PANEL -->
-          <div class="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
-            <div class="inline-flex items-center space-x-2 text-xs font-mono text-saas-primary uppercase">
-              <span class="w-6 h-px bg-saas-primary"></span>
-              <span>03. LĨNH VỰC HOẠT ĐỘNG · CORE PILLARS</span>
-            </div>
-            
-            <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-              4 Trụ Cột Năng Lực Cốt Lõi Của JITEN CNC
+    <!-- ================= SECTION 3: GSAP PINNED ARCH IMAGE MASK REVEAL (4 PILLARS) ================= -->
+    <section id="services-story" class="py-20 px-4 sm:px-6 lg:px-8 border-b border-saas-border bg-[#040a14] relative transition-colors duration-700">
+      
+      <!-- Top Section Header & Spacer -->
+      <div class="max-w-7xl mx-auto mb-12 sm:mb-20">
+        <div class="inline-flex items-center space-x-2 text-xs font-mono text-saas-primary uppercase tracking-widest font-semibold mb-3">
+          <span class="w-6 h-px bg-saas-primary"></span>
+          <span>03. LĨNH VỰC HOẠT ĐỘNG · CORE PILLARS</span>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div>
+            <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+              4 Trụ Cột Năng Lực Cốt Lõi JITEN CNC
             </h2>
-            
-            <p class="text-sm text-saas-textSecondary leading-relaxed font-sans">
-              Cuộn chuột để khám phá lần lượt 4 mảng hoạt động chính. Trang web tự động đồng bộ tiến trình theo từng bước cuộn chuột của bạn.
+            <p class="text-sm sm:text-base text-saas-textSecondary mt-2 max-w-2xl font-sans">
+              Hệ sinh thái khép kín từ máy công cụ, linh kiện truyền động, dịch vụ cứu hộ kỹ thuật 24/7 đến xưởng gia công chi tiết chính xác.
             </p>
+          </div>
+          <div class="text-xs font-mono text-slate-400 flex items-center space-x-2 shrink-0">
+            <span class="w-2 h-2 rounded-full bg-saas-primary animate-pulse"></span>
+            <span>CUỘN CHUỘT ĐỂ KHÁM PHÁ CHI TIẾT</span>
+          </div>
+        </div>
+      </div>
 
-            <!-- Zeggo Progressive Vertical Chapter Index -->
-            <div class="space-y-3 pt-4 font-mono text-xs hidden lg:block">
-              <div id="prog-1" class="flex items-center space-x-3 text-white font-bold transition-all">
-                <span class="w-7 h-7 bg-saas-primary text-black flex items-center justify-center text-xs font-bold rounded-full">01</span>
-                <span>MÁY CÔNG CỤ CNC (CNC Machine Tools)</span>
+      <!-- Pinned Mask Reveal Arch Container -->
+      <div class="arch">
+        
+        <!-- Left Side: 4 Storytelling Chapters -->
+        <div class="arch__left">
+          
+          <!-- Pillar 1: Máy Công Cụ CNC -->
+          <div class="arch__info" id="cnc-machine-arch">
+            <div class="content">
+              <div class="inline-flex items-center space-x-2 text-xs font-mono text-saas-primary uppercase tracking-widest font-semibold mb-3">
+                <span class="w-2 h-2 rounded-full bg-saas-primary"></span>
+                <span>01 / MÁY CÔNG CỤ CNC</span>
               </div>
-              <div id="prog-2" class="flex items-center space-x-3 text-saas-textMuted transition-all">
-                <span class="w-7 h-7 bg-black text-saas-textMuted flex items-center justify-center text-xs border border-saas-border rounded-full">02</span>
-                <span>LINH KIỆN MÁY MÓC (Machine Components)</span>
+              <h2 class="header">Máy Công Cụ CNC & Trung Tâm Gia Công</h2>
+              <p class="desc">Phân phối các dòng máy phay đứng (VMC), phay ngang (HMC), máy tiện băng nghiêng và máy cắt dây EDM. Nhập khẩu trực tiếp từ Đài Loan & Nhật Bản, hỗ trợ chạy thử cắt phôi tải nặng trực tiếp tại kho trước khi quyết định đầu tư.</p>
+              
+              <!-- Technical HUD Specs Matrix -->
+              <div class="grid grid-cols-2 gap-2.5 my-5 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
+                <div>• Trục chính: BT30 / BT40 / BT50</div>
+                <div>• Tốc độ: 8,000 - 15,000 RPM</div>
+                <div>• Hệ điều khiển: Fanuc, Mitsu, Siemens</div>
+                <div>• Dung sai kiểm định: ±0.005 mm</div>
               </div>
-              <div id="prog-3" class="flex items-center space-x-3 text-saas-textMuted transition-all">
-                <span class="w-7 h-7 bg-black text-saas-textMuted flex items-center justify-center text-xs border border-saas-border rounded-full">03</span>
-                <span>SỬA CHỮA VÀ BẢO TRÌ (Maintenance & Retrofit)</span>
-              </div>
-              <div id="prog-4" class="flex items-center space-x-3 text-saas-textMuted transition-all">
-                <span class="w-7 h-7 bg-black text-saas-textMuted flex items-center justify-center text-xs border border-saas-border rounded-full">04</span>
-                <span>GIA CÔNG THEO YÊU CẦU (Custom Machining)</span>
-              </div>
-            </div>
 
-            <div class="pt-2">
-              <a href="#contact" class="inline-flex items-center space-x-2 text-xs font-mono text-saas-primary hover:underline">
-                <span>Cần tư vấn cụ thể từng hạng mục? Gửi liên hệ ngay</span>
-                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              <a class="link" href="#catalog" style="background-color: #38BDF8;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                </svg>
+                <span>Xem Danh Mục Máy CNC</span>
               </a>
             </div>
           </div>
 
-          <!-- RIGHT COLUMN: CONTINUOUS SCROLL CARDS (Featuring Authentic Photos) -->
-          <div class="lg:col-span-7 space-y-16">
-
-            <!-- Card 1: Máy công cụ CNC (Featuring pillar_cnc_machine.png) -->
-            <div class="pillar-card p-6 bg-saas-panel border border-saas-border space-y-5" data-step="1">
-              <div class="relative overflow-hidden bg-white border border-saas-border p-4 flex items-center justify-center">
-                <img 
-                  src="assets/pillar_cnc_machine.png" 
-                  alt="Máy công cụ CNC" 
-                  class="w-full h-auto max-h-[340px] object-contain"
-                />
-                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-white font-mono text-[10px] border border-saas-border">
-                  01 / MACHINE TOOLS
-                </span>
+          <!-- Pillar 2: Linh Kiện Máy Móc -->
+          <div class="arch__info" id="components-arch">
+            <div class="content">
+              <div class="inline-flex items-center space-x-2 text-xs font-mono text-emerald-400 uppercase tracking-widest font-semibold mb-3">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>02 / LINH KIỆN MÁY MÓC</span>
+              </div>
+              <h2 class="header">Linh Kiện Cơ Khí & Truyền Động Chính Xác</h2>
+              <p class="desc">Kho linh kiện sẵn sàng thay thế: Trục vitme bi mài C3/C5, thanh trượt dẫn hướng tuyến tính (Linear guides), cụm vòng bi trục chính P4 chính xác, khớp nối mềm, đài dao tự động ATC và bầu kẹp dao BT30/BT40/BT50 chính hãng.</p>
+              
+              <!-- Technical HUD Specs Matrix -->
+              <div class="grid grid-cols-2 gap-2.5 my-5 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
+                <div>• Cấp chính xác: C3 / C5 (Trục mài)</div>
+                <div>• Bản ray dẫn: 15, 20, 25, 30, 35, 45</div>
+                <div>• Vòng bi Spindle: P4 góc tiếp xúc</div>
+                <div>• Gia công tiện: Theo quy cách bạc đạn</div>
               </div>
 
-              <div class="flex items-center justify-between border-b border-saas-border pb-3">
-                <div>
-                  <h3 class="font-heading text-2xl font-bold text-white">Máy công cụ CNC</h3>
-                  <p class="text-xs font-mono text-saas-primary mt-0.5">CNC Machine Tools · Mới 100% & Bãi Tuyển Chọn</p>
-                </div>
-                <span class="px-2.5 py-1 bg-black text-xs font-mono text-white border border-saas-border">ĐÀI LOAN & NHẬT</span>
-              </div>
-
-              <p class="text-sm text-saas-textSecondary leading-relaxed font-sans">
-                Phân phối các dòng trung tâm gia công phay CNC đứng (VMC), phay ngang (HMC), máy tiện CNC băng nghiêng, máy mài phẳng thủy lực và máy cắt dây CNC (Wire EDM). Hỗ trợ chạy thử cắt phôi tải nặng trực tiếp tại kho trước khi quyết định mua.
-              </p>
-
-              <!-- Technical Specification HUD Matrix -->
-              <div class="p-3.5 bg-black border border-saas-border font-mono text-xs grid grid-cols-2 gap-2 text-saas-textSecondary">
-                <div>• Trục chính: BT30 / BT40 / BT50</div>
-                <div>• Tốc độ Spindle: 8,000 - 15,000 RPM</div>
-                <div>• Hệ điều khiển: Fanuc, Mitsubishi, Siemens</div>
-                <div>• Dung sai kiểm định: ±0.005 mm</div>
-              </div>
+              <a class="link" href="#catalog" style="background-color: #10B981;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                </svg>
+                <span>Khám Phá Kho Linh Kiện</span>
+              </a>
             </div>
+          </div>
 
-            <!-- Card 2: Linh kiện máy móc (Featuring pillar_components.png) -->
-            <div class="pillar-card p-6 bg-saas-panel border border-saas-border space-y-5" data-step="2">
-              <div class="relative overflow-hidden bg-[#ECEEF1] border border-saas-border p-4 flex items-center justify-center">
-                <img 
-                  src="assets/pillar_components.png" 
-                  alt="Linh kiện máy móc" 
-                  class="w-full h-auto max-h-[340px] object-contain"
-                />
-                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-white font-mono text-[10px] border border-saas-border">
-                  02 / COMPONENTS
-                </span>
+          <!-- Pillar 3: Sửa Chữa Và Bảo Trì -->
+          <div class="arch__info" id="maintenance-arch">
+            <div class="content">
+              <div class="inline-flex items-center space-x-2 text-xs font-mono text-amber-400 uppercase tracking-widest font-semibold mb-3">
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                <span>03 / SỬA CHỮA & BẢO TRÌ</span>
               </div>
-
-              <div class="flex items-center justify-between border-b border-saas-border pb-3">
-                <div>
-                  <h3 class="font-heading text-2xl font-bold text-white">Linh kiện máy móc</h3>
-                  <p class="text-xs font-mono text-saas-primary mt-0.5">Machine Components · Sẵn Tồn Kho</p>
-                </div>
-                <span class="px-2.5 py-1 bg-black text-xs font-mono text-white border border-saas-border">THK / HIWIN / NSK</span>
-              </div>
-
-              <p class="text-sm text-saas-textSecondary leading-relaxed font-sans">
-                Kho linh kiện sẵn sàng thay thế: Trục vitme bi mài C3/C5, thanh trượt dẫn hướng tuyến tính (Linear guides), cụm vòng bi trục chính P4 chính xác, khớp nối mềm, đài dao tự động ATC và bầu kẹp dao BT30/BT40/BT50.
-              </p>
-
-              <!-- Technical Specification HUD Matrix -->
-              <div class="p-3.5 bg-black border border-saas-border font-mono text-xs grid grid-cols-2 gap-2 text-saas-textSecondary">
-                <div>• Cấp chính xác vitme: C3 / C5 (Trục mài)</div>
-                <div>• Bản ray dẫn hướng: 15, 20, 25, 30, 35, 45</div>
-                <div>• Vòng bi Spindle: Tiêu chuẩn P4 góc tiếp xúc</div>
-                <div>• Gia công tiện đầu trục: Theo quy cách bạc đạn</div>
-              </div>
-            </div>
-
-            <!-- Card 3: Sửa chữa và bảo trì (Featuring pillar_maintenance.png) -->
-            <div class="pillar-card p-6 bg-saas-panel border border-saas-border space-y-5" data-step="3">
-              <div class="relative overflow-hidden bg-black border border-saas-border flex items-center justify-center">
-                <img 
-                  src="assets/pillar_maintenance.png" 
-                  alt="Sửa chữa và bảo trì" 
-                  class="w-full h-auto max-h-[340px] object-cover"
-                />
-                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-saas-primary font-mono text-[10px] border border-saas-border">
-                  03 / SERVICES
-                </span>
-              </div>
-
-              <div class="flex items-center justify-between border-b border-saas-border pb-3">
-                <div>
-                  <h3 class="font-heading text-2xl font-bold text-white">Sửa chữa và bảo trì</h3>
-                  <p class="text-xs font-mono text-saas-primary mt-0.5">Repair, Maintenance & Retrofit</p>
-                </div>
-                <span class="px-2.5 py-1 bg-black text-xs font-mono text-saas-primary border border-saas-border">HỖ TRỢ 24/7</span>
-              </div>
-
-              <p class="text-sm text-saas-textSecondary leading-relaxed font-sans">
-                Đội ngũ kỹ sư cơ khí & điện tự động hóa xử lý triệt để: Sửa bo mạch chủ, sửa servo drive, khắc phục lỗi mất tọa độ encoder, cạo băng cân chỉnh độ phẳng, thay vòng bi trục chính spindle và nâng cấp hệ điều hành máy đời cũ (Retrofit).
-              </p>
-
-              <!-- Technical Troubleshooting HUD -->
-              <div class="p-3.5 bg-black border border-saas-border font-mono text-xs grid grid-cols-2 gap-2 text-saas-textSecondary">
-                <div>• Chẩn đoán Alarm: 401, 9002, SV0436...</div>
+              <h2 class="header">Dịch Vụ Cứu Hộ, Sửa Chữa & Retrofit 24/7</h2>
+              <p class="desc">Đội ngũ kỹ sư cơ khí & điện tự động hóa xử lý triệt để: Sửa bo mạch chủ, sửa servo drive, khắc phục lỗi mất tọa độ encoder, cạo băng cân chỉnh độ phẳng, thay vòng bi trục chính spindle và nâng cấp hệ điều hành máy đời cũ.</p>
+              
+              <!-- Technical HUD Specs Matrix -->
+              <div class="grid grid-cols-2 gap-2.5 my-5 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
+                <div>• Chẩn đoán Alarm: Fanuc, Mitsu, Heidenhain</div>
                 <div>• Ứng cứu tận xưởng: Trong 2h - 4h nội vùng</div>
                 <div>• Đại tu cơ khí: Cạo băng, cân chỉnh nivô</div>
                 <div>• Bảo hành sửa chữa: 3 - 6 tháng tiêu chuẩn</div>
               </div>
+
+              <a class="link" href="tel:0908123456" style="background-color: #F59E0B;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span>Gọi Kỹ Sư Cứu Hộ: 0908.123.456</span>
+              </a>
             </div>
+          </div>
 
-            <!-- Card 4: Gia công theo yêu cầu (Featuring pillar_machining.png) -->
-            <div class="pillar-card p-6 bg-saas-panel border border-saas-border space-y-5" data-step="4">
-              <div class="relative overflow-hidden bg-black border border-saas-border flex items-center justify-center">
-                <img 
-                  src="assets/pillar_machining.png" 
-                  alt="Gia công theo yêu cầu" 
-                  class="w-full h-auto max-h-[340px] object-cover"
-                />
-                <span class="absolute top-3 right-3 px-2 py-0.5 bg-black/85 text-emerald-400 font-mono text-[10px] border border-saas-border">
-                  04 / CUSTOM OEM
-                </span>
+          <!-- Pillar 4: Gia Công Theo Yêu Cầu -->
+          <div class="arch__info" id="machining-arch">
+            <div class="content">
+              <div class="inline-flex items-center space-x-2 text-xs font-mono text-purple-400 uppercase tracking-widest font-semibold mb-3">
+                <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                <span>04 / GIA CÔNG THEO YÊU CẦU</span>
               </div>
-
-              <div class="flex items-center justify-between border-b border-saas-border pb-3">
-                <div>
-                  <h3 class="font-heading text-2xl font-bold text-white">Gia công theo yêu cầu</h3>
-                  <p class="text-xs font-mono text-emerald-400 mt-0.5">Custom Precision Machining · Theo Bản Vẽ</p>
-                </div>
-                <span class="px-2.5 py-1 bg-black text-xs font-mono text-emerald-400 border border-saas-border">DUNG SAI ±0.005 MM</span>
-              </div>
-
-              <p class="text-sm text-saas-textSecondary leading-relaxed font-sans">
-                Nhận gia công phay, tiện chi tiết cơ khí chính xác, chi tiết khuôn mẫu, chi tiết máy phi tiêu chuẩn theo bản vẽ CAD/STEP của khách hàng. Cam kết vật liệu chuẩn chứng chỉ CO/CQ và dung sai kiểm định bằng máy đo tọa độ kỹ thuật.
-              </p>
-
-              <!-- Machining Capabilities HUD -->
-              <div class="p-3.5 bg-black border border-saas-border font-mono text-xs grid grid-cols-2 gap-2 text-saas-textSecondary">
+              <h2 class="header">Gia Công Cơ Khí Chính Xác Theo Bản Vẽ</h2>
+              <p class="desc">Nhận gia công phay, tiện chi tiết cơ khí chính xác, chi tiết khuôn mẫu, đồ gá JIG và linh kiện máy phi tiêu chuẩn theo bản vẽ CAD/STEP của khách hàng. Cam kết vật liệu chuẩn CO/CQ và nghiệm thu dung sai bằng máy đo tọa độ 3D CMM.</p>
+              
+              <!-- Technical HUD Specs Matrix -->
+              <div class="grid grid-cols-2 gap-2.5 my-5 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
                 <div>• Vật liệu xử lý: Nhôm 6061/7075, SKD11, SUS304</div>
-                <div>• Định dạng bản vẽ: STEP, IGES, DXF, DWG, PDF</div>
-                <div>• Kiểm định QC: Đo tọa độ 2D/3D & Mitutoyo</div>
-                <div>• Đơn hàng: Đơn chiếc mẫu (Prototype) & Hàng loạt</div>
+                <div>• Định dạng bản vẽ: STEP, IGES, DXF, DWG</div>
+                <div>• Kiểm định QC: Đo tọa độ 3D CMM & Mitutoyo</div>
+                <div>• Quy mô: Mẫu đơn chiếc (Prototype) & Hàng loạt</div>
               </div>
-            </div>
 
+              <a class="link" href="#contact" style="background-color: #C084FC;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                </svg>
+                <span>Gửi Bản Vẽ Báo Giá Ngay</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Side: Pinned Images with Mask Reveal -->
+        <div class="arch__right">
+          
+          <div class="img-wrapper" data-index="4">
+            <img src="assets/pillar_cnc_machine.png" alt="Máy công cụ CNC" />
+          </div>
+
+          <div class="img-wrapper" data-index="3">
+            <img src="assets/pillar_components.png" alt="Linh kiện máy móc" />
+          </div>
+
+          <div class="img-wrapper" data-index="2">
+            <img src="assets/pillar_maintenance.png" alt="Sửa chữa và bảo trì" />
+          </div>
+
+          <div class="img-wrapper" data-index="1">
+            <img src="assets/pillar_machining.png" alt="Gia công theo yêu cầu" />
           </div>
 
         </div>
 
       </div>
+
+      <!-- Bottom Spacer -->
+      <div class="w-full h-16 sm:h-24"></div>
+
     </section>
 
     <!-- ================= SECTION 4: SAAS 2026 PACKAGES & SOLUTION TIERS ================= -->
@@ -1068,42 +1192,161 @@
       if (pctLabel) pctLabel.innerText = Math.round(scrolled) + '%';
     });
 
-    // 5. Pinned Storytelling Chapters (Section 3)
-    const steps = [1, 2, 3, 4];
-    const sectionNames = {
-      1: '01 / MÁY CNC',
-      2: '02 / LINH KIỆN',
-      3: '03 / BẢO TRÌ',
-      4: '04 / GIA CÔNG'
-    };
-
-    steps.forEach((step) => {
-      ScrollTrigger.create({
-        trigger: `.pillar-card[data-step="${step}"]`,
-        start: "top 60%",
-        end: "bottom 60%",
-        onEnter: () => activateStep(step),
-        onEnterBack: () => activateStep(step),
-      });
+    // 5. Section 3 Arch Pinned Image Mask Reveal
+    // Set z-index for images based on data-index
+    document.querySelectorAll(".arch__right .img-wrapper").forEach((element) => {
+      const order = element.getAttribute("data-index");
+      if (order !== null) {
+        element.style.zIndex = order;
+      }
     });
 
-    function activateStep(stepNum) {
-      for (let i = 1; i <= 4; i++) {
-        const el = document.getElementById(`prog-${i}`);
-        if (!el) continue;
-        const badge = el.querySelector('span:first-child');
-        if (i === stepNum) {
-          el.className = "flex items-center space-x-3 text-white font-bold transition-all";
-          badge.className = "w-7 h-7 bg-saas-primary text-black flex items-center justify-center text-xs font-bold rounded-full";
-        } else {
-          el.className = "flex items-center space-x-3 text-saas-textMuted transition-all";
-          badge.className = "w-7 h-7 bg-black text-saas-textMuted flex items-center justify-center text-xs border border-saas-border rounded-full";
-        }
-      }
+    // Mobile layout handler (interleave text and images using order)
+    function handleMobileLayout() {
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const leftItems = gsap.utils.toArray(".arch__left .arch__info");
+      const rightItems = gsap.utils.toArray(".arch__right .img-wrapper");
 
+      if (isMobile) {
+        leftItems.forEach((item, i) => {
+          item.style.order = i * 2;
+        });
+        rightItems.forEach((item, i) => {
+          item.style.order = i * 2 + 1;
+        });
+      } else {
+        leftItems.forEach((item) => {
+          item.style.order = "";
+        });
+        rightItems.forEach((item) => {
+          item.style.order = "";
+        });
+      }
+    }
+
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(handleMobileLayout, 100);
+    });
+    handleMobileLayout();
+
+    const archImgs = gsap.utils.toArray(".arch__right .img-wrapper img");
+    const sectionBgColors = ["#040a14", "#03120b", "#140e03", "#0e0618"];
+    const sectionLabels = ["01 / MÁY CNC", "02 / LINH KIỆN", "03 / BẢO TRÌ", "04 / GIA CÔNG"];
+
+    // GSAP ScrollTrigger Pinned Mask Reveal
+    ScrollTrigger.matchMedia({
+      // Desktop: Pinned Mask Reveal
+      "(min-width: 769px)": function () {
+        const mainTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".arch",
+            start: "top top",
+            end: "bottom bottom",
+            pin: ".arch__right",
+            scrub: true
+          }
+        });
+
+        gsap.set(archImgs, {
+          clipPath: "inset(0)",
+          objectPosition: "0px 0%"
+        });
+
+        archImgs.forEach((_, index) => {
+          const currentImage = archImgs[index];
+          const nextImage = archImgs[index + 1] ? archImgs[index + 1] : null;
+
+          const sectionTimeline = gsap.timeline();
+
+          if (nextImage) {
+            sectionTimeline
+              .to(
+                "#services-story",
+                {
+                  backgroundColor: sectionBgColors[index + 1],
+                  duration: 1.5,
+                  ease: "power2.inOut"
+                },
+                0
+              )
+              .to(
+                currentImage,
+                {
+                  clipPath: "inset(0px 0px 100%)",
+                  objectPosition: "0px 60%",
+                  duration: 1.5,
+                  ease: "none"
+                },
+                0
+              )
+              .to(
+                nextImage,
+                {
+                  objectPosition: "0px 40%",
+                  duration: 1.5,
+                  ease: "none"
+                },
+                0
+              );
+          }
+
+          mainTimeline.add(sectionTimeline);
+        });
+
+        // Sync with right scrubber section indicator
+        const archInfos = gsap.utils.toArray(".arch__left .arch__info");
+        archInfos.forEach((info, idx) => {
+          ScrollTrigger.create({
+            trigger: info,
+            start: "top center",
+            end: "bottom center",
+            onEnter: () => updateSideScrubber(idx),
+            onEnterBack: () => updateSideScrubber(idx)
+          });
+        });
+      },
+
+      // Mobile: Parallax & Subtle Ambient Color Shifts
+      "(max-width: 768px)": function () {
+        const mbTimeline = gsap.timeline();
+        gsap.set(archImgs, {
+          objectPosition: "0px 60%",
+          clipPath: "none"
+        });
+
+        archImgs.forEach((image, index) => {
+          const innerTimeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: image,
+              start: "top 80%",
+              end: "bottom 20%",
+              scrub: true
+            }
+          });
+
+          innerTimeline
+            .to(image, {
+              objectPosition: "0px 30%",
+              duration: 3,
+              ease: "none"
+            })
+            .to("#services-story", {
+              backgroundColor: sectionBgColors[index] || "#000000",
+              duration: 1.5,
+              ease: "power2.inOut"
+            });
+
+          mbTimeline.add(innerTimeline);
+        });
+      }
+    });
+
+    function updateSideScrubber(idx) {
       const sideLabel = document.getElementById('scroll-section-label');
-      if (sideLabel && sectionNames[stepNum]) {
-        sideLabel.innerText = sectionNames[stepNum];
+      if (sideLabel && sectionLabels[idx]) {
+        sideLabel.innerText = sectionLabels[idx];
       }
     }
 
