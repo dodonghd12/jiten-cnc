@@ -1349,8 +1349,22 @@
 
   </main>
 
-  <!-- Sticky Bottom-Right Quick Contact Pill -->
-  <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-2">
+  <!-- Sticky Bottom-Right Floating Controls (Scroll To Top + Hotline Pill) -->
+  <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end space-y-2.5">
+    
+    <!-- Smooth Scroll To Top Button (Sits cleanly above the Hotline Pill, zero overlap) -->
+    <button 
+      id="scroll-to-top-btn" 
+      onclick="scrollToTop()" 
+      aria-label="Cuộn lên đầu trang"
+      class="opacity-0 pointer-events-none translate-y-3 transition-all duration-300 px-3.5 py-1.5 rounded-full bg-black/90 hover:bg-saas-cyan text-slate-300 hover:text-black border border-white/20 hover:border-saas-cyan shadow-2xl backdrop-blur-md flex items-center space-x-1.5 group focus:outline-none text-[11px] font-mono font-semibold"
+      title="Cuộn lên đầu trang"
+    >
+      <i data-lucide="arrow-up" class="w-3.5 h-3.5 transition-transform group-hover:-translate-y-0.5"></i>
+      <span class="tracking-wider text-[10px] uppercase">LÊN ĐẦU TRANG</span>
+    </button>
+
+    <!-- Hotline / Zalo Pill -->
     <a href="tel:0908xxxxxx" class="saas-pill-btn px-5 py-2.5 bg-white text-black font-heading font-bold text-xs flex items-center space-x-2 shadow-2xl transition-all border border-saas-border hover:bg-saas-primary hover:text-white">
       <span class="w-2.5 h-2.5 rounded-full bg-saas-emerald"></span>
       <span>HOTLINE / ZALO: 0908.xxx.xxx</span>
@@ -1445,10 +1459,30 @@
       }
     }
 
+    function scrollToTop() {
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
     window.addEventListener('scroll', () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+
+      // Toggle Scroll To Top Button Visibility (Smooth fade in when scrolled past hero)
+      const topBtn = document.getElementById('scroll-to-top-btn');
+      if (topBtn) {
+        if (winScroll > 450) {
+          topBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+          topBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        } else {
+          topBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+          topBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        }
+      }
 
       // Update Top Header Line
       const headerLine = document.getElementById('site-header-line');
