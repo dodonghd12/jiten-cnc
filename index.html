@@ -139,7 +139,7 @@
     }
 
     .arch__left .arch__info {
-      max-width: 480px;
+      max-width: 500px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -149,24 +149,24 @@
 
     .arch__left .arch__info h2.header {
       font-family: 'Be Vietnam Pro', sans-serif;
-      font-size: clamp(28px, 3.2vw, 42px);
+      font-size: clamp(26px, 2.8vw, 36px);
       font-weight: 800;
       letter-spacing: -0.025em;
-      line-height: 1.2;
+      line-height: 1.25;
       color: #FFFFFF;
     }
 
     .arch__left .arch__info p.desc {
       color: #94A3B8;
-      font-size: 15px;
+      font-size: 14.5px;
       line-height: 1.65;
-      margin-block: 16px 20px;
+      margin-block: 12px 18px;
       font-family: 'Inter', sans-serif;
     }
 
     .arch__left .arch__info a.link {
       text-decoration: none;
-      padding: 13px 24px;
+      padding: 12px 22px;
       color: #000000;
       border-radius: 9999px;
       display: inline-flex;
@@ -175,8 +175,8 @@
       align-items: center;
       font-family: 'Be Vietnam Pro', sans-serif;
       font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 0.05em;
+      font-size: 11.5px;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
       transition: transform 0.2s ease, opacity 0.2s ease;
@@ -195,23 +195,30 @@
       position: relative;
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      gap: 16px;
     }
 
-    .arch__right .img-wrapper {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      height: 420px;
+    .arch__right-stage {
+      position: relative;
       width: 100%;
+      height: 420px;
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
-      background-color: #0B111E;
+      background-color: #080D18;
     }
 
-    .arch__right .img-wrapper img {
+    .arch__right-stage .img-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .arch__right-stage .img-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -226,7 +233,7 @@
       .arch__right {
         max-width: 440px;
       }
-      .arch__right .img-wrapper {
+      .arch__right-stage {
         height: 350px;
       }
     }
@@ -237,37 +244,19 @@
         gap: 20px;
       }
 
-      .arch__left,
-      .arch__right {
-        display: contents;
-      }
-
-      .arch__right {
-        height: auto;
-        max-width: 100%;
-      }
-
-      .arch__right .img-wrapper {
-        position: static;
-        transform: none;
-        height: 300px;
+      .arch__left {
         width: 100%;
-        margin-bottom: 32px;
-        border-radius: 14px;
+      }
+
+      .arch__right {
+        display: none;
       }
 
       .arch__left .arch__info {
         min-height: auto;
         height: auto;
-        padding: 24px 0 12px 0;
+        padding: 32px 0 16px 0;
         max-width: 100%;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .arch__right .img-wrapper {
-        border-radius: 12px;
-        height: 240px;
       }
     }
   </style>
@@ -610,7 +599,7 @@
       <!-- Pinned Mask Reveal Arch Container -->
       <div class="arch">
         
-        <!-- Left Side: 4 Storytelling Chapters -->
+        <!-- Left Side: 4 Storytelling Chapters with Rich Inline Engineering Visuals -->
         <div class="arch__left">
           
           <!-- Pillar 1: Máy Công Cụ CNC -->
@@ -621,10 +610,24 @@
                 <span>01 / MÁY CÔNG CỤ CNC</span>
               </div>
               <h2 class="header">Máy Công Cụ CNC & Trung Tâm Gia Công</h2>
+              
+              <!-- Contextual Technical Visual Card -->
+              <div class="my-4 relative overflow-hidden rounded-xl border border-white/10 bg-black/60 shadow-lg group">
+                <img 
+                  src="assets/thumb_vmc_spindle.jpg" 
+                  alt="Trung tâm phay CNC 5 trục DMG MORI" 
+                  class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute bottom-2 left-2 px-2.5 py-1 bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono text-white flex items-center space-x-1.5 rounded">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#38BDF8]"></span>
+                  <span>TRUNG TÂM PHAY 5 TRỤC DMU 50 · ĐÀI DAO 30 VỊ TRÍ</span>
+                </div>
+              </div>
+
               <p class="desc">Phân phối các dòng máy phay đứng (VMC), phay ngang (HMC), máy tiện băng nghiêng và máy cắt dây EDM. Nhập khẩu trực tiếp từ Đài Loan & Nhật Bản, hỗ trợ chạy thử cắt phôi tải nặng trực tiếp tại kho trước khi quyết định đầu tư.</p>
               
               <!-- Technical HUD Specs Matrix -->
-              <div class="grid grid-cols-2 gap-2.5 my-5 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
+              <div class="grid grid-cols-2 gap-2.5 my-4 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
                 <div>• Trục chính: BT30 / BT40 / BT50</div>
                 <div>• Tốc độ: 8,000 - 15,000 RPM</div>
                 <div>• Hệ điều khiển: Fanuc, Mitsu, Siemens</div>
@@ -648,10 +651,24 @@
                 <span>02 / LINH KIỆN MÁY MÓC</span>
               </div>
               <h2 class="header">Linh Kiện Cơ Khí & Truyền Động Chính Xác</h2>
+              
+              <!-- Contextual Technical Visual Card -->
+              <div class="my-4 relative overflow-hidden rounded-xl border border-white/10 bg-black/60 shadow-lg group">
+                <img 
+                  src="assets/thumb_linear_rail.jpg" 
+                  alt="Ray trượt dẫn hướng và bàn trượt CNC" 
+                  class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute bottom-2 left-2 px-2.5 py-1 bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono text-white flex items-center space-x-1.5 rounded">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+                  <span>CỤM RAY TRƯỢT TUYẾN TÍNH & BÀN TRƯỢT CHÍNH XÁC C3</span>
+                </div>
+              </div>
+
               <p class="desc">Kho linh kiện sẵn sàng thay thế: Trục vitme bi mài C3/C5, thanh trượt dẫn hướng tuyến tính (Linear guides), cụm vòng bi trục chính P4 chính xác, khớp nối mềm, đài dao tự động ATC và bầu kẹp dao BT30/BT40/BT50 chính hãng.</p>
               
               <!-- Technical HUD Specs Matrix -->
-              <div class="grid grid-cols-2 gap-2.5 my-5 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
+              <div class="grid grid-cols-2 gap-2.5 my-4 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
                 <div>• Cấp chính xác: C3 / C5 (Trục mài)</div>
                 <div>• Bản ray dẫn: 15, 20, 25, 30, 35, 45</div>
                 <div>• Vòng bi Spindle: P4 góc tiếp xúc</div>
@@ -675,10 +692,24 @@
                 <span>03 / SỬA CHỮA & BẢO TRÌ</span>
               </div>
               <h2 class="header">Dịch Vụ Cứu Hộ, Sửa Chữa & Retrofit 24/7</h2>
+              
+              <!-- Contextual Technical Visual Card -->
+              <div class="my-4 relative overflow-hidden rounded-xl border border-white/10 bg-black/60 shadow-lg group">
+                <img 
+                  src="assets/thumb_cnc_retrofit.jpg" 
+                  alt="Hệ thống tủ điện và động cơ servo máy CNC" 
+                  class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute bottom-2 left-2 px-2.5 py-1 bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono text-white flex items-center space-x-1.5 rounded">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>
+                  <span>ĐẠI TU TRỤC CHÍNH & TỦ ĐIỆN ĐIỀU KHIỂN RETROFIT</span>
+                </div>
+              </div>
+
               <p class="desc">Đội ngũ kỹ sư cơ khí & điện tự động hóa xử lý triệt để: Sửa bo mạch chủ, sửa servo drive, khắc phục lỗi mất tọa độ encoder, cạo băng cân chỉnh độ phẳng, thay vòng bi trục chính spindle và nâng cấp hệ điều hành máy đời cũ.</p>
               
               <!-- Technical HUD Specs Matrix -->
-              <div class="grid grid-cols-2 gap-2.5 my-5 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
+              <div class="grid grid-cols-2 gap-2.5 my-4 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
                 <div>• Chẩn đoán Alarm: Fanuc, Mitsu, Heidenhain</div>
                 <div>• Ứng cứu tận xưởng: Trong 2h - 4h nội vùng</div>
                 <div>• Đại tu cơ khí: Cạo băng, cân chỉnh nivô</div>
@@ -702,10 +733,24 @@
                 <span>04 / GIA CÔNG THEO YÊU CẦU</span>
               </div>
               <h2 class="header">Gia Công Cơ Khí Chính Xác Theo Bản Vẽ</h2>
+              
+              <!-- Contextual Technical Visual Card -->
+              <div class="my-4 relative overflow-hidden rounded-xl border border-white/10 bg-black/60 shadow-lg group">
+                <img 
+                  src="assets/thumb_precision_cmm.jpg" 
+                  alt="Máy đo tọa độ 3D CMM kiểm tra chi tiết phay" 
+                  class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute bottom-2 left-2 px-2.5 py-1 bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono text-white flex items-center space-x-1.5 rounded">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#C084FC]"></span>
+                  <span>NGHIỆM THU ĐO TỌA ĐỘ 3D CMM · DUNG SAI ±0.005 MM</span>
+                </div>
+              </div>
+
               <p class="desc">Nhận gia công phay, tiện chi tiết cơ khí chính xác, chi tiết khuôn mẫu, đồ gá JIG và linh kiện máy phi tiêu chuẩn theo bản vẽ CAD/STEP của khách hàng. Cam kết vật liệu chuẩn CO/CQ và nghiệm thu dung sai bằng máy đo tọa độ 3D CMM.</p>
               
               <!-- Technical HUD Specs Matrix -->
-              <div class="grid grid-cols-2 gap-2.5 my-5 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
+              <div class="grid grid-cols-2 gap-2.5 my-4 p-3.5 bg-black/60 border border-white/10 text-xs font-mono text-slate-300 rounded-lg backdrop-blur-sm">
                 <div>• Vật liệu xử lý: Nhôm 6061/7075, SKD11, SUS304</div>
                 <div>• Định dạng bản vẽ: STEP, IGES, DXF, DWG</div>
                 <div>• Kiểm định QC: Đo tọa độ 3D CMM & Mitutoyo</div>
@@ -723,23 +768,64 @@
 
         </div>
 
-        <!-- Right Side: Pinned Images with Mask Reveal -->
+        <!-- Right Side: Pinned Images Showcase with Clean Wrapper Mask Reveal & Dock -->
         <div class="arch__right">
           
-          <div class="img-wrapper" data-index="4">
-            <img src="assets/pillar_cnc_milling.jpg" alt="Máy công cụ CNC" />
+          <!-- Pinned Image Stage Frame -->
+          <div class="arch__right-stage">
+            
+            <div class="img-wrapper" data-index="4">
+              <img src="assets/pillar_cnc_milling.jpg" alt="Máy công cụ CNC" />
+              <div class="absolute top-4 right-4 px-3 py-1 bg-black/85 backdrop-blur-md border border-white/15 text-[11px] font-mono text-white flex items-center space-x-2 rounded-full shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse"></span>
+                <span>01 · PHAY CNC 5 TRỤC TẢI NẶNG</span>
+              </div>
+            </div>
+
+            <div class="img-wrapper" data-index="3">
+              <img src="assets/pillar_linear_components.jpg" alt="Linh kiện máy móc" />
+              <div class="absolute top-4 right-4 px-3 py-1 bg-black/85 backdrop-blur-md border border-white/15 text-[11px] font-mono text-white flex items-center space-x-2 rounded-full shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+                <span>02 · TRỤC VITME & RAY TRƯỢT THK</span>
+              </div>
+            </div>
+
+            <div class="img-wrapper" data-index="2">
+              <img src="assets/pillar_maintenance_dial.jpg" alt="Sửa chữa và bảo trì" />
+              <div class="absolute top-4 right-4 px-3 py-1 bg-black/85 backdrop-blur-md border border-white/15 text-[11px] font-mono text-white flex items-center space-x-2 rounded-full shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-[#F59E0B] animate-pulse"></span>
+                <span>03 · RÀ ĐỘ ĐẢO RUNOUT SPINDLE</span>
+              </div>
+            </div>
+
+            <div class="img-wrapper" data-index="1">
+              <img src="assets/pillar_custom_machining.jpg" alt="Gia công theo yêu cầu" />
+              <div class="absolute top-4 right-4 px-3 py-1 bg-black/85 backdrop-blur-md border border-white/15 text-[11px] font-mono text-white flex items-center space-x-2 rounded-full shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-[#C084FC] animate-pulse"></span>
+                <span>04 · GIA CÔNG CHI TIẾT CHÍNH XÁC</span>
+              </div>
+            </div>
+
           </div>
 
-          <div class="img-wrapper" data-index="3">
-            <img src="assets/pillar_linear_components.jpg" alt="Linh kiện máy móc" />
-          </div>
-
-          <div class="img-wrapper" data-index="2">
-            <img src="assets/pillar_maintenance_dial.jpg" alt="Sửa chữa và bảo trì" />
-          </div>
-
-          <div class="img-wrapper" data-index="1">
-            <img src="assets/pillar_custom_machining.jpg" alt="Gia công theo yêu cầu" />
+          <!-- Interactive 4-Pillar Thumbnail Switcher Dock -->
+          <div class="grid grid-cols-4 gap-2 pt-1">
+            <div id="thumb-btn-0" onclick="jumpToPillar(0)" class="p-1.5 rounded-lg border-2 border-saas-primary bg-black flex flex-col items-center space-y-1 transition-all shadow-lg scale-105 cursor-pointer">
+              <img src="assets/pillar_cnc_milling.jpg" class="w-full h-11 object-cover rounded" alt="Thumb 1" />
+              <span class="text-[9.5px] font-mono font-bold text-saas-primary tracking-wider">01 MÁY</span>
+            </div>
+            <div id="thumb-btn-1" onclick="jumpToPillar(1)" class="p-1.5 rounded-lg border border-white/10 bg-black/60 opacity-60 hover:opacity-100 flex flex-col items-center space-y-1 transition-all cursor-pointer">
+              <img src="assets/pillar_linear_components.jpg" class="w-full h-11 object-cover rounded" alt="Thumb 2" />
+              <span class="text-[9.5px] font-mono text-slate-400 tracking-wider">02 LINH KIỆN</span>
+            </div>
+            <div id="thumb-btn-2" onclick="jumpToPillar(2)" class="p-1.5 rounded-lg border border-white/10 bg-black/60 opacity-60 hover:opacity-100 flex flex-col items-center space-y-1 transition-all cursor-pointer">
+              <img src="assets/pillar_maintenance_dial.jpg" class="w-full h-11 object-cover rounded" alt="Thumb 3" />
+              <span class="text-[9.5px] font-mono text-slate-400 tracking-wider">03 CỨU HỘ</span>
+            </div>
+            <div id="thumb-btn-3" onclick="jumpToPillar(3)" class="p-1.5 rounded-lg border border-white/10 bg-black/60 opacity-60 hover:opacity-100 flex flex-col items-center space-y-1 transition-all cursor-pointer">
+              <img src="assets/pillar_custom_machining.jpg" class="w-full h-11 object-cover rounded" alt="Thumb 4" />
+              <span class="text-[9.5px] font-mono text-slate-400 tracking-wider">04 GIA CÔNG</span>
+            </div>
           </div>
 
         </div>
@@ -1192,46 +1278,16 @@
       if (pctLabel) pctLabel.innerText = Math.round(scrolled) + '%';
     });
 
-    // 5. Section 3 Arch Pinned Image Mask Reveal
+    // 5. Section 3 Arch Pinned Image Mask Reveal & Navigation
     // Set z-index for images based on data-index
-    document.querySelectorAll(".arch__right .img-wrapper").forEach((element) => {
+    document.querySelectorAll(".arch__right-stage .img-wrapper").forEach((element) => {
       const order = element.getAttribute("data-index");
       if (order !== null) {
         element.style.zIndex = order;
       }
     });
 
-    // Mobile layout handler (interleave text and images using order)
-    function handleMobileLayout() {
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
-      const leftItems = gsap.utils.toArray(".arch__left .arch__info");
-      const rightItems = gsap.utils.toArray(".arch__right .img-wrapper");
-
-      if (isMobile) {
-        leftItems.forEach((item, i) => {
-          item.style.order = i * 2;
-        });
-        rightItems.forEach((item, i) => {
-          item.style.order = i * 2 + 1;
-        });
-      } else {
-        leftItems.forEach((item) => {
-          item.style.order = "";
-        });
-        rightItems.forEach((item) => {
-          item.style.order = "";
-        });
-      }
-    }
-
-    let resizeTimeout;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(handleMobileLayout, 100);
-    });
-    handleMobileLayout();
-
-    const archImgs = gsap.utils.toArray(".arch__right .img-wrapper img");
+    const archWrappers = gsap.utils.toArray(".arch__right-stage .img-wrapper");
     const sectionBgColors = ["#040a14", "#03120b", "#140e03", "#0e0618"];
     const sectionLabels = ["01 / MÁY CNC", "02 / LINH KIỆN", "03 / BẢO TRÌ", "04 / GIA CÔNG"];
 
@@ -1249,18 +1305,17 @@
           }
         });
 
-        gsap.set(archImgs, {
-          clipPath: "inset(0)",
-          objectPosition: "0px 0%"
+        gsap.set(archWrappers, {
+          clipPath: "inset(0% 0% 0% 0%)"
         });
 
-        archImgs.forEach((_, index) => {
-          const currentImage = archImgs[index];
-          const nextImage = archImgs[index + 1] ? archImgs[index + 1] : null;
+        archWrappers.forEach((_, index) => {
+          const currentWrapper = archWrappers[index];
+          const nextWrapper = archWrappers[index + 1] ? archWrappers[index + 1] : null;
 
           const sectionTimeline = gsap.timeline();
 
-          if (nextImage) {
+          if (nextWrapper) {
             sectionTimeline
               .to(
                 "#services-story",
@@ -1272,19 +1327,9 @@
                 0
               )
               .to(
-                currentImage,
+                currentWrapper,
                 {
-                  clipPath: "inset(0px 0px 100%)",
-                  objectPosition: "0px 60%",
-                  duration: 1.5,
-                  ease: "none"
-                },
-                0
-              )
-              .to(
-                nextImage,
-                {
-                  objectPosition: "0px 40%",
+                  clipPath: "inset(0% 0% 100% 0%)",
                   duration: 1.5,
                   ease: "none"
                 },
@@ -1295,58 +1340,46 @@
           mainTimeline.add(sectionTimeline);
         });
 
-        // Sync with right scrubber section indicator
+        // Sync with right scrubber & thumbnail switcher
         const archInfos = gsap.utils.toArray(".arch__left .arch__info");
         archInfos.forEach((info, idx) => {
           ScrollTrigger.create({
             trigger: info,
             start: "top center",
             end: "bottom center",
-            onEnter: () => updateSideScrubber(idx),
-            onEnterBack: () => updateSideScrubber(idx)
+            onEnter: () => updateActivePillar(idx),
+            onEnterBack: () => updateActivePillar(idx)
           });
-        });
-      },
-
-      // Mobile: Parallax & Subtle Ambient Color Shifts
-      "(max-width: 768px)": function () {
-        const mbTimeline = gsap.timeline();
-        gsap.set(archImgs, {
-          objectPosition: "0px 60%",
-          clipPath: "none"
-        });
-
-        archImgs.forEach((image, index) => {
-          const innerTimeline = gsap.timeline({
-            scrollTrigger: {
-              trigger: image,
-              start: "top 80%",
-              end: "bottom 20%",
-              scrub: true
-            }
-          });
-
-          innerTimeline
-            .to(image, {
-              objectPosition: "0px 30%",
-              duration: 3,
-              ease: "none"
-            })
-            .to("#services-story", {
-              backgroundColor: sectionBgColors[index] || "#000000",
-              duration: 1.5,
-              ease: "power2.inOut"
-            });
-
-          mbTimeline.add(innerTimeline);
         });
       }
     });
 
-    function updateSideScrubber(idx) {
+    function updateActivePillar(idx) {
+      // 1. Update side track scrubber label
       const sideLabel = document.getElementById('scroll-section-label');
       if (sideLabel && sectionLabels[idx]) {
         sideLabel.innerText = sectionLabels[idx];
+      }
+
+      // 2. Update thumbnail switcher dock
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById(`thumb-btn-${i}`);
+        if (!btn) continue;
+        const label = btn.querySelector('span');
+        if (i === idx) {
+          btn.className = "p-1.5 rounded-lg border-2 border-saas-primary bg-black flex flex-col items-center space-y-1 transition-all shadow-lg scale-105 cursor-pointer";
+          if (label) label.className = "text-[9.5px] font-mono font-bold text-saas-primary tracking-wider";
+        } else {
+          btn.className = "p-1.5 rounded-lg border border-white/10 bg-black/60 opacity-60 hover:opacity-100 flex flex-col items-center space-y-1 transition-all cursor-pointer";
+          if (label) label.className = "text-[9.5px] font-mono text-slate-400 tracking-wider";
+        }
+      }
+    }
+
+    function jumpToPillar(idx) {
+      const archInfos = gsap.utils.toArray(".arch__left .arch__info");
+      if (archInfos[idx]) {
+        lenis.scrollTo(archInfos[idx], { offset: -20, duration: 1.2 });
       }
     }
 
