@@ -367,98 +367,163 @@
   <!-- ================= MAIN SINGLE PAGE CONTAINER ================= -->
   <main class="pt-20">
 
-    <!-- ================= SECTION 1: SAAS 2026 HERO SHOWCASE ================= -->
-    <section id="home" class="min-h-[92vh] flex flex-col justify-between border-b border-saas-border px-4 sm:px-6 lg:px-8 pt-12 pb-16 bg-black relative">
-      <div class="max-w-7xl mx-auto w-full space-y-10">
+    <!-- ================= SECTION 1: SAAS 2026 HERO SHOWCASE (DRIBBLE LIQUID BROKERS MOTION STYLE) ================= -->
+    <section id="home" class="min-h-[100vh] relative flex flex-col justify-between overflow-hidden bg-black text-white border-b border-saas-border pt-16 md:pt-24 pb-12">
+      
+      <!-- Ambient Dynamic Video Background with Cinema Vignette & Glow -->
+      <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        
+        <!-- Ambient Atmosphere Glow Orbs (Subtle Cyan & Gold Rim Light) -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-tr from-saas-cyan/15 via-saas-primary/10 to-amber-500/10 rounded-full blur-[140px] opacity-70"></div>
+        <div class="absolute bottom-10 right-10 w-[400px] h-[300px] bg-saas-cyan/10 rounded-full blur-[100px] opacity-40"></div>
+
+        <!-- The Hailuo AI Dynamic High-Speed Video Stream -->
+        <video 
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          preload="auto"
+          poster="assets/hero_cnc_center.jpg"
+          class="w-full h-full object-cover object-center opacity-70 md:opacity-80 transition-opacity duration-1000 scale-[1.02]"
+        >
+          <source src="assets/hero_bg_motion.mp4" type="video/mp4">
+        </video>
+
+        <!-- Cinema Gradients for Legibility & Deep Obsidian Contrast -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black via-black/65 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+        <div class="absolute inset-0 [background:radial-gradient(ellipse_at_center,_transparent_35%,_rgba(0,0,0,0.85)_100%)]"></div>
+
+        <!-- Subtle Cosmic Starlight Grid Texture (Dribbble Liquid Brokers Atmosphere) -->
+        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:32px_32px]"></div>
+      </div>
+
+      <!-- Main Centered Content Container -->
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-between items-center text-center">
         
         <!-- Top SaaS Status Beacon -->
-        <div class="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-saas-panel border border-white/10 text-xs font-mono text-slate-300">
+        <div class="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-black/60 border border-white/15 backdrop-blur-xl text-xs font-mono text-slate-300 shadow-2xl mb-6 mt-4">
           <span class="w-2 h-2 rounded-full bg-saas-emerald animate-pulse"></span>
-          <span>ENTERPRISE HUB · KHO MÁY TRẢNG BOM ĐỒNG NAI</span>
+          <span class="tracking-wide">ENTERPRISE HUB · KHO MÁY TRẢNG BOM ĐỒNG NAI</span>
           <span class="text-white/20">|</span>
-          <span class="text-saas-cyan">ĐỦ MÁY CHẠY THỬ PHÔI 24/7</span>
+          <span class="text-saas-cyan font-bold">ĐỦ MÁY CHẠY THỬ PHÔI 24/7</span>
         </div>
 
-        <!-- Hero Headline & Subtitle -->
-        <div class="space-y-6 max-w-4xl">
-          <h1 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08]">
-            Nền Tảng Máy Công Cụ & Cơ Điện <color-stop>Chuẩn Công Nghiệp 4.0</color-stop>
+        <!-- Centered Typography & Main Call to Action (Dribbble Layout) -->
+        <div class="space-y-6 max-w-4xl mx-auto pt-2">
+          
+          <h1 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+            Đỉnh Cao Gia Công Cơ Khí &<br class="hidden sm:inline">
+            <span class="bg-gradient-to-r from-white via-slate-100 to-saas-cyan bg-clip-text text-transparent">Bản Sao Số (3D Digital Twin)</span>
           </h1>
 
-          <p class="text-base sm:text-xl text-saas-textSecondary font-normal leading-relaxed max-w-3xl">
-            Phân phối trung tâm gia công CNC phay & tiện, cung ứng linh kiện ray trượt THK/Hiwin, chẩn đoán bo mạch Servo/Spindle chuyên sâu và trực quan hóa <color-stop>Bản Sao Số (3D Digital Twin)</color-stop>.
+          <p class="text-base sm:text-lg md:text-xl text-slate-300/90 font-normal leading-relaxed max-w-2xl mx-auto font-sans">
+            Phân phối trung tâm gia công CNC phay & tiện, cung ứng linh kiện ray trượt THK/Hiwin, chẩn đoán bo mạch Servo/Spindle và trực quan hóa bản sao số 3D thời gian thực.
           </p>
 
-          <!-- SaaS Call to Actions Group -->
-          <div class="pt-2 flex flex-wrap gap-4 items-center">
-            <a href="#contact" class="saas-pill-btn inline-flex items-center space-x-2 px-8 py-3.5 bg-white hover:bg-saas-primary text-black hover:text-white font-heading font-extrabold text-xs tracking-wider uppercase transition-all shadow-xl">
+          <!-- Centered Action Pill Buttons (Matching Dribbble "Sign Up & Trade" Button) -->
+          <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
+            
+            <!-- Primary Action Pill (White High-Contrast with Circle Arrow Up-Right) -->
+            <a href="#contact" class="saas-pill-btn group inline-flex items-center space-x-3 px-8 py-3.5 bg-white hover:bg-saas-cyan text-black hover:text-black font-heading font-extrabold text-xs tracking-wider uppercase transition-all shadow-[0_0_35px_rgba(255,255,255,0.25)] hover:shadow-[0_0_45px_rgba(56,189,248,0.5)] transform hover:-translate-y-0.5">
               <span>YÊU CẦU BÁO GIÁ NHANH (15 PHÚT)</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              <div class="w-6 h-6 rounded-full bg-black/10 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-black"></i>
+              </div>
             </a>
 
-            <!-- 3D Digital Twin Flagship Launch Button -->
-            <a href="3d-cad.html" class="saas-pill-btn inline-flex items-center space-x-2.5 px-6 py-3.5 bg-saas-panel hover:bg-saas-surface border border-saas-primary/50 text-saas-primary hover:text-white text-xs font-mono font-semibold transition-all shadow-lg group">
-              <span class="w-2 h-2 rounded-full bg-saas-primary group-hover:scale-125 transition-transform"></span>
+            <!-- Secondary 3D Digital Twin Flagship Launch Button (Frosted Glass) -->
+            <a href="3d-cad.html" class="saas-pill-btn group inline-flex items-center space-x-2.5 px-6 py-3.5 bg-black/50 hover:bg-black/80 border border-white/20 hover:border-saas-cyan/60 backdrop-blur-xl text-white hover:text-saas-cyan text-xs font-mono font-semibold transition-all shadow-xl transform hover:-translate-y-0.5">
+              <span class="w-2 h-2 rounded-full bg-saas-cyan animate-pulse"></span>
               <span>TRẢI NGHIỆM 3D CAD TWIN (250+ PARTS)</span>
-              <i data-lucide="box" class="w-4 h-4"></i>
+              <i data-lucide="box" class="w-4 h-4 text-saas-cyan"></i>
             </a>
 
-            <a href="#catalog" class="saas-pill-btn inline-flex items-center space-x-2 px-5 py-3.5 bg-saas-panel hover:bg-saas-surface border border-saas-border text-white text-xs font-mono font-medium transition-all">
+            <a href="#catalog" class="saas-pill-btn inline-flex items-center space-x-2 px-5 py-3.5 bg-black/40 hover:bg-black/70 border border-white/10 text-slate-300 hover:text-white text-xs font-mono font-medium transition-all backdrop-blur-md">
               <span>XEM BẢNG MODEL MÁY</span>
               <i data-lucide="chevron-down" class="w-4 h-4"></i>
             </a>
           </div>
+
         </div>
 
-        <!-- Hero Machine Stage with Live Telemetry Hotspots -->
-        <div class="relative w-full border border-saas-border overflow-hidden bg-black shadow-2xl group">
-          <img 
-            src="assets/hero_cnc_center.jpg" 
-            alt="Trung tâm gia công phay CNC công nghiệp JITEN" 
-            class="w-full h-auto max-h-[620px] object-cover object-center"
-          />
-
-          <!-- Live Technical Telemetry Hotspots -->
-          <div class="absolute top-1/4 left-1/3 hidden md:flex items-center space-x-2 px-3 py-1.5 bg-black/90 border border-saas-border text-[11px] font-mono text-white shadow-xl backdrop-blur-sm">
-            <span class="w-2 h-2 rounded-full bg-saas-cyan hotspot-pin"></span>
-            <span>TRỤC CHÍNH SPINDLE 12,000 RPM (BT40)</span>
+        <!-- Floating Glassmorphic Telemetry Cards (Signature Dribbble Liquid Brokers Floating Cards) -->
+        <div class="w-full mt-12 md:mt-20 mb-8 grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+          
+          <!-- Left Floating Glass Card: Machining Precision -->
+          <div class="text-left backdrop-blur-xl bg-black/55 border border-white/15 hover:border-saas-cyan/50 rounded-2xl p-5 shadow-[0_20px_40px_rgba(0,0,0,0.7)] transition-all duration-300 group hover:bg-black/70 relative overflow-hidden">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1">
+                <span class="text-[10.5px] font-mono text-slate-400 uppercase tracking-widest block flex items-center space-x-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-saas-cyan"></span>
+                  <span>HỆ THỐNG GIA CÔNG CHÍNH XÁC</span>
+                </span>
+                <h4 class="font-heading text-lg font-bold text-white group-hover:text-saas-cyan transition-colors">
+                  Trục Chính Spindle BT40 · 15,000 RPM
+                </h4>
+              </div>
+              <a href="#solutions-bento" class="w-8 h-8 rounded-full bg-white/10 group-hover:bg-white text-white group-hover:text-black flex items-center justify-center transition-all shrink-0 ml-3">
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+            
+            <div class="mt-4 flex items-center justify-between pt-3 border-t border-white/10 text-xs font-mono">
+              <span class="text-slate-400">Dung sai kiểm định laser:</span>
+              <span class="text-saas-cyan font-bold text-sm tracking-wide">±0.003 mm</span>
+            </div>
           </div>
 
-          <div class="absolute bottom-1/3 right-1/4 hidden md:flex items-center space-x-2 px-3 py-1.5 bg-black/90 border border-saas-border text-[11px] font-mono text-white shadow-xl backdrop-blur-sm">
-            <span class="w-2 h-2 rounded-full bg-saas-primary hotspot-pin"></span>
-            <span>HỆ ĐIỀU KHIỂN FANUC 0i-MF PLUS</span>
+          <!-- Right Floating Glass Card: 99.8% Reliability with Progress Telemetry -->
+          <div class="text-left backdrop-blur-xl bg-black/55 border border-white/15 hover:border-saas-cyan/50 rounded-2xl p-5 shadow-[0_20px_40px_rgba(0,0,0,0.7)] transition-all duration-300 group hover:bg-black/70 relative overflow-hidden">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1">
+                <span class="text-[10.5px] font-mono text-slate-400 uppercase tracking-widest block flex items-center space-x-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-saas-emerald"></span>
+                  <span>ĐỘ TIN CẬY VẬN HÀNH</span>
+                </span>
+                <div class="flex items-baseline space-x-2 pt-0.5">
+                  <span class="font-heading text-3xl font-black text-white">99.8%</span>
+                  <span class="text-xs font-mono text-saas-emerald font-semibold uppercase">UPTIME LIVE</span>
+                </div>
+              </div>
+              <a href="#services-story" class="w-8 h-8 rounded-full bg-white/10 group-hover:bg-white text-white group-hover:text-black flex items-center justify-center transition-all shrink-0 ml-3">
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <!-- Sleek Telemetry Progress Bar -->
+            <div class="mt-3 space-y-1.5">
+              <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-saas-cyan via-sky-400 to-saas-emerald rounded-full w-[99.8%]"></div>
+              </div>
+              <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
+                <span>Ray trượt THK C3 & Vít me bi</span>
+                <span class="text-white font-medium">Sẵn sàng 24/7</span>
+              </div>
+            </div>
           </div>
 
-          <!-- Real Image Watermark Badges -->
-          <div class="absolute bottom-4 left-4 px-3 py-1.5 bg-black/90 border border-saas-border text-[11px] font-mono text-saas-textSecondary flex items-center space-x-2">
-            <span class="w-2 h-2 rounded-full bg-saas-emerald"></span>
-            <span>slmncncmachine.com · KHO MÁY TRẢNG BOM ĐỒNG NAI</span>
-          </div>
-
-          <!-- Down Arrow Indicator -->
-          <a href="#solutions-bento" class="absolute bottom-4 right-1/2 translate-x-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-black flex items-center justify-center transition-all shadow-lg">
-            <i data-lucide="arrow-down" class="w-5 h-5"></i>
-          </a>
         </div>
 
         <!-- 4 Metric Trust Bar (SaaS 2026 Key Performance Metrics) -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-saas-border pt-8 font-mono text-xs">
-          <div class="p-4 bg-saas-panel border border-saas-border flex flex-col justify-between space-y-1">
+        <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-white/10 pt-6 font-mono text-xs backdrop-blur-md">
+          <div class="p-4 bg-black/60 border border-white/10 flex flex-col justify-between space-y-1 text-left rounded-xl">
             <div class="text-slate-400">DUNG SAI KIỂM ĐỊNH</div>
             <div class="text-2xl font-bold text-white font-heading">±0.005 mm</div>
             <div class="text-[10px] text-saas-cyan">Đo kiểm Mitutoyo & Renishaw</div>
           </div>
-          <div class="p-4 bg-saas-panel border border-saas-border flex flex-col justify-between space-y-1">
+          <div class="p-4 bg-black/60 border border-white/10 flex flex-col justify-between space-y-1 text-left rounded-xl">
             <div class="text-slate-400">TỒN KHO THỰC TẾ</div>
             <div class="text-2xl font-bold text-saas-primary font-heading">50+ Đầu Máy</div>
             <div class="text-[10px] text-saas-textMuted">Sẵn sàng giao trong 24h</div>
           </div>
-          <div class="p-4 bg-saas-panel border border-saas-border flex flex-col justify-between space-y-1">
+          <div class="p-4 bg-black/60 border border-white/10 flex flex-col justify-between space-y-1 text-left rounded-xl">
             <div class="text-slate-400">PHẢN HỒI BẢN VẼ (RFQ)</div>
             <div class="text-2xl font-bold text-white font-heading">&lt; 15 Phút</div>
             <div class="text-[10px] text-saas-emerald">Phân tích STEP / DWG / DXF</div>
           </div>
-          <div class="p-4 bg-saas-panel border border-saas-border flex flex-col justify-between space-y-1">
+          <div class="p-4 bg-black/60 border border-white/10 flex flex-col justify-between space-y-1 text-left rounded-xl">
             <div class="text-slate-400">MÃ SỐ THUẾ CHÍNH THỨC</div>
             <div class="text-2xl font-bold text-saas-cyan font-heading">3603910491</div>
             <div class="text-[10px] text-slate-400">Pháp nhân Cơ Điện Kim Phong</div>
