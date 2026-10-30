@@ -268,18 +268,63 @@
     <div id="site-header-line"></div>
   </div>
 
-  <!-- ================= FLOATING SIDE PROGRESS SCRUBBER ================= -->
-  <aside class="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-end space-y-4 font-mono text-[11px] pointer-events-none select-none">
-    <div class="flex items-center space-x-2 text-saas-primary">
-      <span id="scroll-section-label" class="tracking-widest uppercase font-bold">01 / KHỞI ĐẦU</span>
+  <!-- ================= FLOATING SIDE PROGRESS SCRUBBER (SAAS 2026 DYNAMIC TRACK) ================= -->
+  <aside class="fixed right-5 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-end space-y-3 font-mono text-[11px] select-none">
+    
+    <!-- Dynamic Active Section Label Badge -->
+    <div class="flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-black/85 border border-white/15 backdrop-blur-md text-saas-cyan shadow-xl pointer-events-none transition-all">
+      <span class="w-1.5 h-1.5 rounded-full bg-saas-cyan animate-pulse"></span>
+      <span id="scroll-section-label" class="tracking-widest uppercase font-bold text-[10.5px]">01 / TRANG CHỦ</span>
     </div>
     
-    <!-- Vertical Progress Track -->
-    <div class="w-1 h-36 bg-white/10 rounded-none relative overflow-hidden">
-      <div id="scroll-track-fill" class="w-full bg-saas-primary h-0 transition-all duration-100"></div>
+    <!-- Vertical Progress Track with 8 Interactive Section Nodes -->
+    <div class="relative flex flex-col items-center py-1">
+      
+      <!-- Continuous Background Track Line -->
+      <div class="absolute top-2 bottom-2 w-[2px] bg-white/10 left-1/2 -translate-x-1/2 pointer-events-none">
+        <div id="scroll-track-fill" class="w-full bg-gradient-to-b from-saas-cyan to-saas-primary h-0 transition-all duration-100"></div>
+      </div>
+
+      <!-- 8 Clickable Section Nodes -->
+      <div class="relative z-10 flex flex-col justify-between h-56 pointer-events-auto">
+        <a href="#home" id="dot-home" onclick="jumpToSection('home', event)" class="nav-dot group flex items-center justify-end space-x-2 cursor-pointer" title="01. Trang chủ">
+          <span class="nav-dot-tooltip opacity-0 group-hover:opacity-100 transition-opacity text-[9.5px] font-mono text-slate-300 bg-black/95 px-1.5 py-0.5 border border-white/15 rounded whitespace-nowrap shadow-md">01 Trang chủ</span>
+          <span class="dot-indicator w-2.5 h-2.5 rounded-full border border-saas-cyan bg-saas-cyan scale-125 shadow-[0_0_10px_#38BDF8] transition-all"></span>
+        </a>
+        <a href="#metrics-telemetry" id="dot-metrics-telemetry" onclick="jumpToSection('metrics-telemetry', event)" class="nav-dot group flex items-center justify-end space-x-2 cursor-pointer" title="02. Telemetry">
+          <span class="nav-dot-tooltip opacity-0 group-hover:opacity-100 transition-opacity text-[9.5px] font-mono text-slate-300 bg-black/95 px-1.5 py-0.5 border border-white/15 rounded whitespace-nowrap shadow-md">02 Telemetry</span>
+          <span class="dot-indicator w-2 h-2 rounded-full border border-white/30 bg-black group-hover:border-saas-cyan group-hover:scale-125 transition-all"></span>
+        </a>
+        <a href="#solutions-bento" id="dot-solutions-bento" onclick="jumpToSection('solutions-bento', event)" class="nav-dot group flex items-center justify-end space-x-2 cursor-pointer" title="03. Giải pháp">
+          <span class="nav-dot-tooltip opacity-0 group-hover:opacity-100 transition-opacity text-[9.5px] font-mono text-slate-300 bg-black/95 px-1.5 py-0.5 border border-white/15 rounded whitespace-nowrap shadow-md">03 Giải pháp</span>
+          <span class="dot-indicator w-2 h-2 rounded-full border border-white/30 bg-black group-hover:border-saas-cyan group-hover:scale-125 transition-all"></span>
+        </a>
+        <a href="#services-story" id="dot-services-story" onclick="jumpToSection('services-story', event)" class="nav-dot group flex items-center justify-end space-x-2 cursor-pointer" title="04. Năng lực">
+          <span class="nav-dot-tooltip opacity-0 group-hover:opacity-100 transition-opacity text-[9.5px] font-mono text-slate-300 bg-black/95 px-1.5 py-0.5 border border-white/15 rounded whitespace-nowrap shadow-md">04 Năng lực</span>
+          <span class="dot-indicator w-2 h-2 rounded-full border border-white/30 bg-black group-hover:border-saas-cyan group-hover:scale-125 transition-all"></span>
+        </a>
+        <a href="#packages" id="dot-packages" onclick="jumpToSection('packages', event)" class="nav-dot group flex items-center justify-end space-x-2 cursor-pointer" title="05. Gói giải pháp">
+          <span class="nav-dot-tooltip opacity-0 group-hover:opacity-100 transition-opacity text-[9.5px] font-mono text-slate-300 bg-black/95 px-1.5 py-0.5 border border-white/15 rounded whitespace-nowrap shadow-md">05 Gói giải pháp</span>
+          <span class="dot-indicator w-2 h-2 rounded-full border border-white/30 bg-black group-hover:border-saas-cyan group-hover:scale-125 transition-all"></span>
+        </a>
+        <a href="#brands" id="dot-brands" onclick="jumpToSection('brands', event)" class="nav-dot group flex items-center justify-end space-x-2 cursor-pointer" title="06. Thương hiệu">
+          <span class="nav-dot-tooltip opacity-0 group-hover:opacity-100 transition-opacity text-[9.5px] font-mono text-slate-300 bg-black/95 px-1.5 py-0.5 border border-white/15 rounded whitespace-nowrap shadow-md">06 Thương hiệu</span>
+          <span class="dot-indicator w-2 h-2 rounded-full border border-white/30 bg-black group-hover:border-saas-cyan group-hover:scale-125 transition-all"></span>
+        </a>
+        <a href="#catalog" id="dot-catalog" onclick="jumpToSection('catalog', event)" class="nav-dot group flex items-center justify-end space-x-2 cursor-pointer" title="07. Catalog máy">
+          <span class="nav-dot-tooltip opacity-0 group-hover:opacity-100 transition-opacity text-[9.5px] font-mono text-slate-300 bg-black/95 px-1.5 py-0.5 border border-white/15 rounded whitespace-nowrap shadow-md">07 Catalog máy</span>
+          <span class="dot-indicator w-2 h-2 rounded-full border border-white/30 bg-black group-hover:border-saas-cyan group-hover:scale-125 transition-all"></span>
+        </a>
+        <a href="#contact" id="dot-contact" onclick="jumpToSection('contact', event)" class="nav-dot group flex items-center justify-end space-x-2 cursor-pointer" title="08. Báo giá & RFQ">
+          <span class="nav-dot-tooltip opacity-0 group-hover:opacity-100 transition-opacity text-[9.5px] font-mono text-slate-300 bg-black/95 px-1.5 py-0.5 border border-white/15 rounded whitespace-nowrap shadow-md">08 Báo giá & RFQ</span>
+          <span class="dot-indicator w-2 h-2 rounded-full border border-white/30 bg-black group-hover:border-saas-cyan group-hover:scale-125 transition-all"></span>
+        </a>
+      </div>
+
     </div>
 
-    <div class="text-[10px] text-saas-textMuted" id="scroll-pct">0%</div>
+    <!-- Live Scroll Percentage -->
+    <div class="text-[10px] text-slate-400 font-mono tracking-wider" id="scroll-pct">0%</div>
   </aside>
 
   <!-- ================= 1. SAAS 2026 ENTERPRISE HEADER ================= -->
@@ -1351,11 +1396,59 @@
     });
     gsap.ticker.lagSmoothing(0);
 
-    // 4. Top Header Progress Line + Right Side Track Scrubber
+    // 4. Top Header Progress Line + Right Side Dynamic Track Scrubber (All 8 Sections)
+    const siteSections = [
+      { id: 'home', label: '01 / TRANG CHỦ' },
+      { id: 'metrics-telemetry', label: '02 / TELEMETRY' },
+      { id: 'solutions-bento', label: '03 / GIẢI PHÁP' },
+      { id: 'services-story', label: '04 / NĂNG LỰC' },
+      { id: 'packages', label: '05 / GÓI GIẢI PHÁP' },
+      { id: 'brands', label: '06 / THƯƠNG HIỆU' },
+      { id: 'catalog', label: '07 / CATALOG MÁY' },
+      { id: 'contact', label: '08 / BÁO GIÁ & RFQ' }
+    ];
+
+    let currentActiveSectionId = 'home';
+    let isInsideServicesPillar = false;
+
+    function updateSideTrackIndicator(secId, customLabel) {
+      currentActiveSectionId = secId;
+      const labelEl = document.getElementById('scroll-section-label');
+      if (labelEl) {
+        if (customLabel) {
+          labelEl.innerText = customLabel;
+        } else {
+          const match = siteSections.find(s => s.id === secId);
+          if (match) labelEl.innerText = match.label;
+        }
+      }
+
+      // Update 8 Dots
+      siteSections.forEach(s => {
+        const dotAnchor = document.getElementById(`dot-${s.id}`);
+        if (!dotAnchor) return;
+        const dot = dotAnchor.querySelector('.dot-indicator');
+        if (!dot) return;
+        if (s.id === secId) {
+          dot.className = "dot-indicator w-2.5 h-2.5 rounded-full border border-saas-cyan bg-saas-cyan scale-125 shadow-[0_0_10px_#38BDF8] transition-all";
+        } else {
+          dot.className = "dot-indicator w-2 h-2 rounded-full border border-white/30 bg-black group-hover:border-saas-cyan group-hover:scale-125 transition-all";
+        }
+      });
+    }
+
+    function jumpToSection(secId, event) {
+      if (event) event.preventDefault();
+      const el = document.getElementById(secId);
+      if (el) {
+        lenis.scrollTo(el, { offset: -20, duration: 1.2 });
+      }
+    }
+
     window.addEventListener('scroll', () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
 
       // Update Top Header Line
       const headerLine = document.getElementById('site-header-line');
@@ -1367,6 +1460,42 @@
 
       const pctLabel = document.getElementById('scroll-pct');
       if (pctLabel) pctLabel.innerText = Math.round(scrolled) + '%';
+
+      // Global Section Detection Across All 8 Sections
+      const windowHeight = window.innerHeight;
+      const triggerY = winScroll + windowHeight * 0.35; // 35% down viewport
+
+      // Bottom of page -> Lock to Contact RFQ
+      if (winScroll + windowHeight >= document.documentElement.scrollHeight - 60) {
+        updateSideTrackIndicator('contact');
+        return;
+      }
+
+      // Inside services-story pinned container -> Managed by active pillar
+      const servicesEl = document.getElementById('services-story');
+      if (servicesEl) {
+        const rect = servicesEl.getBoundingClientRect();
+        const sTop = rect.top + winScroll;
+        const sBottom = sTop + servicesEl.offsetHeight;
+        if (triggerY >= sTop && triggerY < sBottom) {
+          isInsideServicesPillar = true;
+          return;
+        } else {
+          isInsideServicesPillar = false;
+        }
+      }
+
+      // Scan all site sections from bottom to top
+      for (let i = siteSections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(siteSections[i].id);
+        if (el) {
+          const top = el.offsetTop;
+          if (triggerY >= top) {
+            updateSideTrackIndicator(siteSections[i].id);
+            break;
+          }
+        }
+      }
     });
 
     // 5. Section 3 Arch Pinned Image Mask Reveal & Navigation
@@ -1380,7 +1509,7 @@
 
     const archWrappers = gsap.utils.toArray(".arch__right-stage .img-wrapper");
     const sectionBgColors = ["#040a14", "#03120b", "#140e03", "#0e0618"];
-    const sectionLabels = ["01 / MÁY CNC", "02 / LINH KIỆN", "03 / BẢO TRÌ", "04 / GIA CÔNG"];
+    const sectionLabels = ["04.1 / MÁY CNC", "04.2 / LINH KIỆN", "04.3 / BẢO TRÌ", "04.4 / GIA CÔNG"];
 
     // GSAP ScrollTrigger Pinned Mask Reveal
     ScrollTrigger.matchMedia({
@@ -1446,10 +1575,9 @@
     });
 
     function updateActivePillar(idx) {
-      // 1. Update side track scrubber label
-      const sideLabel = document.getElementById('scroll-section-label');
-      if (sideLabel && sectionLabels[idx]) {
-        sideLabel.innerText = sectionLabels[idx];
+      // 1. Update side track scrubber label & dot
+      if (sectionLabels[idx]) {
+        updateSideTrackIndicator('services-story', sectionLabels[idx]);
       }
 
       // 2. Update thumbnail switcher dock
