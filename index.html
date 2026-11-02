@@ -138,6 +138,11 @@
       line-height: 1.18 !important;
       letter-spacing: -0.02em;
     }
+
+    /* Footer Safe Padding to prevent floating Scroll-to-Top button from occluding legal text */
+    .footer {
+      padding-bottom: 6rem !important;
+    }
   </style>
 </head>
 <body class="body">
@@ -884,7 +889,7 @@
   </div>
 
   <!-- ================= SECTION 9: FOOTER (MODULABS TEMPLATE) ================= -->
-  <section class="footer">
+  <section class="footer pb-24">
     <div class="w-layout-blockcontainer main-container w-container">
       <div class="master-footer">
         <div class="w-layout-grid footer-halves">
@@ -933,7 +938,7 @@
 
         </div>
 
-        <div class="footer-legal-tile pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400">
+        <div class="footer-legal-tile pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 md:pr-40">
           <div>
             © 2026 JITEN CNC · CÔNG TY TNHH CƠ ĐIỆN KIM PHONG. All rights reserved.
           </div>
