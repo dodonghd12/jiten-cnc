@@ -123,6 +123,21 @@
     .button-circle {
       background-color: #38BDF8 !important;
     }
+
+    /* Fix CTA Section Headline Width & Force Exact 2-Line Display */
+    .content-cta {
+      max-width: 960px !important;
+      width: 100% !important;
+    }
+    .heading-cta {
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    .heading-cta h2 {
+      font-size: clamp(22px, 4.2vw, 50px) !important;
+      line-height: 1.18 !important;
+      letter-spacing: -0.02em;
+    }
   </style>
 </head>
 <body class="body">
@@ -787,12 +802,13 @@
       </video>
       
       <div class="w-layout-blockcontainer main-container w-container relative z-10 w-full">
-        <div class="content-cta text-center space-y-4">
+        <div class="content-cta text-center space-y-4 max-w-4xl mx-auto">
           
           <!-- User requested: heading-cta chỉ hiển thị đúng 2 dòng, dòng đầu Sẵn Sàng Nâng Tầm, dòng 2 là Năng Lực Sản Xuất Của Bạn? -->
-          <div class="heading-cta">
-            <h2 class="no-margins font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
-              Sẵn Sàng Nâng Tầm<br><span class="heading-medium text-saas-cyan">Năng Lực Sản Xuất Của Bạn?</span>
+          <div class="heading-cta w-full !max-w-none">
+            <h2 class="no-margins font-heading font-extrabold text-white leading-tight">
+              <span class="inline-block whitespace-nowrap">Sẵn Sàng Nâng Tầm</span><br>
+              <span class="inline-block heading-medium text-saas-cyan whitespace-nowrap">Năng Lực Sản Xuất Của Bạn?</span>
             </h2>
           </div>
 
