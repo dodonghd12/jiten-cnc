@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JITEN CNC · Giải Pháp Máy CNC Công Nghiệp & Bản Sao Số 3D Digital Twin</title>
-  <meta name="description" content="Phân phối trung tâm gia công CNC phay & tiện, cung ứng linh kiện ray trượt THK/Hiwin, chẩn đoán bo mạch Servo/Spindle và trực quan hóa bản sao số 3D thời gian thực."/>
+  <meta name="description" content="Phân phối trung tâm gia công CNC phay & tiện, cung ứng linh kiện ray trượt chính hãng và bản sao số 3D."/>
   
   <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin="anonymous"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -89,12 +89,18 @@
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Video Cover in Modulabs */
-    .video-home-b video {
-      object-fit: cover;
+    /* Video Cover Styling */
+    .video-home-b video,
+    .video-cta video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      opacity: 0.85;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+      pointer-events: none;
     }
 
     /* Custom Scrollbar */
@@ -185,24 +191,17 @@
     <div class="text-[10px] text-slate-400 font-mono tracking-wider" id="scroll-pct">0%</div>
   </aside>
 
-  <!-- ================= FLOATING SCROLL TO TOP & HOTLINE (ZERO OVERLAP) ================= -->
-  <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end space-y-2.5">
-    <button 
-      id="scroll-to-top-btn" 
-      onclick="scrollToTop()" 
-      aria-label="Cuộn lên đầu trang"
-      class="opacity-0 pointer-events-none translate-y-3 transition-all duration-300 px-3.5 py-1.5 rounded-full bg-black/90 hover:bg-saas-cyan text-slate-300 hover:text-black border border-white/20 hover:border-saas-cyan shadow-2xl backdrop-blur-md flex items-center space-x-1.5 group focus:outline-none text-[11px] font-mono font-semibold"
-      title="Cuộn lên đầu trang"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 transition-transform group-hover:-translate-y-0.5"><path d="m18 15-6-6-6 6"></path></svg>
-      <span class="tracking-wider text-[10px] uppercase">LÊN ĐẦU TRANG</span>
-    </button>
-
-    <a href="tel:0908123456" class="saas-pill-btn px-5 py-2.5 bg-white text-black font-heading font-bold text-xs flex items-center space-x-2 shadow-2xl transition-all border border-saas-border hover:bg-saas-cyan hover:text-black">
-      <span class="w-2.5 h-2.5 rounded-full bg-saas-emerald animate-pulse"></span>
-      <span>HOTLINE / ZALO: 0908.123.456</span>
-    </a>
-  </div>
+  <!-- ================= FLOATING SCROLL TO TOP (USER EXPLICITLY REMOVED HOTLINE PILL) ================= -->
+  <button 
+    id="scroll-to-top-btn" 
+    onclick="scrollToTop()" 
+    aria-label="Cuộn lên đầu trang"
+    class="fixed bottom-6 right-6 z-40 opacity-0 pointer-events-none translate-y-3 transition-all duration-300 px-3.5 py-1.5 rounded-full bg-black/90 hover:bg-saas-cyan text-slate-300 hover:text-black border border-white/20 hover:border-saas-cyan shadow-2xl backdrop-blur-md flex items-center space-x-1.5 group focus:outline-none text-[11px] font-mono font-semibold"
+    title="Cuộn lên đầu trang"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 transition-transform group-hover:-translate-y-0.5"><path d="m18 15-6-6-6 6"></path></svg>
+    <span class="tracking-wider text-[10px] uppercase">LÊN ĐẦU TRANG</span>
+  </button>
 
   <!-- ================= MASTER NAVIGATION (MODULABS DESIGN) ================= -->
   <div class="master-navigation">
@@ -229,15 +228,14 @@
               </div>
             </div>
 
-            <!-- Brand Identity -->
+            <!-- Brand Identity (User requested: only show CÔNG TY TNHH CƠ ĐIỆN KIM PHONG in master-logo-text pl-2) -->
             <a href="#home" aria-current="page" class="brand-nav w-nav-brand w--current">
               <div class="logo-navigation">
                 <div class="px-2.5 py-1 bg-white text-black font-heading font-black text-xs tracking-widest border border-white rounded-sm shrink-0">
                   JITEN
                 </div>
                 <div class="master-logo-text pl-2">
-                  <div class="font-heading font-extrabold text-sm tracking-tight text-white leading-tight">JITEN CNC</div>
-                  <p class="text-[8.5px] text-slate-400 uppercase tracking-tight font-medium leading-tight whitespace-nowrap">CÔNG TY TNHH CƠ ĐIỆN KIM PHONG</p>
+                  <div class="font-heading font-bold text-xs sm:text-[13px] tracking-tight text-white uppercase whitespace-nowrap">CÔNG TY TNHH CƠ ĐIỆN KIM PHONG</div>
                 </div>
               </div>
             </a>
@@ -274,18 +272,7 @@
 
           </div>
 
-          <!-- Right Nav: Language & Dial Info (User explicitly removed right-nav > a Get Template link) -->
-          <div class="right-nav flex items-center space-x-3">
-            <div class="flex items-center p-0.5 bg-black/60 border border-white/15 text-xs font-mono rounded-full">
-              <button class="bg-white text-black px-2 py-0.5 font-bold rounded-full text-[10px]">VI</button>
-              <button class="text-slate-400 hover:text-white px-2 py-0.5 text-[10px] transition-colors">EN</button>
-              <button class="text-slate-400 hover:text-white px-2 py-0.5 text-[10px] transition-colors">ZH</button>
-            </div>
-            <a href="tel:0908123456" class="hidden md:inline-flex items-center space-x-1.5 text-xs font-mono text-slate-300 hover:text-saas-cyan transition-colors">
-              <span class="w-1.5 h-1.5 rounded-full bg-saas-emerald"></span>
-              <span>0908.123.456</span>
-            </a>
-          </div>
+          <!-- User explicitly requested: LOẠI BỎ TOÀN BỘ right-nav flex items-center space-x-3 -->
 
         </div>
       </div>
@@ -310,27 +297,40 @@
   </div>
 
   <!-- ================= SECTION 1: HERO HOME B SECTION (MODULABS TEMPLATE) ================= -->
-  <section id="home" class="section hero-home-b-section">
-    <!-- Video background using assets/hero_bg_motion.mp4 as requested -->
-    <div data-poster-url="assets/hero_cnc_center.jpg" data-video-urls="assets/hero_bg_motion.mp4" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="video-home-b w-background-video w-background-video-atom">
-      <video id="hero-cnc-video" autoplay="" loop="" style="background-image:url('assets/hero_cnc_center.jpg')" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-        <source src="assets/hero_bg_motion.mp4" type="video/mp4" data-wf-ignore="true"/>
+  <section id="home" class="section hero-home-b-section relative overflow-hidden">
+    <!-- Native Video background running smoothly without Webflow widget interference -->
+    <div class="video-home-b relative overflow-hidden flex items-end">
+      
+      <video 
+        id="hero-cnc-video"
+        autoplay 
+        loop 
+        muted 
+        playsinline 
+        preload="auto"
+        poster="assets/hero_cnc_center.jpg"
+        class="opacity-80"
+      >
+        <source src="assets/hero_bg_motion.mp4" type="video/mp4"/>
       </video>
 
-      <div class="w-layout-blockcontainer main-container w-container">
+      <div class="w-layout-blockcontainer main-container w-container relative z-10 w-full">
         <div class="content-home-b">
           
           <!-- Headline Group -->
           <div class="headline-home-b">
-            <h1 class="font-heading">Đỉnh Cao Gia Công Cơ Khí &amp; <span class="heading-medium">Bản Sao Số</span></h1>
+            <!-- User requested: Gia Công Cơ Khí dòng đầu, Bản Sao Số dòng thứ 2 -->
+            <h1 class="font-heading">Gia Công Cơ Khí &amp;<br><span class="heading-medium text-saas-cyan">Bản Sao Số</span></h1>
+            
+            <!-- User requested: Phân phối máy CNC, linh kiện ray trượt chính hãng và bản sao số 3D. -->
             <p class="text-slate-300 text-sm md:text-base font-normal leading-relaxed max-w-xl">
-              Phân phối máy CNC, linh kiện ray trượt chính hãng và bản sao số 3D thời gian thực.
+              Phân phối máy CNC, linh kiện ray trượt chính hãng và bản sao số 3D.
             </p>
 
             <!-- Button Wrap Hero: Replaced cta-main and button-book with Jiten CNC buttons -->
             <div class="button-wrap-hero flex flex-wrap items-center gap-3 pt-2">
               
-              <!-- Button Book replaced by: YÊU CẦU BÁO GIÁ NHANH (15 PHÚT) -->
+              <!-- Primary Action: YÊU CẦU BÁO GIÁ NHANH (15 PHÚT) -->
               <a href="#contact" class="saas-pill-btn group inline-flex items-center space-x-3 px-7 sm:px-8 py-3.5 bg-white hover:bg-saas-cyan text-black hover:text-black font-heading font-extrabold text-xs tracking-wider uppercase transition-all shadow-[0_0_35px_rgba(255,255,255,0.25)] hover:shadow-[0_0_45px_rgba(56,189,248,0.5)] transform hover:-translate-y-0.5">
                 <span>YÊU CẦU BÁO GIÁ NHANH (15 PHÚT)</span>
                 <div class="w-6 h-6 rounded-full bg-black/10 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
@@ -338,7 +338,7 @@
                 </div>
               </a>
 
-              <!-- CTA Main replaced by: XEM BẢNG MODEL MÁY -->
+              <!-- Secondary Action: XEM BẢNG MODEL MÁY -->
               <a href="#catalog" class="saas-pill-btn inline-flex items-center space-x-2 px-5 py-3.5 bg-black/40 hover:bg-black/70 border border-white/15 text-slate-300 hover:text-white text-xs font-mono font-medium transition-all backdrop-blur-md">
                 <span>XEM BẢNG MODEL MÁY</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m6 9 6 6 6-6"></path></svg>
@@ -770,20 +770,32 @@
   </section>
 
   <!-- ================= SECTION 8: CTA & RFQ CONSULTATION SECTION ================= -->
-  <section id="contact" class="section cta-section">
-    <!-- Background video using assets/hero_bg_motion.mp4 -->
-    <div data-poster-url="assets/hero_cnc_center.jpg" data-video-urls="assets/hero_bg_motion.mp4" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="video-cta w-background-video w-background-video-atom">
-      <video id="cta-video" autoplay="" loop="" style="background-image:url('assets/hero_cnc_center.jpg')" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-        <source src="assets/hero_bg_motion.mp4" type="video/mp4" data-wf-ignore="true"/>
+  <section id="contact" class="section cta-section relative overflow-hidden">
+    <!-- Native Video background for Section 8 -->
+    <div class="video-cta relative overflow-hidden flex items-center justify-center">
+      <video 
+        id="cta-video" 
+        autoplay 
+        loop 
+        muted 
+        playsinline 
+        preload="auto"
+        poster="assets/hero_cnc_center.jpg"
+        class="opacity-40"
+      >
+        <source src="assets/hero_bg_motion.mp4" type="video/mp4"/>
       </video>
       
-      <div class="w-layout-blockcontainer main-container w-container">
+      <div class="w-layout-blockcontainer main-container w-container relative z-10 w-full">
         <div class="content-cta text-center space-y-4">
+          
+          <!-- User requested: heading-cta chỉ hiển thị đúng 2 dòng, dòng đầu Sẵn Sàng Nâng Tầm, dòng 2 là Năng Lực Sản Xuất Của Bạn? -->
           <div class="heading-cta">
-            <h2 class="no-margins font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-              Sẵn Sàng Nâng Tầm <span class="heading-medium text-saas-cyan">Năng Lực Sản Xuất Của Bạn?</span>
+            <h2 class="no-margins font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
+              Sẵn Sàng Nâng Tầm<br><span class="heading-medium text-saas-cyan">Năng Lực Sản Xuất Của Bạn?</span>
             </h2>
           </div>
+
           <p class="text-slate-200 text-sm md:text-base max-w-2xl mx-auto">
             Liên hệ kỹ sư JITEN CNC để nhận báo giá chi tiết, phân tích bản vẽ kỹ thuật hoặc đặt lịch chạy thử phôi trực tiếp tại kho Trảng Bom, Đồng Nai.
           </p>
@@ -930,6 +942,35 @@
   <script src="https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js"></script>
 
   <script>
+    // 0. Auto-play Guarantee for Native Video Backgrounds
+    function ensureVideoAutoplay() {
+      document.querySelectorAll('video').forEach(vid => {
+        vid.muted = true;
+        vid.playsInline = true;
+        const promise = vid.play();
+        if (promise !== undefined) {
+          promise.catch(() => {
+            // If browser autoplay policy blocked it, play on first interaction
+            const onUserTouch = () => {
+              vid.play();
+              window.removeEventListener('click', onUserTouch);
+              window.removeEventListener('touchstart', onUserTouch);
+              window.removeEventListener('scroll', onUserTouch);
+            };
+            window.addEventListener('click', onUserTouch, { passive: true });
+            window.addEventListener('touchstart', onUserTouch, { passive: true });
+            window.addEventListener('scroll', onUserTouch, { passive: true });
+          });
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', ensureVideoAutoplay);
+    } else {
+      ensureVideoAutoplay();
+    }
+
     // 1. Scrollspy Tracker Logic
     const siteSections = [
       { id: 'home', label: '01 / TRANG CHỦ' },
